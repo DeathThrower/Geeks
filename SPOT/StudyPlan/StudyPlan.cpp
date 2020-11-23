@@ -2,11 +2,11 @@
 
 
 
-StudyPlan::StudyPlan()
+StudyPlan::StudyPlan(int yearnum)
 {
 	//By default, the study plan starts with 5 years
 	//More year can be added
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < yearnum; i++)
 		plan.push_back(new AcademicYear);
 }
 

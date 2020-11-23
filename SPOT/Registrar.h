@@ -5,6 +5,7 @@
 #include "StudyPlan/StudyPlan.h"
 
 
+
 //The maestro class for the application
 class Registrar
 {
@@ -21,7 +22,7 @@ public:
 	bool ExecuteAction(Action*);
 	void UpdateInterface();
 	StudyPlan* getStudyPlay() const;
-
+	CourseInfo getCourseInfo(Rules myrules, Course_Code CC) const; //helper function needed in many places 
 	void Run();
 
 	~Registrar();

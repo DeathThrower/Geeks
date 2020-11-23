@@ -1,5 +1,4 @@
 #include "Registrar.h"
-#include <windows.h>
 #include "Actions/ActionAddCourse.h"
 
 string Registrar::openfilename( char* filter , HWND owner) const {
@@ -36,6 +35,15 @@ string Registrar::savefilename( char* filter , HWND owner) const {
 		fileNameStr = fileName;
 	}
 	return fileNameStr;
+}
+
+// function to get the course information
+CourseInfo Registrar::getCourseInfo(Rules myrules, Course_Code CC) const{
+	for (CourseInfo i : myrules.CourseCatalog) {
+		if (i.Code == CC) {
+			return i;
+		}
+	}
 }
 
 Registrar::Registrar()

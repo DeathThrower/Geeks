@@ -64,7 +64,8 @@ public:
 	string GetSrting() const;
 
 
-	
+	//helper function needed in many places
+	SEMESTER str2sem(string semester) const ;
 	
 
 	~GUI();

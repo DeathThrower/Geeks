@@ -15,7 +15,7 @@ class StudyPlan:public Drawable
 
 	string PlanNotes;
 public:
-	StudyPlan();
+	StudyPlan(int yearnum=5);
 	bool AddCourse(Course*, int year, SEMESTER);
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();

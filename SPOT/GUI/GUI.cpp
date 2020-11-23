@@ -215,7 +215,17 @@ string GUI::GetSrting() const
 }
 
 
-
+SEMESTER GUI::str2sem(string semester) const {
+	if (semester=="Fall"||semester=="fall") {
+		return FALL;
+	}
+	else if(semester == "Spring" || semester == "spring"){
+		return SPRING;
+	}
+	else if (semester == "Spring" || semester == "spring") {
+		return SPRING;
+	}
+}
 
 
 
