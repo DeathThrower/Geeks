@@ -11,6 +11,8 @@ class Registrar
 	GUI *pGUI;	//pointer to GUI 
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
+	string openfilename( char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
+	string savefilename( char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 
 public:
 	Registrar();

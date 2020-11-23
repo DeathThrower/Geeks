@@ -1,6 +1,42 @@
 #include "Registrar.h"
-
+#include <windows.h>
 #include "Actions/ActionAddCourse.h"
+
+string Registrar::openfilename( char* filter , HWND owner) const {
+	OPENFILENAME ofn;
+	char fileName[MAX_PATH]="";
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = owner;
+	ofn.lpstrFilter = filter;
+	ofn.lpstrFile = fileName;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+	ofn.lpstrDefExt = "";
+	string fileNameStr;
+	if (GetOpenFileName(&ofn)) {
+		fileNameStr = fileName;
+	}
+	return fileNameStr;
+}
+
+string Registrar::savefilename( char* filter , HWND owner) const {
+	OPENFILENAME ofn;
+	char fileName[MAX_PATH] = "";
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = owner;
+	ofn.lpstrFilter = filter;
+	ofn.lpstrFile = fileName;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+	ofn.lpstrDefExt = "";
+	string fileNameStr;
+	if (GetSaveFileName(&ofn)) {
+		fileNameStr = fileName;
+	}
+	return fileNameStr;
+}
 
 Registrar::Registrar()
 {
