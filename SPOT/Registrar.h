@@ -12,18 +12,23 @@ class Registrar
 	GUI *pGUI;	//pointer to GUI 
 	Rules RegRules;	//Registration rules
 	StudyPlan *pSPlan;
-	string openfilename( char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
-	string savefilename( char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 
 public:
 	Registrar();
 	GUI* getGUI() const;
 	Action* CreateRequiredAction();
-	bool ExecuteAction(Action*);
+	Rules getRules() const;
+	bool ExecuteAction(Action*&);
 	void UpdateInterface();
 	StudyPlan* getStudyPlay() const;
-	CourseInfo getCourseInfo(Rules myrules, Course_Code CC) const; //helper function needed in many places 
+
 	void Run();
+
+	//helper functions
+	CourseInfo getCourseInfo(Rules myrules, Course_Code CC) const;
+	SEMESTER str2sem(string semester) const;
+	string openfilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
+	string savefilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 
 	~Registrar();
 };

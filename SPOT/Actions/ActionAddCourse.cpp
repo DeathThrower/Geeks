@@ -2,7 +2,7 @@
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 
-#include <iostream>
+//#include <iostream>
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {
 }
@@ -44,6 +44,8 @@ bool ActionAddCourse::Execute()
 		//For the seke of demo, we will add the course to the 1st year, 1st semester
 		StudyPlan* pS = pReg->getStudyPlay();
 		pS->AddCourse(pC, 1, FALL);
+		delete pC;
+		pC = nullptr;
 	}
 
 	

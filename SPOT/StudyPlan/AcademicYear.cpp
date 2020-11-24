@@ -32,9 +32,13 @@ void AcademicYear::DrawMe(GUI* pGUI) const
 	//Draw all semesters inside this year by iterating on each semester list
 	//to get courses and draw each course
 	
-	for (int sem = FALL; sem < SEM_CNT; sem++)
-		for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
-		{
-			(*it)->DrawMe(pGUI);	//call DrawMe for each course in this semester
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		//for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
+		//{
+		//	(*it)->DrawMe(pGUI);	//call DrawMe for each course in this semester
+		//}
+		for (auto it: YearCourses[sem]) {
+			it->DrawMe(pGUI);
 		}
+	}
 }

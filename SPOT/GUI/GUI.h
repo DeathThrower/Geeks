@@ -27,7 +27,7 @@ class GUI
 	};
 
 	//Some constants for GUI
-	static const int	WindWidth = 1300, WindHeight = 700,	//Window width and height
+	static const int	WindWidth = 1350, WindHeight = 700,	//Window width and height
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
@@ -64,8 +64,7 @@ public:
 	string GetSrting() const;
 
 
-	//helper function needed in many places
-	SEMESTER str2sem(string semester) const ;
+
 	
 
 	~GUI();

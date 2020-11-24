@@ -1,5 +1,5 @@
 #pragma once
-#include <list>
+#include <vector>
 
 #include "..\Courses\Course.h"
 #include "../GUI/Drawable.h"
@@ -16,7 +16,7 @@ class AcademicYear:public Drawable
 	//So YearCourses[FALL] is the list of FALL course in that year
 	//So YearCourses[SPRING] is the list of SPRING course in that year
 	//So YearCourses[SUMMER] is the list of SUMMER course in that year
-	list<Course*> YearCourses[SEM_CNT];
+	vector<Course*> YearCourses[SEM_CNT];
 	
 public:
 	AcademicYear();

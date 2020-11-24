@@ -1,5 +1,6 @@
 #include "Registrar.h"
 #include "Actions/ActionAddCourse.h"
+#include "Actions/ActionLoadStudyPlan.h"
 
 string Registrar::openfilename( char* filter , HWND owner) const {
 	OPENFILENAME ofn;
@@ -46,10 +47,27 @@ CourseInfo Registrar::getCourseInfo(Rules myrules, Course_Code CC) const{
 	}
 }
 
+// convert string to SEMESTER
+SEMESTER Registrar::str2sem(string semester) const {
+	if (semester == "Fall" || semester == "fall") {
+		return FALL;
+	}
+	else if (semester == "Spring" || semester == "spring") {
+		return SPRING;
+	}
+	else if (semester == "Summer" || semester == "summer") {
+		return SUMMER;
+	}
+}
+
 Registrar::Registrar()
 {
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
+}
+
+Rules Registrar::getRules() const {
+	return RegRules;
 }
 
 //returns a pointer to GUI
@@ -72,9 +90,12 @@ Action* Registrar::CreateRequiredAction()
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
-		RequiredAction = new ActionAddCourse(this);
+		RequiredAction = new ActionLoadStudyPlan(this);  //error
 		break;
 
+	case LOAD:
+		RequiredAction = new ActionLoadStudyPlan(this);
+		break;
 	//TODO: Add case for each action
 	
 	/*case EXIT:
@@ -85,10 +106,10 @@ Action* Registrar::CreateRequiredAction()
 }
 
 //Executes the action, Releases its memory, and return true if done, false if cancelled
-bool Registrar::ExecuteAction(Action* pAct)
+bool Registrar::ExecuteAction(Action*& pAct)
 {
 	bool done = pAct->Execute();
-	delete pAct;	//free memory of that action object (either action is exec or cancelled)
+	//delete pAct;	//free memory of that action object (either action is exec or cancelled)
 	return done;
 }
 
@@ -104,8 +125,11 @@ void Registrar::Run()
 		if (pAct)	//if user doesn't cancel
 		{
 			if (ExecuteAction(pAct))	//if action is not cancelled
+				int x =4;
 				UpdateInterface();
 		}
+		delete pAct;
+		pAct = nullptr;
 	}
 }
 

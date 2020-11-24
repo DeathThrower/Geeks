@@ -39,8 +39,8 @@ void GUI::CreateMenu() const
 
 	//First prepare List of images paths for menu item
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = "GUI\\Images\\Menu\\Menu_add_course.jpg";
-	MenuItemImages[ITM_EXIT] = "GUI\\Images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[ITM_ADD] = "F:/CIE Year 2 S1/C++/SPOT - CIE202 Project Code Framework/Geeks/SPOT/GUI/Images/Menu/Menu_add_course.jpg";
+	MenuItemImages[ITM_EXIT] = "F:/CIE Year 2 S1/C++/SPOT - CIE202 Project Code Framework/Geeks/SPOT/GUI/Images/Menu/Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -215,17 +215,6 @@ string GUI::GetSrting() const
 }
 
 
-SEMESTER GUI::str2sem(string semester) const {
-	if (semester=="Fall"||semester=="fall") {
-		return FALL;
-	}
-	else if(semester == "Spring" || semester == "spring"){
-		return SPRING;
-	}
-	else if (semester == "Spring" || semester == "spring") {
-		return SPRING;
-	}
-}
 
 
 
