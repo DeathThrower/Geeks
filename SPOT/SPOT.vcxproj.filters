@@ -149,6 +149,9 @@
     <ClCompile Include="Actions\ActionLoadStudyPlan.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionSaveStudyPlan.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI\GUI.h">
@@ -233,6 +236,9 @@
       <Filter>StudyPlan</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionLoadStudyPlan.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionSaveStudyPlan.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
