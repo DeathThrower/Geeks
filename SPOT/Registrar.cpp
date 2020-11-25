@@ -136,7 +136,7 @@ Action* Registrar::CreateRequiredAction()
 bool Registrar::ExecuteAction(Action*& pAct)
 {
 	bool done = pAct->Execute();
-	//delete pAct;	//free memory of that action object (either action is exec or cancelled)
+	delete pAct;	//free memory of that action object (either action is exec or cancelled)
 	return done;
 }
 
@@ -155,8 +155,6 @@ void Registrar::Run()
 				int x =4;
 				UpdateInterface();
 		}
-		delete pAct;
-		pAct = nullptr;
 	}
 }
 
