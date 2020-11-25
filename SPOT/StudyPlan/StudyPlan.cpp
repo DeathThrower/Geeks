@@ -10,6 +10,10 @@ StudyPlan::StudyPlan(int yearnum)
 		plan.push_back(new AcademicYear);
 }
 
+vector<AcademicYear*> StudyPlan::getPlan() const {
+	return plan;
+}
+
 //adds a course to the study plan in certain year, semester
 //year idetifies year number to add course to 1=first, 2 = 2nd,....
 bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
@@ -17,7 +21,11 @@ bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 	//TODO: add all requried checks to add the course 
 
 	plan[year - 1]->AddCourse(pC, sem);
-	
+	TotalCredits += pC->getCredits();
+
+	//TODO: acording to course type incremenet corrsponding toatl hours for that year
+
+
 	return true;
 }
 

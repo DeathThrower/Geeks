@@ -21,7 +21,7 @@ class AcademicYear:public Drawable
 public:
 	AcademicYear();
 	virtual ~AcademicYear();
-
+	vector<Course*> getCourses(int sem) const;
 	bool AddCourse(Course*, SEMESTER );
 	
 

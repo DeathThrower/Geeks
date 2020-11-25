@@ -1,6 +1,7 @@
 #include "Registrar.h"
 #include "Actions/ActionAddCourse.h"
 #include "Actions/ActionLoadStudyPlan.h"
+#include "Actions/ActionSaveStudyPlan.h"
 
 string Registrar::openfilename( char* filter , HWND owner) const {
 	OPENFILENAME ofn;
@@ -22,7 +23,7 @@ string Registrar::openfilename( char* filter , HWND owner) const {
 
 string Registrar::savefilename( char* filter , HWND owner) const {
 	OPENFILENAME ofn;
-	char fileName[MAX_PATH] = "";
+	char fileName[MAX_PATH] = ".txt";
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = owner;
@@ -45,18 +46,43 @@ CourseInfo Registrar::getCourseInfo(Rules myrules, Course_Code CC) const{
 			return i;
 		}
 	}
+	CourseInfo empty;
+	empty.Code = "";
+	return empty;
 }
 
 // convert string to SEMESTER
-SEMESTER Registrar::str2sem(string semester) const {
-	if (semester == "Fall" || semester == "fall") {
+SEMESTER Registrar::str2sem(string str) const {
+	if (str == "Fall" || str == "fall") {
 		return FALL;
 	}
-	else if (semester == "Spring" || semester == "spring") {
+	else if (str == "Spring" || str == "spring") {
 		return SPRING;
 	}
-	else if (semester == "Summer" || semester == "summer") {
+	else if (str == "Summer" || str == "summer") {
 		return SUMMER;
+	}
+	return SEM_CNT;
+}
+
+string Registrar::sem2str(SEMESTER sem) const {
+	switch (sem)
+	{
+	case FALL:
+		return "Fall";
+		break;
+	case SPRING:
+		return "Spring";
+		break;
+	case SUMMER:
+		return "Summer";
+		break;
+	case SEM_CNT:
+		return "";
+		break;
+	default:
+		return "";
+		break;
 	}
 }
 
@@ -90,17 +116,18 @@ Action* Registrar::CreateRequiredAction()
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
-		RequiredAction = new ActionLoadStudyPlan(this);  //error
+		RequiredAction = new ActionAddCourse(this);  //error don't forget to fix it
 		break;
 
 	case LOAD:
 		RequiredAction = new ActionLoadStudyPlan(this);
 		break;
+
 	//TODO: Add case for each action
 	
-	/*case EXIT:
+	case EXIT:
+		exit(1);
 		break;
-		*/
 	}
 	return RequiredAction;
 }

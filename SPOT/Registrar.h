@@ -26,7 +26,8 @@ public:
 
 	//helper functions
 	CourseInfo getCourseInfo(Rules myrules, Course_Code CC) const;
-	SEMESTER str2sem(string semester) const;
+	SEMESTER str2sem(string str) const;
+	string sem2str(SEMESTER sem) const;
 	string openfilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 	string savefilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 

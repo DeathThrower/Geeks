@@ -11,6 +11,10 @@ AcademicYear::~AcademicYear()
 {
 }
 
+vector<Course*> AcademicYear::getCourses(int sem) const {
+	return YearCourses[sem];
+}
+
 //Adds a course to this year in the spesified semester
 bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 {

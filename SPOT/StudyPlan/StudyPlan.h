@@ -16,6 +16,7 @@ class StudyPlan:public Drawable
 	string PlanNotes;
 public:
 	StudyPlan(int yearnum=5);
+	vector<AcademicYear*> getPlan() const;
 	bool AddCourse(Course*, int year, SEMESTER);
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
