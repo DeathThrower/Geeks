@@ -47,7 +47,7 @@ bool ActionAddCourse::Execute()
 		//TODO: add the course to the correct year obtained from registrar
 
 		//For the seke of demo, we will add the course to the 1st year, 1st semester
-		StudyPlan* pS = pReg->getStudyPlay();
+		StudyPlan* pS = pReg->getStudyPlan();
 		pS->AddCourse(pC, 1, FALL);
 	}
 

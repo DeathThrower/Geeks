@@ -10,7 +10,7 @@ class AcademicYear;
 //user interface class
 class GUI
 {
-
+	
 	enum MENU_ITEM //The items of the menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in the menu
@@ -25,7 +25,7 @@ class GUI
 		ITM_CNT			//no. of menu items ==> This should be the last line in this enum
 
 	};
-
+	string MenuItemImages[ITM_CNT];
 	//Some constants for GUI
 	static const int	WindWidth = 1350, WindHeight = 700,	//Window width and height
 		wx = 15, wy = 15,		//Window starting coordinates

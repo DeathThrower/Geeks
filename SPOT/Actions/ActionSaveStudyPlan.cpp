@@ -9,7 +9,7 @@ bool ActionSaveStudyPlan::Execute() {
 	if (filepath!="") {
 		ofstream outdata;
 		outdata.open(filepath,ios::trunc);
-		for (AcademicYear* year : pReg->getStudyPlay()->getPlan()) {
+		for (AcademicYear* year : pReg->getStudyPlan()->getPlan()) {
 			y++;
 			for (int sem = FALL; sem < SEM_CNT; sem++) {
 				outdata << "Year " << y;

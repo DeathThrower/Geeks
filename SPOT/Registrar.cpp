@@ -15,7 +15,7 @@ string Registrar::openfilename( char* filter , HWND owner) const {
 	ofn.nMaxFile = MAX_PATH;
 	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
 	ofn.lpstrDefExt = "";
-	string fileNameStr;
+	string fileNameStr="";
 	if (GetOpenFileName(&ofn)) {
 		fileNameStr = fileName;
 	}
@@ -106,7 +106,7 @@ GUI* Registrar::getGUI() const
 }
 
 //returns the study plan
-StudyPlan* Registrar::getStudyPlay() const
+StudyPlan* Registrar::getStudyPlan() const
 {
 	return pSPlan;
 }
@@ -154,6 +154,7 @@ void Registrar::Run()
 		Action* pAct = CreateRequiredAction();
 		if (pAct)	//if user doesn't cancel
 		{
+			
 			if (ExecuteAction(pAct))	//if action is not cancelled
 				UpdateInterface();
 		}

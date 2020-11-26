@@ -20,7 +20,7 @@ public:
 	Rules* getRules() const;
 	bool ExecuteAction(Action*&);
 	void UpdateInterface();
-	StudyPlan* getStudyPlay() const;
+	StudyPlan* getStudyPlan() const;
 
 	void Run();
 

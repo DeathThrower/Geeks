@@ -7,7 +7,8 @@ ActionLoadStudyPlan::ActionLoadStudyPlan(Registrar* p) :Action(p)
 bool ActionLoadStudyPlan::Execute() {
     string filepath = pReg->openfilename();
     if (filepath != "") {
-        ifstream finput(filepath);
+        ifstream finput;
+        finput.open(filepath);
         char* pch;
         char* context = nullptr;
         const int size = 100;
@@ -30,7 +31,7 @@ bool ActionLoadStudyPlan::Execute() {
                     }
                 }
                 else if(index!=0){
-                    course = pReg->getCourseInfo(pReg->getRules(), pch);
+                    //course = pReg->getCourseInfo(pReg->getRules(), pch);
                     //if (course.Code!="") {
                         Course* pC = new Course(pch, /*course.Title*/ "hi", 3 /*course.Credits*/);
                         switch (sem)
@@ -49,8 +50,9 @@ bool ActionLoadStudyPlan::Execute() {
                         }
                         graphicsInfo gInfo{ x, y };
                         pC->setGfxInfo(gInfo);
-                        StudyPlan* pS = pReg->getStudyPlay();
-                        pS->AddCourse(pC, year, sem);
+                        //StudyPlan* pS = 
+                        pReg->getStudyPlan()->AddCourse(pC, year, sem);
+                        //pS->AddCourse(pC, year, sem);
                         y += 45;
                     //}
                     //else {

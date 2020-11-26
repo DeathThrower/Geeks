@@ -2,6 +2,8 @@
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
+#include <iostream>
+using namespace std;
 
 GUI::GUI()
 { 
@@ -38,9 +40,18 @@ void GUI::CreateMenu() const
 	//You can draw the menu icons any way you want.
 
 	//First prepare List of images paths for menu item
+	char result[MAX_PATH];
+	string str = string(result, GetModuleFileName(NULL, result, MAX_PATH));
+	str = str.erase(str.length() - 18, 18);
+	int ind = str.find("\\");
+	while (ind != string::npos) {
+		str.replace(ind, 1, "/");
+		ind = str.find("\\");
+	}
+	cout << str;
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = "F:/CIE Year 2 S1/C++/SPOT - CIE202 Project Code Framework/Geeks/SPOT/GUI/Images/Menu/Menu_add_course.jpg";
-	MenuItemImages[ITM_EXIT] = "F:/CIE Year 2 S1/C++/SPOT - CIE202 Project Code Framework/Geeks/SPOT/GUI/Images/Menu/Menu_Exit.jpg";
+	MenuItemImages[ITM_ADD] = str+"SPOT/GUI/Images/Menu/Menu_add_course.jpg";
+	MenuItemImages[ITM_EXIT] = str+"SPOT/GUI/Images/Menu/Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
