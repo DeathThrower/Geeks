@@ -2,8 +2,6 @@
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
-#include <iostream>
-using namespace std;
 
 GUI::GUI()
 { 
@@ -48,7 +46,6 @@ void GUI::CreateMenu() const
 		str.replace(ind, 1, "/");
 		ind = str.find("\\");
 	}
-	cout << str;
 	string MenuItemImages[ITM_CNT];
 	MenuItemImages[ITM_ADD] = str+"SPOT/GUI/Images/Menu/Menu_add_course.jpg";
 	MenuItemImages[ITM_EXIT] = str+"SPOT/GUI/Images/Menu/Menu_Exit.jpg";
