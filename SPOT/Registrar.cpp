@@ -2,6 +2,7 @@
 #include "Actions/ActionAddCourse.h"
 #include "Actions/ActionLoadStudyPlan.h"
 #include "Actions/ActionSaveStudyPlan.h"
+#include "Actions/ActionLoadCourseOffering.h"
 
 string Registrar::openfilename( char* filter , HWND owner) const {
 	OPENFILENAME ofn;
@@ -39,9 +40,9 @@ string Registrar::savefilename( char* filter , HWND owner) const {
 	return fileNameStr;
 }
 
-// function to get the course information
-CourseInfo Registrar::getCourseInfo(Rules myrules, Course_Code CC) const{
-	for (CourseInfo i : myrules.CourseCatalog) {
+
+CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
+	for (CourseInfo i : myrules->CourseCatalog) {
 		if (i.Code == CC) {
 			return i;
 		}
@@ -51,7 +52,7 @@ CourseInfo Registrar::getCourseInfo(Rules myrules, Course_Code CC) const{
 	return empty;
 }
 
-// convert string to SEMESTER
+
 SEMESTER Registrar::str2sem(string str) const {
 	if (str == "Fall" || str == "fall") {
 		return FALL;
@@ -90,10 +91,12 @@ Registrar::Registrar()
 {
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
+	pRegRules = new Rules;  // create a Rules struct
 }
 
-Rules Registrar::getRules() const {
-	return RegRules;
+//return a pointer to Rules
+Rules* Registrar::getRules() const {
+	return pRegRules;
 }
 
 //returns a pointer to GUI
@@ -152,7 +155,6 @@ void Registrar::Run()
 		if (pAct)	//if user doesn't cancel
 		{
 			if (ExecuteAction(pAct))	//if action is not cancelled
-				int x =4;
 				UpdateInterface();
 		}
 	}

@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actions\ActionAddCourse.cpp" />
+    <ClCompile Include="Actions\ActionLoadCourseOffering.cpp" />
     <ClCompile Include="Actions\ActionLoadStudyPlan.cpp" />
     <ClCompile Include="Actions\ActionSaveStudyPlan.cpp" />
     <ClCompile Include="Courses\Course.cpp" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddCourse.h" />
+    <ClInclude Include="Actions\ActionLoadCourseOffering.h" />
     <ClInclude Include="Actions\ActionLoadStudyPlan.h" />
     <ClInclude Include="Actions\ActionSaveStudyPlan.h" />
     <ClInclude Include="Courses\Course.h" />

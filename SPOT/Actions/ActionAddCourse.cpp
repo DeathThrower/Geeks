@@ -1,8 +1,8 @@
 #include "ActionAddCourse.h"
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
+#include <iostream>
 
-//#include <iostream>
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {
 }
@@ -10,11 +10,16 @@ ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 bool ActionAddCourse::Execute()
 {
 	GUI* pGUI = pReg->getGUI();	
-	
+	//CourseInfo co;
 	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
 	Course_Code code = pGUI->GetSrting();
+	/*co = pReg->getCourseInfo(pReg->getRules(), code);
+	while (co.Code == "") {
+		pGUI->PrintMsg("Error!! unknown course code, please try again");
+		Course_Code code = pGUI->GetSrting();
+		co = pReg->getCourseInfo(pReg->getRules(), code);
+	}*/
 
-	//TODO: add input validation
 
 
 	ActionData actData = pGUI->GetUserAction("Select a year to add coures to:(To be implemented in phase1) we will just draw coures where user clicks");
@@ -44,8 +49,6 @@ bool ActionAddCourse::Execute()
 		//For the seke of demo, we will add the course to the 1st year, 1st semester
 		StudyPlan* pS = pReg->getStudyPlay();
 		pS->AddCourse(pC, 1, FALL);
-		delete pC;
-		pC = nullptr;
 	}
 
 	

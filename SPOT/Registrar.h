@@ -10,25 +10,35 @@
 class Registrar
 {
 	GUI *pGUI;	//pointer to GUI 
-	Rules RegRules;	//Registration rules
+	Rules *pRegRules;	//Registration rules
 	StudyPlan *pSPlan;
 
 public:
 	Registrar();
 	GUI* getGUI() const;
 	Action* CreateRequiredAction();
-	Rules getRules() const;
+	Rules* getRules() const;
 	bool ExecuteAction(Action*&);
 	void UpdateInterface();
 	StudyPlan* getStudyPlay() const;
 
 	void Run();
 
-	//helper functions
-	CourseInfo getCourseInfo(Rules myrules, Course_Code CC) const;
+	//helper functions:
+
+	// function to get the course information
+	CourseInfo getCourseInfo(Rules* myrules, Course_Code CC) const;
+
+	// convert string to SEMESTER
 	SEMESTER str2sem(string str) const;
+
+	//convert SEMESTER to string
 	string sem2str(SEMESTER sem) const;
+
+	//open a file selection window and return the path of the file
 	string openfilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
+
+	//open a save file window and return the path 
 	string savefilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 
 	~Registrar();

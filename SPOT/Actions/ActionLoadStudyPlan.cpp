@@ -30,7 +30,7 @@ bool ActionLoadStudyPlan::Execute() {
                     }
                 }
                 else if(index!=0){
-                    //course = pReg->getCourseInfo(pReg->getRules(), pch);
+                    course = pReg->getCourseInfo(pReg->getRules(), pch);
                     //if (course.Code!="") {
                         Course* pC = new Course(pch, /*course.Title*/ "hi", 3 /*course.Credits*/);
                         switch (sem)
