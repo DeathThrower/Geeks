@@ -25,7 +25,7 @@ public:
 	void Run();
 
 	//helper functions:
-
+	Course* getCourse(int x, int y) const;
 	// function to get the course information
 	CourseInfo getCourseInfo(Rules* myrules, Course_Code CC) const;
 

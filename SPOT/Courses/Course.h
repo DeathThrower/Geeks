@@ -9,8 +9,9 @@ using namespace std;
 //Base class for all types of courses
 class Course : public Drawable
 {
-	const Course_Code code;	//course code: e.g. "CIE202". This is the course ID
-	const string Title;		//course title: e.g. "Fundamentals of Computer Programming"
+	// Title and code were const
+	Course_Code code;	//course code: e.g. "CIE202". This is the course ID
+	string Title;		//course title: e.g. "Fundamentals of Computer Programming"
 	int credits;	//no. of course credits
 	string type;	//Univ, track, or major.....etc.
 	bool Done;		//Done or not yet?
@@ -24,5 +25,13 @@ public:
 
 	void DrawMe(GUI*) const;
 	virtual ~Course();
+	/* setters*/
+	void setTitle(string title) ;
+	void setCode(Course_Code code)  ;
+	void setCredits(int credits) ;
+	void setType(string type) ;
+	void setDone(bool Done);
+	void setPreReq(vector<Course_Code> PreReq);
+	void setCoReq(vector<Course_Code> CoReq);
 
 };

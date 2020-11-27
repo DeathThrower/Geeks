@@ -3,6 +3,7 @@
 #include "Actions/ActionLoadStudyPlan.h"
 #include "Actions/ActionSaveStudyPlan.h"
 #include "Actions/ActionLoadCourseOffering.h"
+#include "Actions/ActionReplaceCourse.h"
 
 string Registrar::openfilename( char* filter , HWND owner) const {
 	OPENFILENAME ofn;
@@ -86,7 +87,25 @@ string Registrar::sem2str(SEMESTER sem) const {
 		break;
 	}
 }
-
+Course* Registrar::getCourse(int x, int y) const
+{
+	int cX, cY;
+	for (auto year : getStudyPlan()->getPlan())
+	{
+		for (int sem = 0; sem <= 2; sem++)
+		{
+			for (auto course : year->getCourses(sem))
+			{
+				//height =40 width=80
+				graphicsInfo ginfo = course->getGfxInfo();
+				cX = ginfo.x; cY = ginfo.y;
+				if ( cX <= x && cX+80 >= x && cY <= y && cY + 40 >= y) {
+					return course;
+				}
+			}
+		}
+	}
+}
 Registrar::Registrar()
 {
 	pGUI = new GUI;	//create interface object
@@ -119,7 +138,7 @@ Action* Registrar::CreateRequiredAction()
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
-		RequiredAction = new ActionAddCourse(this);  //error don't forget to fix it
+		RequiredAction = new ActionLoadStudyPlan(this);// ActionAddCourse(this);  //error don't forget to fix it
 		break;
 
 	case LOAD:
