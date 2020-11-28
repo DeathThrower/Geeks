@@ -4,8 +4,9 @@
 #include "Actions/ActionSaveStudyPlan.h"
 #include "Actions/ActionLoadCourseOffering.h"
 #include "Actions/ActionReplaceCourse.h"
+#include "Actions/ActionLoadRules.h"
 
-string Registrar::openfilename( char* filter , HWND owner) const {
+string Registrar::openfilename(string title ,char* filter , HWND owner) const {
 	OPENFILENAME ofn;
 	char fileName[MAX_PATH]="";
 	ZeroMemory(&ofn, sizeof(ofn));
@@ -16,6 +17,7 @@ string Registrar::openfilename( char* filter , HWND owner) const {
 	ofn.nMaxFile = MAX_PATH;
 	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
 	ofn.lpstrDefExt = "";
+	ofn.lpstrTitle = title.c_str();
 	string fileNameStr="";
 	if (GetOpenFileName(&ofn)) {
 		fileNameStr = fileName;
@@ -87,6 +89,7 @@ string Registrar::sem2str(SEMESTER sem) const {
 		break;
 	}
 }
+
 Course* Registrar::getCourse(int x, int y) const
 {
 	int cX, cY;
@@ -105,12 +108,16 @@ Course* Registrar::getCourse(int x, int y) const
 			}
 		}
 	}
+	Course* p = &Course("", "", 0);
+	return p;
 }
+
 Registrar::Registrar()
 {
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
 	pRegRules = new Rules;  // create a Rules struct
+	ActionLoadCourseOffering(this).Execute();
 }
 
 //return a pointer to Rules
@@ -187,7 +194,32 @@ void Registrar::UpdateInterface()
 	pSPlan->DrawMe(pGUI);		//make study plan draw itself
 }
 
+void Registrar::clearRules() {
+	pRegRules->totalCredit = 0;
+	pRegRules->ReqUnivCredits = 0;
+	pRegRules->ReqTrackCredits = 0;
+	pRegRules->ReqMajorCredits = 0;
+	pRegRules->NumConcentration = 0;
+	pRegRules->ReqConCredits.clear();
+	pRegRules->UnivCompulsory.clear();
+	pRegRules->UnivElective.clear();
+	pRegRules->TrackCompulsory.clear();
+	pRegRules->TrackElective.clear();
+	pRegRules->MajorCompulsory.clear();
+	pRegRules->MajorElective.clear();
+	pRegRules->ConCompulsory.clear();
+	pRegRules->ConElective.clear();
+	pRegRules->SemMaxCredit = 0;
+	pRegRules->SemMinCredit = 0;
+}
+
+void Registrar::clearStudyPlan() {
+	pSPlan->getPlan().clear();
+}
+
 Registrar::~Registrar()
 {
 	delete pGUI;
+	delete pSPlan;
+	delete pRegRules;
 }

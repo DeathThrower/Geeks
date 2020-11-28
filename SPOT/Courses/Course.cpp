@@ -31,6 +31,7 @@ void Course::DrawMe(GUI* pG) const
 	pG->DrawCourse(this);
 }
 /* setters*/
+
 void Course::setTitle(const string title) {
 	this->Title = title;
 };

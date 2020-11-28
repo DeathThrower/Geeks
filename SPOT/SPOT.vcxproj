@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="Actions\ActionAddCourse.cpp" />
     <ClCompile Include="Actions\ActionLoadCourseOffering.cpp" />
+    <ClCompile Include="Actions\ActionLoadRules.cpp" />
     <ClCompile Include="Actions\ActionLoadStudyPlan.cpp" />
     <ClCompile Include="Actions\ActionReplaceCourse.cpp" />
     <ClCompile Include="Actions\ActionSaveStudyPlan.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddCourse.h" />
     <ClInclude Include="Actions\ActionLoadCourseOffering.h" />
+    <ClInclude Include="Actions\ActionLoadRules.h" />
     <ClInclude Include="Actions\ActionLoadStudyPlan.h" />
     <ClInclude Include="Actions\ActionReplaceCourse.h" />
     <ClInclude Include="Actions\ActionSaveStudyPlan.h" />

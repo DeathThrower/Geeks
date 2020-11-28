@@ -180,6 +180,9 @@ ActionData GUI::GetUserAction(string msg) const
 			//[3] User clicks on the status bar
 			return ActionData{ STATUS_BAR };
 		}
+		else if(ctInput == RIGHT_CLICK){
+			// put here the function that display course info
+		}
 	}//end while
 
 }

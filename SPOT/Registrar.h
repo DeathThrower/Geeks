@@ -21,6 +21,8 @@ public:
 	bool ExecuteAction(Action*&);
 	void UpdateInterface();
 	StudyPlan* getStudyPlan() const;
+	void clearStudyPlan();
+	void clearRules();
 
 	void Run();
 
@@ -36,7 +38,7 @@ public:
 	string sem2str(SEMESTER sem) const;
 
 	//open a file selection window and return the path of the file
-	string openfilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
+	string openfilename(string title,char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 
 	//open a save file window and return the path 
 	string savefilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
