@@ -63,8 +63,8 @@ public:
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
 	string GetSrting() const;
-	//
-	void displayCourseInfo(Registrar * pReg, int x, int y);
+	
+	window* getWindow() const;
 
 
 	

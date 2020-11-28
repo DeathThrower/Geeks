@@ -36,6 +36,7 @@ enum ActionType
 	DRAW_AREA,	//A click in the drawing area
 
 	CANCEL,		//ESC key is pressed
+	RIGHTCLICK   
 
 	//TODO: Add more action types
 

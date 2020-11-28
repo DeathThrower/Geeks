@@ -112,6 +112,12 @@ Course* Registrar::getCourse(int x, int y) const
 	return p;
 }
 
+void Registrar::displayCourseInfo( int x, int y)
+{
+	Course* course = getCourse(x, y);
+	getGUI()->PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()));
+}
+
 Registrar::Registrar()
 {
 	pGUI = new GUI;	//create interface object
@@ -151,7 +157,11 @@ Action* Registrar::CreateRequiredAction()
 	case LOAD:
 		RequiredAction = new ActionLoadStudyPlan(this);
 		break;
-
+	case RIGHTCLICK:
+		displayCourseInfo(actData.x,actData.y);
+		int x, y;
+		getGUI()->getWindow()->WaitMouseClick(x,y);
+		break;
 	//TODO: Add case for each action
 	
 	case EXIT:

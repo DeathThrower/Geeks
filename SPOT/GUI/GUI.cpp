@@ -12,6 +12,9 @@ GUI::GUI()
 	CreateMenu();
 }
 
+window* GUI::getWindow() const{
+	return pWind;
+}
 
 //Clears the status bar
 void GUI::ClearDrawingArea() const
@@ -182,6 +185,7 @@ ActionData GUI::GetUserAction(string msg) const
 		}
 		else if(ctInput == RIGHT_CLICK){
 			// put here the function that display course info
+			return ActionData{RIGHTCLICK,x,y};
 		}
 	}//end while
 
@@ -223,14 +227,6 @@ string GUI::GetSrting() const
 		PrintMsg(userInput);
 	}
 
-}
-
-
-void GUI::displayCourseInfo(Registrar * pReg, int x, int y)
-{
-
-	Course* course = pReg->getCourse(x, y);
-	PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()) );
 }
 
 

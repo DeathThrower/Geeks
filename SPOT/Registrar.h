@@ -31,6 +31,9 @@ public:
 	// function to get the course information
 	CourseInfo getCourseInfo(Rules* myrules, Course_Code CC) const;
 
+	// function to display the course info
+	void displayCourseInfo( int x, int y);
+
 	// convert string to SEMESTER
 	SEMESTER str2sem(string str) const;
 
