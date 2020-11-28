@@ -7,7 +7,7 @@ ActionLoadStudyPlan::ActionLoadStudyPlan(Registrar* p) :Action(p)
 bool ActionLoadStudyPlan::Execute() {
     string filepath = pReg->openfilename("Open Study Plan file");
     if (filepath != "") {
-        //pReg->clearStudyPlan();
+        pReg->clearStudyPlan();
         ifstream finput;
         finput.open(filepath);
         char* pch;
