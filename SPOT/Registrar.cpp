@@ -148,7 +148,7 @@ Action* Registrar::CreateRequiredAction()
 	//TODO: Add case for each action
 	
 	case EXIT:
-		exit(1);
+		RequiredAction = new ActionReplaceCourse(this);//exit(1);
 		break;
 	}
 	return RequiredAction;

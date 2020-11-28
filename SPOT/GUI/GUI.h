@@ -4,6 +4,7 @@ using namespace std;
 
 #include "..\DEFs.h"
 #include "CMUgraphicsLib\CMUgraphics.h"
+#include "..\Registrar.h"
 
 class Course;
 class AcademicYear;
@@ -62,7 +63,8 @@ public:
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
 	string GetSrting() const;
-
+	//
+	void displayCourseInfo(Registrar * pReg, int x, int y);
 
 
 	

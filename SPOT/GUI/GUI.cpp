@@ -223,7 +223,12 @@ string GUI::GetSrting() const
 }
 
 
+void GUI::displayCourseInfo(Registrar * pReg, int x, int y)
+{
 
+	Course* course = pReg->getCourse(x, y);
+	PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()) );
+}
 
 
 
