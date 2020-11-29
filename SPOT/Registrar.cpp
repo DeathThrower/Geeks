@@ -4,7 +4,9 @@
 #include "Actions/ActionSaveStudyPlan.h"
 #include "Actions/ActionLoadCourseOffering.h"
 #include "Actions/ActionReplaceCourse.h"
+#include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
+#include<iostream>
 
 string Registrar::openfilename(string title ,char* filter , HWND owner) const {
 	OPENFILENAME ofn;
@@ -90,6 +92,8 @@ string Registrar::sem2str(SEMESTER sem) const {
 	}
 }
 
+
+
 Course* Registrar::getCourse(int x, int y) const
 {
 	int cX, cY;
@@ -165,7 +169,7 @@ Action* Registrar::CreateRequiredAction()
 	//TODO: Add case for each action
 	
 	case EXIT:
-		RequiredAction = new ActionReplaceCourse(this);//exit(1);
+		RequiredAction = new ActionDeleteCourse(this);//exit(1);
 		break;
 	}
 	return RequiredAction;

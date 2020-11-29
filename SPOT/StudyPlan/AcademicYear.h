@@ -23,7 +23,7 @@ public:
 	virtual ~AcademicYear();
 	vector<Course*> getCourses(int sem) const;
 	bool AddCourse(Course*, SEMESTER );
-	
+	bool DeleteCourse(int, int);
 
 	void virtual DrawMe(GUI*) const;
 };

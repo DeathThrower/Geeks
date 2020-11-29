@@ -18,6 +18,7 @@ public:
 	StudyPlan(int yearnum=5);
 	vector<AcademicYear*> getPlan() const;
 	bool AddCourse(Course*, int year, SEMESTER);
+	bool DeleteCourse(int ,int);
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
 };

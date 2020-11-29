@@ -161,6 +161,9 @@
     <ClCompile Include="Actions\ActionLoadRules.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionDeleteCourse.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI\GUI.h">
@@ -257,6 +260,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionLoadRules.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionDeleteCourse.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

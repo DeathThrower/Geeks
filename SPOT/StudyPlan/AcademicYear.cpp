@@ -1,6 +1,7 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
-
+#include "../GUI/Drawable.h"
+#include<iostream>
 AcademicYear::AcademicYear()
 {
 	//TODO: make all necessary initializations
@@ -26,6 +27,24 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 	//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
 
+	return true;
+}
+
+bool AcademicYear::DeleteCourse(int x, int y) {
+	int cX, cY, i =0;
+	for (auto sem : YearCourses) {
+		for (auto course = sem.begin(); course != sem.end(); ++course){
+			graphicsInfo ginfo = (*course)->getGfxInfo();
+			cX = ginfo.x; cY = ginfo.y;
+			if (cX <= x && cX + 80 >= x && cY <= y && cY + 40 >= y) {
+				TotalCredits -= (*course)->getCredits();
+				sem.erase(course);
+				YearCourses[i] = sem;
+				break;
+			}
+		}
+		i++;
+	}
 	return true;
 }
 
