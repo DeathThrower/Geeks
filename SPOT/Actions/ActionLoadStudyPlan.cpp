@@ -14,12 +14,12 @@ bool ActionLoadStudyPlan::Execute() {
         char* context = nullptr;
         const int size = 100;
         char line[size];
-        int index, year, x = 0, y = 85;
+        int index, year, x = 0, y = 180;
         SEMESTER sem = FALL;
         CourseInfo course;
         while (finput.getline(line, size)) {
             index = 0;
-            y = 85;
+            y = 180;
             pch = strtok_s(line, ",", &context);
             year = pch[5] - '0';
             while (pch != NULL) {

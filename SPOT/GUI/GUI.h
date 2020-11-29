@@ -27,11 +27,11 @@ class GUI
 	};
 	string MenuItemImages[ITM_CNT];
 	//Some constants for GUI
-	static const int	WindWidth = 1350, WindHeight = 700,	//Window width and height
+	static const int	WindWidth = 1920, WindHeight = 1080,	//Window width and height
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
-		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 70;		//Width of each item in the menu
+		MenuBarHeight = 55,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
+		MenuItemWidth = 55;		//Width of each item in the menu
 
 
 
@@ -40,7 +40,7 @@ class GUI
 	color HiColor = RED;			//Highlighting color
 	color ConnColor = GREEN;		//Connector color
 	color MsgColor = BLUE;			//Messages color
-	color BkGrndColor = LIGHTGRAY;	//Background color
+	color BkGrndColor = WHITE;	//Background color
 	color StatusBarColor = DARKGRAY;//statusbar color
 	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
 
