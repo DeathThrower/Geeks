@@ -12,7 +12,7 @@ public:
 	Action(Registrar* p) { pReg = p; }
 	
 	//Execute action (code depends on action type)
-	bool virtual Execute() = 0; //pure virtual
+	virtual bool Execute() = 0; //pure virtual
 	virtual ~Action() {}
 };
 

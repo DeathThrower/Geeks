@@ -7,6 +7,6 @@
 class ActionLoadCourseOffering : public Action {
 public:
 	ActionLoadCourseOffering(Registrar*);
-	bool virtual Execute();
+	bool Execute();
 	virtual ~ActionLoadCourseOffering();
 };

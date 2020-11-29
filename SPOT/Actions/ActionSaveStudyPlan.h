@@ -7,6 +7,6 @@
 class ActionSaveStudyPlan : public Action {
 public:
 	ActionSaveStudyPlan(Registrar*);
-	bool virtual Execute();
+	bool Execute();
 	virtual ~ActionSaveStudyPlan();
 };

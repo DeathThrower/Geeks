@@ -27,7 +27,7 @@ bool ActionLoadStudyPlan::Execute() {
                     sem = pReg->str2sem(pch);
                     if (sem==SEM_CNT) {
                         pReg->getGUI()->PrintMsg("Error!!!! unknown Semester name in the file: " + string(pch));
-                        Sleep(10000);
+                        Sleep(8000);
                         break;
                     }
                 }
@@ -58,7 +58,7 @@ bool ActionLoadStudyPlan::Execute() {
                     //}
                     //else {
                     //    pReg->getGUI()->PrintMsg("Error!!!! unknown course in the file: "+string(pch));
-                    //    Sleep(10000);
+                    //    Sleep(8000);
                     //}
                 }
 

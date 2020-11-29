@@ -7,6 +7,6 @@
 class ActionLoadRules : public Action {
 public:
 	ActionLoadRules(Registrar*);
-	bool virtual Execute();
+	bool Execute();
 	virtual ~ActionLoadRules();
 };

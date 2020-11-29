@@ -6,6 +6,6 @@ class ActionReplaceCourse :
 {
 public:
 	ActionReplaceCourse(Registrar*);
-	bool virtual Execute();
+	bool Execute();
 	virtual ~ActionReplaceCourse();
 };

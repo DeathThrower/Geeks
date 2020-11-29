@@ -6,7 +6,7 @@ class ActionAddCourse :
 {
 public:
 	ActionAddCourse(Registrar*);
-	bool virtual Execute();
+	bool Execute();
 	virtual ~ActionAddCourse();
 };
 

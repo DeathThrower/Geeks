@@ -4,7 +4,6 @@ using namespace std;
 
 #include "..\DEFs.h"
 #include "CMUgraphicsLib\CMUgraphics.h"
-#include "..\Registrar.h"
 
 class Course;
 class AcademicYear;
