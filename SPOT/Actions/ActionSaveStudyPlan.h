@@ -7,6 +7,7 @@
 class ActionSaveStudyPlan : public Action {
 public:
 	ActionSaveStudyPlan(Registrar*);
+	string savefilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
 	bool Execute();
 	virtual ~ActionSaveStudyPlan();
 };

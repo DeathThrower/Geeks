@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <fstream>
 using namespace std;
 #include "..\DEFs.h"
 
@@ -22,7 +23,8 @@ public:
 	string getTitle() const;
 	string getCode() const;
 	int getCredits() const;
-
+	//return true if the point(x,y) is in the box of the course
+	bool isCourse(int x, int y) const;
 	void DrawMe(GUI*) const;
 	virtual ~Course();
 	/* setters*/
@@ -33,5 +35,7 @@ public:
 	void setDone(bool Done);
 	void setPreReq(vector<Course_Code> PreReq);
 	void setCoReq(vector<Course_Code> CoReq);
+
+	void saveCourse(ofstream & outdata) const;
 
 };

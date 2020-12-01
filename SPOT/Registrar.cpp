@@ -6,44 +6,7 @@
 #include "Actions/ActionReplaceCourse.h"
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
-#include<iostream>
-
-string Registrar::openfilename(string title ,char* filter , HWND owner) const {
-	OPENFILENAME ofn;
-	char fileName[MAX_PATH]="";
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = owner;
-	ofn.lpstrFilter = filter;
-	ofn.lpstrFile = fileName;
-	ofn.nMaxFile = MAX_PATH;
-	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-	ofn.lpstrDefExt = "";
-	ofn.lpstrTitle = title.c_str();
-	string fileNameStr="";
-	if (GetOpenFileName(&ofn)) {
-		fileNameStr = fileName;
-	}
-	return fileNameStr;
-}
-
-string Registrar::savefilename( char* filter , HWND owner) const {
-	OPENFILENAME ofn;
-	char fileName[MAX_PATH] = ".txt";
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = owner;
-	ofn.lpstrFilter = filter;
-	ofn.lpstrFile = fileName;
-	ofn.nMaxFile = MAX_PATH;
-	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-	ofn.lpstrDefExt = "";
-	string fileNameStr;
-	if (GetSaveFileName(&ofn)) {
-		fileNameStr = fileName;
-	}
-	return fileNameStr;
-}
+//#include<iostream>
 
 
 CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
@@ -58,7 +21,7 @@ CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
 }
 
 
-SEMESTER Registrar::str2sem(string str) const {
+SEMESTER Registrar::str2sem(string str)  {
 	if (str == "Fall" || str == "fall") {
 		return FALL;
 	}
@@ -71,7 +34,7 @@ SEMESTER Registrar::str2sem(string str) const {
 	return SEM_CNT;
 }
 
-string Registrar::sem2str(SEMESTER sem) const {
+string Registrar::sem2str(SEMESTER sem)  {
 	switch (sem)
 	{
 	case FALL:
@@ -92,33 +55,9 @@ string Registrar::sem2str(SEMESTER sem) const {
 	}
 }
 
-
-
-Course* Registrar::getCourse(int x, int y) const
-{
-	int cX, cY;
-	for (auto year : getStudyPlan()->getPlan())
-	{
-		for (int sem = 0; sem <= 2; sem++)
-		{
-			for (auto course : year->getCourses(sem))
-			{
-				//height =40 width=80
-				graphicsInfo ginfo = course->getGfxInfo();
-				cX = ginfo.x; cY = ginfo.y;
-				if ( cX <= x && cX+80 >= x && cY <= y && cY + 40 >= y) {
-					return course;
-				}
-			}
-		}
-	}
-	Course* p = &Course("", "", 0);
-	return p;
-}
-
 void Registrar::displayCourseInfo( int x, int y)
 {
-	Course* course = getCourse(x, y);
+	Course* course = getStudyPlan()->getCourse(x, y);
 	getGUI()->PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()));
 }
 
@@ -169,7 +108,7 @@ Action* Registrar::CreateRequiredAction()
 	//TODO: Add case for each action
 	
 	case EXIT:
-		RequiredAction = new ActionDeleteCourse(this);//exit(1);
+		RequiredAction = new ActionReplaceCourse(this);//exit(1);
 		break;
 	}
 	return RequiredAction;

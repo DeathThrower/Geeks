@@ -25,7 +25,7 @@ bool ActionReplaceCourse::Execute()
 			Course_Code code = pGUI->GetSrting();
 			co = pReg->getCourseInfo(pReg->getRules(), code);
 		}*/
-		Course * course = pReg->getCourse(x, y);
+		Course * course = pReg->getStudyPlan()->getCourse(x, y);
 		course->setCode(code);
 		course->setCredits(2);
 		/*course->setDone(done);

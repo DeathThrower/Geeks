@@ -1,11 +1,30 @@
 #include "ActionLoadStudyPlan.h"
 
+string ActionLoadStudyPlan::openfilename(string title, char* filter, HWND owner) const {
+    OPENFILENAME ofn;
+    char fileName[MAX_PATH] = "";
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(OPENFILENAME);
+    ofn.hwndOwner = owner;
+    ofn.lpstrFilter = filter;
+    ofn.lpstrFile = fileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = "";
+    ofn.lpstrTitle = title.c_str();
+    string fileNameStr = "";
+    if (GetOpenFileName(&ofn)) {
+        fileNameStr = fileName;
+    }
+    return fileNameStr;
+}
+
 ActionLoadStudyPlan::ActionLoadStudyPlan(Registrar* p) :Action(p)
 {
 }
 
 bool ActionLoadStudyPlan::Execute() {
-    string filepath = pReg->openfilename("Open Study Plan file");
+    string filepath = openfilename("Open Study Plan file");
     if (filepath != "") {
         pReg->clearStudyPlan();
         ifstream finput;

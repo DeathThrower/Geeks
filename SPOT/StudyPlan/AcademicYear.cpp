@@ -1,7 +1,8 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
 #include "../GUI/Drawable.h"
-#include<iostream>
+//#include<iostream>
+
 AcademicYear::AcademicYear()
 {
 	//TODO: make all necessary initializations
@@ -64,4 +65,26 @@ void AcademicYear::DrawMe(GUI* pGUI) const
 			it->DrawMe(pGUI);
 		}
 	}
+}
+
+void AcademicYear::saveAcademicYear(ofstream& outdata, int yearnum) const {
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		outdata << "Year " << yearnum;
+		outdata << "," << Registrar::sem2str(SEMESTER(sem));
+		for (Course* course : getCourses(sem)) {
+			course->saveCourse(outdata);
+		}
+		outdata << "\n";
+	}
+}
+
+Course* AcademicYear::getCourse(int x, int y)const {
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		for (Course* course : getCourses(sem)) {
+			if (course->isCourse(x, y)) {
+				return course;
+			}
+		}
+	}
+	return NULL;
 }

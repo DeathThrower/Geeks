@@ -1,9 +1,8 @@
 #pragma once
 #include <vector>
-
+#include "../Registrar.h"
 #include "..\Courses\Course.h"
 #include "../GUI/Drawable.h"
-
 //Represent one year in the student's study plan
 class AcademicYear:public Drawable
 {
@@ -24,7 +23,9 @@ public:
 	vector<Course*> getCourses(int sem) const;
 	bool AddCourse(Course*, SEMESTER );
 	bool DeleteCourse(int, int);
-
+	Course* getCourse(int x,int y)const;
 	void virtual DrawMe(GUI*) const;
+
+	void saveAcademicYear(ofstream& outdata, int yearnum) const;
 };
 

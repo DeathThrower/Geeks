@@ -18,8 +18,11 @@ public:
 	StudyPlan(int yearnum=5);
 	vector<AcademicYear*> getPlan() const;
 	bool AddCourse(Course*, int year, SEMESTER);
+	Course* getCourse(int x, int y) const;
 	bool DeleteCourse(int ,int);
 	void virtual DrawMe(GUI*) const;
+	void saveStudyPlan(ofstream& outdata) const;
+
 	virtual ~StudyPlan();
 };
 
