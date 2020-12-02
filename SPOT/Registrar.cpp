@@ -7,47 +7,11 @@
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
 #include "Actions/ActionImportCatalog.h"
-#include<iostream>
-
-string Registrar::openfilename(string title ,char* filter , HWND owner) const {
-	OPENFILENAME ofn;
-	char fileName[MAX_PATH]="";
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = owner;
-	ofn.lpstrFilter = filter;
-	ofn.lpstrFile = fileName;
-	ofn.nMaxFile = MAX_PATH;
-	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-	ofn.lpstrDefExt = "";
-	ofn.lpstrTitle = title.c_str();
-	string fileNameStr="";
-	if (GetOpenFileName(&ofn)) {
-		fileNameStr = fileName;
-	}
-	return fileNameStr;
-}
-
-string Registrar::savefilename( char* filter , HWND owner) const {
-	OPENFILENAME ofn;
-	char fileName[MAX_PATH] = ".txt";
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = owner;
-	ofn.lpstrFilter = filter;
-	ofn.lpstrFile = fileName;
-	ofn.nMaxFile = MAX_PATH;
-	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-	ofn.lpstrDefExt = "";
-	string fileNameStr;
-	if (GetSaveFileName(&ofn)) {
-		fileNameStr = fileName;
-	}
-	return fileNameStr;
-}
+#include  <algorithm>
+//#include<iostream>
 
 
-CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
+CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const {
 	for (CourseInfo i : myrules->CourseCatalog) {
 		if (i.Code == CC) {
 			return i;
@@ -59,7 +23,7 @@ CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
 }
 
 
-SEMESTER Registrar::str2sem(string str) const {
+SEMESTER Registrar::str2sem(string str) {
 	if (str == "Fall" || str == "fall") {
 		return FALL;
 	}
@@ -72,7 +36,7 @@ SEMESTER Registrar::str2sem(string str) const {
 	return SEM_CNT;
 }
 
-string Registrar::sem2str(SEMESTER sem) const {
+string Registrar::sem2str(SEMESTER sem) {
 	switch (sem)
 	{
 	case FALL:
@@ -93,33 +57,43 @@ string Registrar::sem2str(SEMESTER sem) const {
 	}
 }
 
-
-
-Course* Registrar::getCourse(int x, int y) const
-{
-	int cX, cY;
-	for (auto year : getStudyPlan()->getPlan())
-	{
-		for (int sem = 0; sem <= 2; sem++)
-		{
-			for (auto course : year->getCourses(sem))
-			{
-				//height =40 width=80
-				graphicsInfo ginfo = course->getGfxInfo();
-				cX = ginfo.x; cY = ginfo.y;
-				if ( cX <= x && cX+80 >= x && cY <= y && cY + 40 >= y) {
-					return course;
-				}
-			}
-		}
+Major Registrar::str2maj(string str) {
+	transform(str.begin(), str.end(), str.begin(), ::toupper);
+	if (str == "CIE") {
+		return CIE;
 	}
-	Course* p = &Course("", "", 0);
-	return p;
+	else if (str == "ENV") {
+		return ENV;
+	}
+	else if (str == "NANOE") {
+		return NANOE;
+	}
+	else if (str == "REE") {
+		return REE;
+	}
+	else if (str == "SPC") {
+		return SPC;
+	}
+	else if (str == "PEU") {
+		return PEU;
+	}
+	else if (str == "BMS") {
+		return BMS;
+	}
+	else if (str == "MS") {
+		return MS;
+	}
+	else if (str == "NANOS") {
+		return NANOS;
+	}
+	else {
+		return Major_NUM;
+	}
 }
 
-void Registrar::displayCourseInfo( int x, int y)
+void Registrar::displayCourseInfo(int x, int y)
 {
-	Course* course = getCourse(x, y);
+	Course* course = getStudyPlan()->getCourse(x, y);
 	getGUI()->PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()));
 }
 
@@ -149,8 +123,8 @@ StudyPlan* Registrar::getStudyPlan() const
 	return pSPlan;
 }
 
-Action* Registrar::CreateRequiredAction() 
-{	
+Action* Registrar::CreateRequiredAction()
+{
 	ActionData actData = pGUI->GetUserAction("Pick and action...");
 	Action* RequiredAction = nullptr;
 
@@ -164,14 +138,14 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionLoadStudyPlan(this);
 		break;
 	case RIGHTCLICK:
-		displayCourseInfo(actData.x,actData.y);
+		displayCourseInfo(actData.x, actData.y);
 		int x, y;
-		getGUI()->getWindow()->WaitMouseClick(x,y);
+		getGUI()->getWindow()->WaitMouseClick(x, y);
 		break;
-	//TODO: Add case for each action
-	
+		//TODO: Add case for each action
+
 	case EXIT:
-		RequiredAction = new ActionDeleteCourse(this);//exit(1);
+		RequiredAction = new ActionReplaceCourse(this);//exit(1);
 		break;
 	}
 	return RequiredAction;
@@ -196,7 +170,7 @@ void Registrar::Run()
 		Action* pAct = CreateRequiredAction();
 		if (pAct)	//if user doesn't cancel
 		{
-			
+
 			if (ExecuteAction(pAct))	//if action is not cancelled
 				UpdateInterface();
 		}
@@ -229,9 +203,6 @@ void Registrar::clearRules() {
 	pRegRules->SemMinCredit = 0;
 }
 
-void Registrar::clearStudyPlan() {
-	pSPlan->getPlan().clear();
-}
 
 Registrar::~Registrar()
 {

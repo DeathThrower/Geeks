@@ -5,7 +5,7 @@
 #include "StudyPlan/StudyPlan.h"
 
 
-
+class StudyPlan;
 //The maestro class for the application
 class Registrar
 {
@@ -21,13 +21,13 @@ public:
 	bool ExecuteAction(Action*&);
 	void UpdateInterface();
 	StudyPlan* getStudyPlan() const;
-	void clearStudyPlan();
 	void clearRules();
 
 	void Run();
 
 	//helper functions:
-	Course* getCourse(int x, int y) const;
+
+	
 	// function to get the course information
 	CourseInfo getCourseInfo(Rules* myrules, Course_Code CC) const;
 
@@ -35,16 +35,13 @@ public:
 	void displayCourseInfo( int x, int y);
 
 	// convert string to SEMESTER
-	SEMESTER str2sem(string str) const;
+	static SEMESTER str2sem(string str) ;
 
 	//convert SEMESTER to string
-	string sem2str(SEMESTER sem) const;
+	static string sem2str(SEMESTER sem) ;
 
-	//open a file selection window and return the path of the file
-	string openfilename(string title,char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
-
-	//open a save file window and return the path 
-	string savefilename(char* filter = "Text Documents (*.txt)\0*.txt\0", HWND owner = NULL) const;
+	//convert string to Major
+	static Major  str2maj(string str);
 
 	~Registrar();
 };

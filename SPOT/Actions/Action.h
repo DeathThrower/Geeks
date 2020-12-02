@@ -1,5 +1,4 @@
 #pragma once
-#include <fstream>
 class Registrar; //forward class declaration
 
 //Base class for all possible actions (abstract class)

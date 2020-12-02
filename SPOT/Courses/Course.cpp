@@ -26,6 +26,18 @@ int Course::getCredits() const
 	return credits;
 }
 
+bool Course::isCourse(int x, int y) const {
+	int cY, cX;
+	cX = getGfxInfo().x; cY = getGfxInfo().y;
+	if (cX <= x && cX + 80 >= x && cY <= y && cY + 40 >= y) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+
 void Course::DrawMe(GUI* pG) const
 {
 	pG->DrawCourse(this);
@@ -52,4 +64,8 @@ void Course::setPreReq(vector<Course_Code> PreReq) {
 }
 void Course::setCoReq(vector<Course_Code> CoReq) {
 	this->CoReq = CoReq;
+}
+
+void Course::saveCourse(ofstream& outdata) const {
+	outdata << "," << getCode();
 }

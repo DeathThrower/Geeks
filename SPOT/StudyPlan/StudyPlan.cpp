@@ -36,11 +36,49 @@ bool StudyPlan::DeleteCourse(int x, int y)
 	return true;
 }
 
+Course* StudyPlan::getCourse(int x, int y) const {
+	for (auto year :plan) {
+		Course* course = year->getCourse(x, y);
+		if (course!=NULL) {
+			return course;
+		}
+	}
+	return NULL;
+}
+
+Major StudyPlan::getMajor() {
+	return major;
+}
+
+void StudyPlan::setMajor(Major nmajor)
+{
+	major = nmajor;
+}
+
+void StudyPlan::clearStudyPlan() {
+	for (auto year : plan) {
+		year->clearYear();
+	}
+	major = Major_NUM;
+	TotalCredits = 0;
+	TotalUnivCredits = 0;
+	TotalMajorCredits = 0;
+	TotalTrackCredits = 0;
+	TotalConcentrationCredits = 0;
+	TotalMinorCredits = 0;
+}
+
 void StudyPlan::DrawMe(GUI* pGUI) const
 {
 	//Plan draws all year inside it.
 	for (int i = 0; i < plan.size(); i++)
 		plan[i]->DrawMe(pGUI);
+}
+
+void StudyPlan::saveStudyPlan(ofstream& outdata) const {
+	for (int i = 0; i < plan.size();i++) {
+		plan[i]->saveAcademicYear(outdata, i);
+	}
 }
 
 StudyPlan::~StudyPlan()

@@ -50,4 +50,52 @@ struct ActionData
 	
 };
 
+enum Major {
+	CIE,
+	ENV,
+	NANOE,
+	REE,
+	SPC,
+	PEU,
+	BMS,
+	MS,
+	NANOS,
+	Major_NUM
+};
 
+//// convert string to SEMESTER
+//SEMESTER str2sem(string str) {
+//	if (str == "Fall" || str == "fall") {
+//		return FALL;
+//	}
+//	else if (str == "Spring" || str == "spring") {
+//		return SPRING;
+//	}
+//	else if (str == "Summer" || str == "summer") {
+//		return SUMMER;
+//	}
+//	return SEM_CNT;
+//}
+//
+//
+////convert SEMESTER to string
+//string sem2str(SEMESTER sem) {
+//	switch (sem)
+//	{
+//	case FALL:
+//		return "Fall";
+//		break;
+//	case SPRING:
+//		return "Spring";
+//		break;
+//	case SUMMER:
+//		return "Summer";
+//		break;
+//	case SEM_CNT:
+//		return "";
+//		break;
+//	default:
+//		return "";
+//		break;
+//	}
+//}
