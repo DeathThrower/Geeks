@@ -10,7 +10,15 @@ ActionLoadCourseOffering::~ActionLoadCourseOffering()
 {}
 
 bool ActionLoadCourseOffering::Execute() {
-    string filepath = "F:/CIE Year 2 S1/C++/SPOT - CIE202 Project Code Framework/Geeks/SPOT/Files/CourseOffering.txt";
+    char result[MAX_PATH];
+    string str = string(result, GetModuleFileName(NULL, result, MAX_PATH));
+    str = str.erase(str.length() - 18, 18);
+    int ind = str.find("\\");
+    while (ind != string::npos) {
+        str.replace(ind, 1, "/");
+        ind = str.find("\\");
+    }
+    string filepath = str+"SPOT/Files/CourseOffering.txt";
     ifstream finput(filepath);
     char* pch;
     char* context = nullptr;
@@ -44,7 +52,7 @@ bool ActionLoadCourseOffering::Execute() {
             pch = strtok_s(NULL, ",", &context);
             index++;
         }
-        pReg->getRules()->OffringsList.push_back(year);
+        pReg->getRules()->OfferingsList.push_back(year);
     }
     finput.close();
     return true;

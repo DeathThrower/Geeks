@@ -6,6 +6,7 @@
 #include "Actions/ActionReplaceCourse.h"
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
+#include "Actions/ActionImportCatalog.h"
 #include<iostream>
 
 string Registrar::openfilename(string title ,char* filter , HWND owner) const {
@@ -128,6 +129,7 @@ Registrar::Registrar()
 	pSPlan = new StudyPlan;	//create a study plan.
 	pRegRules = new Rules;  // create a Rules struct
 	ActionLoadCourseOffering(this).Execute();
+	ActionImportCatalog(this).Execute();
 }
 
 //return a pointer to Rules
