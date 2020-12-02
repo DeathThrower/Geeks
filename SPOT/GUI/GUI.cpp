@@ -239,7 +239,9 @@ ActionData GUI::GetUserAction(string msg) const
 		}
 		else if(ctInput == RIGHT_CLICK){
 			// put here the function that display course info
-			return ActionData{RIGHTCLICK,x,y};
+			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight){
+				return ActionData{RIGHTCLICK,x,y};
+			}
 		}
 	}//end while
 
