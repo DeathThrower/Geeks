@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="Actions\ActionAddCourse.cpp" />
     <ClCompile Include="Actions\ActionDeleteCourse.cpp" />
+    <ClCompile Include="Actions\ActionDisplayCourseInfo.cpp" />
     <ClCompile Include="Actions\ActionImportCatalog.cpp" />
     <ClCompile Include="Actions\ActionLoadCourseOffering.cpp" />
     <ClCompile Include="Actions\ActionLoadRules.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\ActionAddCourse.h" />
     <ClInclude Include="Actions\ActionDeleteCourse.h" />
+    <ClInclude Include="Actions\ActionDisplayCourseInfo.h" />
     <ClInclude Include="Actions\ActionImportCatalog.h" />
     <ClInclude Include="Actions\ActionLoadCourseOffering.h" />
     <ClInclude Include="Actions\ActionLoadRules.h" />

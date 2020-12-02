@@ -7,6 +7,7 @@
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
 #include "Actions/ActionImportCatalog.h"
+#include "Actions/ActionDisplayCourseInfo.h"
 #include  <algorithm>
 //#include<iostream>
 
@@ -121,11 +122,6 @@ Major Registrar::str2maj(string str) {
 	}
 }
 
-void Registrar::displayCourseInfo(int x, int y)
-{
-	Course* course = getStudyPlan()->getCourse(x, y);
-	getGUI()->PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()));
-}
 
 Registrar::Registrar()
 {
@@ -168,9 +164,11 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionLoadStudyPlan(this);
 		break;
 	case RIGHTCLICK:
-		displayCourseInfo(actData.x, actData.y);
-		int x, y;
-		getGUI()->getWindow()->WaitMouseClick(x, y);
+		// Adjusted this to create an ActionDisplayCourseInfo object instead
+		//displayCourseInfo(actData.x, actData.y);
+		//int x, y;
+		//getGUI()->getWindow()->WaitMouseClick(x, y);
+		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
 		break;
 		//TODO: Add case for each action
 
