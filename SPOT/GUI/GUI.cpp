@@ -5,7 +5,7 @@
 
 GUI::GUI()
 { 
-	pWind = new window(1920, 1080,-10,0);
+	pWind = new window(1360, 768,-10,0);
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
@@ -50,14 +50,24 @@ void GUI::CreateMenu() const
 		ind = str.find("\\");
 	}
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = str+"SPOT/GUI/Images/Menu/add.jpg";
-	MenuItemImages[ITM_EXIT] = str+"SPOT/GUI/Images/Menu/Exit.jpg";
+	MenuItemImages[ITM_ADD] = str+"SPOT/GUI/Images/Menu/add-file.jpg";
+	MenuItemImages[ITM_ex1] = str+"SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex2] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex4] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex5] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex6] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/Exit.jpg";
+
 
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu items one image at a time
-	for (int i = 0; i<ITM_CNT; i++)
-		pWind->DrawImage(MenuItemImages[i], i*MenuItemWidth, 0, MenuItemWidth, MenuBarHeight);
+	for (int i = 0; i<ITM_CNT-1; i++)
+		pWind->DrawImage(MenuItemImages[i], (i*65)+5, 5, MenuItemWidth, 50);
+
+	pWind->DrawImage(MenuItemImages[ITM_EXIT], 1290 , 5, MenuItemWidth, 50);
+
 }
 
 ////////////////////////    Output functions    ///////////////////
@@ -123,59 +133,47 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	//		2- Draw a sub-rectangle for each semester
 	//Then each course should be drawn inside rect of its year/sem
 
-	// Drawing the borders of the acadimic plan:
-	pWind->SetPen(BLACK, 3);
-	pWind->DrawLine(265, 55, 265, 600);
-	pWind->DrawLine(2* 265, 55, 2* 265, 600);
-	pWind->DrawLine(3* 265, 55, 3* 265, 600);
-	pWind->DrawLine(4* 265, 55, 4* 265, 600);
-	pWind->DrawLine(5 * 265, 55, 5 * 265, 600);
-	pWind->DrawLine(0, 600, 1920, 600);
-	pWind->DrawLine(0, 100, 1920, 100);
-	pWind->DrawLine(0, 55, 1920, 55);
-
-	pWind->SetPen(BLUE, 2);
-	pWind->DrawLine(0, 150, 1920, 150);
-	pWind->DrawLine(88, 100, 88, 600);
-	pWind->DrawLine(2* 88, 100, 2* 88, 600);
-	pWind->DrawLine(4* 88, 100, 4* 88, 600);
-	pWind->DrawLine(5* 88, 100, 5* 88, 600);
-	pWind->DrawLine(7 * 88, 100, 7 * 88, 600);
-	pWind->DrawLine(8 * 88, 100, 8 * 88, 600);
-	pWind->DrawLine(10 * 88, 100, 10 * 88, 600);
-	pWind->DrawLine(11 * 88, 100, 11 * 88, 600);
-	pWind->DrawLine(13 * 88, 100, 13 * 88, 600);
-	pWind->DrawLine(14 * 88, 100, 14 * 88, 600);
-	pWind->DrawLine(16 * 87, 100, 16 * 87, 600);
-	pWind->DrawLine(17 * 87, 100, 17 * 87, 600);
-
+	pWind->SetPen(RED, 5);
+	pWind->DrawRectangle(15, 80, 1330, 700, FRAME);
 	
-	// Headlines printing:
+	pWind->SetPen(BLUE, 3);
+	for (int i = 1; i <= 4; i++)
+	{
+		pWind->DrawLine(15 + (i * 263), 100, 15 + (i * 263), 680);
+	}
+	pWind->DrawLine(40, 130, 1310, 130);
 
-	pWind->DrawString(100, 75, " YEAR 1 ");
-	pWind->DrawString(100 + (256), 75, " YEAR 2 ");
-	pWind->DrawString(100 + (2 * 256), 75, " YEAR 3 ");
-	pWind->DrawString(100 + (3 * 256), 75, " YEAR 4 ");
-	pWind->DrawString(100 + (4 * 256), 75, " YEAR 5 ");
-	pWind->DrawString(100 + (5 * 256), 75, " YEAR 6 ");
+	pWind->SetPen(LIGHTBLUE, 2);
+	for (int i = 1; i <= 3*5; i++)
+	{
+		if (i % 3 == 0)
+			i++;
 
+		pWind->DrawLine(15 + i*87.67, 140, 15 + i*87.67, 650);
 
-	pWind->DrawString(30, 120, " FALL ");
-	pWind->DrawString(30+88, 120, " SPRING ");
-	pWind->DrawString(30+(2*88), 120, " SUMMER ");
-	pWind->DrawString(30 + (3 * 88), 120, " FALL ");
-	pWind->DrawString(30 + (4 * 88), 120, " SPRING ");
-	pWind->DrawString(30 + (5 * 88), 120, " SUMMER ");
-	pWind->DrawString(30 + (6 * 88), 120, " FALL ");
-	pWind->DrawString(30 + (7 * 88), 120, " SPRING ");
-	pWind->DrawString(30 + (8 * 88), 120, " SUMMER ");
-	pWind->DrawString(30 + (9 * 88), 120, " FALL ");
-	pWind->DrawString(30 + (10 * 88), 120, " SPRING ");
-	pWind->DrawString(30 + (11 * 88), 120, " SUMMER ");
-	pWind->DrawString(30 + (12 * 88), 120, " FALL ");
-	pWind->DrawString(30 + (13 * 88), 120, " SPRING ");
-	pWind->DrawString(30 + (14 * 88), 120, " SUMMER ");
+	}
 
+	for (int i = 0; i < 5; i++)
+	{
+		pWind->DrawLine(30+(i*263), 165, 260+(i*263), 165);
+	}
+
+	pWind->SetFont(CRS_HEIGHT * 0.8, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(BROWN);
+	pWind->DrawString(100, 95, "Year 1");
+	pWind->DrawString(100 + 263, 95, "Year 2");
+	pWind->DrawString(100 + 2*263, 95, "Year 3");
+	pWind->DrawString(100 + 3*263, 95, "Year 4");
+	pWind->DrawString(100 + 4*263, 95, "Year 5");
+
+	pWind->SetFont(CRS_HEIGHT * 0.5, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(DARKGREEN);
+	for (int i = 0; i < 5; i++)
+	{
+		pWind->DrawString(55 + i * 263, 140, "Fall");
+		pWind->DrawString(120 + i * 263, 140, "Spring");
+		pWind->DrawString(200 + i * 263, 140, "Summer");
+	}
 	
 }
 
@@ -282,7 +280,6 @@ string GUI::GetSrting() const
 	}
 
 }
-
 
 
 

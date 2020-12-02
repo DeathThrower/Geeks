@@ -18,6 +18,12 @@ class GUI
 		ITM_ADD,		//Add a new course
 
 						//TODO: Add more items names here
+		ITM_ex1,
+		ITM_ex2,
+		ITM_ex3,
+		ITM_ex4,
+		ITM_ex5,
+		ITM_ex6,
 
 
 		ITM_EXIT,		//Exit item
@@ -27,11 +33,11 @@ class GUI
 	};
 	string MenuItemImages[ITM_CNT];
 	//Some constants for GUI
-	static const int	WindWidth = 1920, WindHeight = 1080,	//Window width and height
+	static const int	WindWidth = 1360, WindHeight = 768,	//Window width and height
 		wx = 15, wy = 15,		//Window starting coordinates
-		StatusBarHeight = 60,	//Status Bar Height
-		MenuBarHeight = 55,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 55;		//Width of each item in the menu
+		StatusBarHeight = 50,	//Status Bar Height
+		MenuBarHeight = 60,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
+		MenuItemWidth = 50;		//Width of each item in the menu
 
 
 
@@ -39,9 +45,9 @@ class GUI
 	color FillColor = YELLOW;		//Filling color (for courses)
 	color HiColor = RED;			//Highlighting color
 	color ConnColor = GREEN;		//Connector color
-	color MsgColor = BLUE;			//Messages color
+	color MsgColor = WHITE;			//Messages color
 	color BkGrndColor = WHITE;	//Background color
-	color StatusBarColor = DARKGRAY;//statusbar color
+	color StatusBarColor = BROWN;//statusbar color
 	string WindTitle = "Study-Plan Organizational Tool (SPOT)";
 
 	window* pWind;
