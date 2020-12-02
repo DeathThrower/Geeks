@@ -85,7 +85,6 @@ bool ActionImportCatalog::Execute() {
             pch = strtok_s(NULL, ",", &context);
             index++;
         }
-        cout << "been calles and here is course data:" << course.Title << endl;
         pReg->getRules()->CourseCatalog.push_back(course);
     }
     finput.close();
