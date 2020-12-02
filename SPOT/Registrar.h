@@ -29,7 +29,9 @@ public:
 
 	
 	// function to get the course information
-	CourseInfo getCourseInfo(Rules* myrules, Course_Code CC) const;
+	CourseInfo getCourseInfo(Course_Code CC) const;
+
+	string getCourseType(Course_Code CC) const;
 
 	// function to display the course info
 	void displayCourseInfo( int x, int y);

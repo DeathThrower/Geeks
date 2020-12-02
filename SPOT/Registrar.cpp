@@ -6,12 +6,14 @@
 #include "Actions/ActionReplaceCourse.h"
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
+#include "Actions/ActionImportCatalog.h"
+#include "Actions/ActionDisplayCourseInfo.h"
 #include  <algorithm>
 //#include<iostream>
 
 
-CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
-	for (CourseInfo i : myrules->CourseCatalog) {
+CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
+	for (CourseInfo i : pRegRules->CourseCatalog) {
 		if (i.Code == CC) {
 			return i;
 		}
@@ -21,8 +23,38 @@ CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const{
 	return empty;
 }
 
+string Registrar::getCourseType(Course_Code CC) const {
+	for (auto code : pRegRules->UnivCompulsory) {
+		if (CC == code) return "UNIV";
+	}
+	for (auto code : pRegRules->UnivElective) {
+		if (CC == code) return "UNIV";
+	}
+	for (auto code : pRegRules->TrackCompulsory) {
+		if (CC == code) return "TRACK";
+	}
+	for (auto code : pRegRules->TrackElective) {
+		if (CC == code) return "TRACK";
+	}
+	for (auto code : pRegRules->MajorCompulsory) {
+		if (CC == code) return "MAJOR";
+	}
+	for (auto code : pRegRules->MajorElective) {
+			if (CC == code) return "MAJOR";
+	}
+	for (auto vecCode : pRegRules->ConCompulsory) {
+		for (auto code : vecCode) {
+			if (CC == code) return "CON";
+		}
+	}
+	for (auto vecCode : pRegRules->ConElective) {
+		for (auto code : vecCode) {
+			if (CC == code) return "CON";
+		}
+	}
+}
 
-SEMESTER Registrar::str2sem(string str)  {
+SEMESTER Registrar::str2sem(string str) {
 	if (str == "Fall" || str == "fall") {
 		return FALL;
 	}
@@ -35,7 +67,7 @@ SEMESTER Registrar::str2sem(string str)  {
 	return SEM_CNT;
 }
 
-string Registrar::sem2str(SEMESTER sem)  {
+string Registrar::sem2str(SEMESTER sem) {
 	switch (sem)
 	{
 	case FALL:
@@ -58,10 +90,10 @@ string Registrar::sem2str(SEMESTER sem)  {
 
 Major Registrar::str2maj(string str) {
 	transform(str.begin(), str.end(), str.begin(), ::toupper);
-	if (str=="CIE") {
+	if (str == "CIE") {
 		return CIE;
 	}
-	else if(str == "ENV"){
+	else if (str == "ENV") {
 		return ENV;
 	}
 	else if (str == "NANOE") {
@@ -90,11 +122,6 @@ Major Registrar::str2maj(string str) {
 	}
 }
 
-void Registrar::displayCourseInfo( int x, int y)
-{
-	Course* course = getStudyPlan()->getCourse(x, y);
-	getGUI()->PrintMsg("Course Name: " + course->getCode() + " No. of credits: " + to_string(course->getCredits()));
-}
 
 Registrar::Registrar()
 {
@@ -102,6 +129,7 @@ Registrar::Registrar()
 	pSPlan = new StudyPlan;	//create a study plan.
 	pRegRules = new Rules;  // create a Rules struct
 	ActionLoadCourseOffering(this).Execute();
+	ActionImportCatalog(this).Execute();
 }
 
 //return a pointer to Rules
@@ -121,8 +149,8 @@ StudyPlan* Registrar::getStudyPlan() const
 	return pSPlan;
 }
 
-Action* Registrar::CreateRequiredAction() 
-{	
+Action* Registrar::CreateRequiredAction()
+{
 	ActionData actData = pGUI->GetUserAction("Pick and action...");
 	Action* RequiredAction = nullptr;
 
@@ -136,12 +164,14 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionLoadStudyPlan(this);
 		break;
 	case RIGHTCLICK:
-		displayCourseInfo(actData.x,actData.y);
-		int x, y;
-		getGUI()->getWindow()->WaitMouseClick(x,y);
+		// Adjusted this to create an ActionDisplayCourseInfo object instead
+		//displayCourseInfo(actData.x, actData.y);
+		//int x, y;
+		//getGUI()->getWindow()->WaitMouseClick(x, y);
+		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
 		break;
-	//TODO: Add case for each action
-	
+		//TODO: Add case for each action
+
 	case EXIT:
 		RequiredAction = new ActionReplaceCourse(this);//exit(1);
 		break;
@@ -168,7 +198,7 @@ void Registrar::Run()
 		Action* pAct = CreateRequiredAction();
 		if (pAct)	//if user doesn't cancel
 		{
-			
+
 			if (ExecuteAction(pAct))	//if action is not cancelled
 				UpdateInterface();
 		}

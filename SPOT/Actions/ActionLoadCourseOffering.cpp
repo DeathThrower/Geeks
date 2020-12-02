@@ -51,7 +51,7 @@ bool ActionLoadCourseOffering::Execute() {
             pch = strtok_s(NULL, ",", &context);
             index++;
         }
-        pReg->getRules()->OffringsList.push_back(year);
+        pReg->getRules()->OfferingsList.push_back(year);
     }
     finput.close();
     return true;
