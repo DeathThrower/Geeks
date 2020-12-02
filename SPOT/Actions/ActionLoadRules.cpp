@@ -1,4 +1,5 @@
 #include "ActionLoadRules.h"
+#include <fstream>
 
 ActionLoadRules::ActionLoadRules(Registrar* p) :Action(p)
 {

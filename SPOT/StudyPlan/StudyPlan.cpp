@@ -46,6 +46,28 @@ Course* StudyPlan::getCourse(int x, int y) const {
 	return NULL;
 }
 
+Major StudyPlan::getMajor() {
+	return major;
+}
+
+void StudyPlan::setMajor(Major nmajor)
+{
+	major = nmajor;
+}
+
+void StudyPlan::clearStudyPlan() {
+	for (auto year : plan) {
+		year->clearYear();
+	}
+	major = Major_NUM;
+	TotalCredits = 0;
+	TotalUnivCredits = 0;
+	TotalMajorCredits = 0;
+	TotalTrackCredits = 0;
+	TotalConcentrationCredits = 0;
+	TotalMinorCredits = 0;
+}
+
 void StudyPlan::DrawMe(GUI* pGUI) const
 {
 	//Plan draws all year inside it.

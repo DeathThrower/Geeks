@@ -1,7 +1,6 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
 #include "../GUI/Drawable.h"
-//#include<iostream>
 
 AcademicYear::AcademicYear()
 {
@@ -87,4 +86,16 @@ Course* AcademicYear::getCourse(int x, int y)const {
 		}
 	}
 	return NULL;
+}
+
+void AcademicYear::clearYear() {
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		YearCourses[sem].clear();
+	}
+	TotalCredits = 0;
+	TotalUnivCredits = 0;
+	TotalMajorCredits = 0;
+	TotalTrackCredits = 0;
+	TotalConcentrationCredits = 0;
+	TotalMinorCredits = 0;
 }

@@ -1,6 +1,5 @@
 #include "ActionLoadCourseOffering.h"
-#include <iostream>
-using namespace std;
+#include <fstream>
 
 ActionLoadCourseOffering::ActionLoadCourseOffering(Registrar* p) :Action(p){
 

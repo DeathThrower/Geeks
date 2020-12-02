@@ -23,6 +23,7 @@ public:
 	vector<Course*> getCourses(int sem) const;
 	bool AddCourse(Course*, SEMESTER );
 	bool DeleteCourse(int, int);
+	void clearYear();
 	Course* getCourse(int x,int y)const;
 	void virtual DrawMe(GUI*) const;
 

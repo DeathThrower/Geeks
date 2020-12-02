@@ -1,4 +1,6 @@
 #include "ActionLoadStudyPlan.h"
+#include <fstream>
+#include <iostream>
 
 string ActionLoadStudyPlan::openfilename(string title, char* filter, HWND owner) const {
     OPENFILENAME ofn;
@@ -26,7 +28,9 @@ ActionLoadStudyPlan::ActionLoadStudyPlan(Registrar* p) :Action(p)
 bool ActionLoadStudyPlan::Execute() {
     string filepath = openfilename("Open Study Plan file");
     if (filepath != "") {
-        pReg->clearStudyPlan();
+        pReg->getStudyPlan()->clearStudyPlan();
+        string major = filepath.substr(filepath.find("Files") + 6, filepath.find("StudyPlan") - filepath.find("Files") - 7);
+        pReg->getStudyPlan()->setMajor(pReg->str2maj(major));
         ifstream finput;
         finput.open(filepath);
         char* pch;

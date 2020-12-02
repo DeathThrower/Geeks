@@ -21,7 +21,6 @@ public:
 	bool ExecuteAction(Action*&);
 	void UpdateInterface();
 	StudyPlan* getStudyPlan() const;
-	void clearStudyPlan();
 	void clearRules();
 
 	void Run();
@@ -40,6 +39,9 @@ public:
 
 	//convert SEMESTER to string
 	static string sem2str(SEMESTER sem) ;
+
+	//convert string to Major
+	static Major  str2maj(string str);
 
 	~Registrar();
 };

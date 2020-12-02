@@ -50,7 +50,18 @@ struct ActionData
 	
 };
 
-
+enum Major {
+	CIE,
+	ENV,
+	NANOE,
+	REE,
+	SPC,
+	PEU,
+	BMS,
+	MS,
+	NANOS,
+	Major_NUM
+};
 
 //// convert string to SEMESTER
 //SEMESTER str2sem(string str) {

@@ -6,6 +6,7 @@
 #include "Actions/ActionReplaceCourse.h"
 #include "Actions/ActionDeleteCourse.h"
 #include "Actions/ActionLoadRules.h"
+#include  <algorithm>
 //#include<iostream>
 
 
@@ -52,6 +53,40 @@ string Registrar::sem2str(SEMESTER sem)  {
 	default:
 		return "";
 		break;
+	}
+}
+
+Major Registrar::str2maj(string str) {
+	transform(str.begin(), str.end(), str.begin(), ::toupper);
+	if (str=="CIE") {
+		return CIE;
+	}
+	else if(str == "ENV"){
+		return ENV;
+	}
+	else if (str == "NANOE") {
+		return NANOE;
+	}
+	else if (str == "REE") {
+		return REE;
+	}
+	else if (str == "SPC") {
+		return SPC;
+	}
+	else if (str == "PEU") {
+		return PEU;
+	}
+	else if (str == "BMS") {
+		return BMS;
+	}
+	else if (str == "MS") {
+		return MS;
+	}
+	else if (str == "NANOS") {
+		return NANOS;
+	}
+	else {
+		return Major_NUM;
 	}
 }
 
@@ -166,9 +201,6 @@ void Registrar::clearRules() {
 	pRegRules->SemMinCredit = 0;
 }
 
-void Registrar::clearStudyPlan() {
-	pSPlan->getPlan().clear();
-}
 
 Registrar::~Registrar()
 {
