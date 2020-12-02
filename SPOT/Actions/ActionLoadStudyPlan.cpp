@@ -74,9 +74,10 @@ bool ActionLoadStudyPlan::Execute() {
                         }
                         graphicsInfo gInfo{ x, y };
                         pC->setGfxInfo(gInfo);
-                        //StudyPlan* pS = 
+                        //pC->setPreReq(course.PreReqList);
+                        //pC->setCoReq(course.CoReqList);
+                        //pC->setType(pReg->getCourseType(course.Code));
                         pReg->getStudyPlan()->AddCourse(pC, year, sem);
-                        //pS->AddCourse(pC, year, sem);
                         y += 45;
                     //}
                     //else {

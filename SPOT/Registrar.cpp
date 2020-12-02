@@ -11,8 +11,8 @@
 //#include<iostream>
 
 
-CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const {
-	for (CourseInfo i : myrules->CourseCatalog) {
+CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
+	for (CourseInfo i : pRegRules->CourseCatalog) {
 		if (i.Code == CC) {
 			return i;
 		}
@@ -22,6 +22,36 @@ CourseInfo Registrar::getCourseInfo(Rules* myrules, Course_Code CC) const {
 	return empty;
 }
 
+string Registrar::getCourseType(Course_Code CC) const {
+	for (auto code : pRegRules->UnivCompulsory) {
+		if (CC == code) return "UNIV";
+	}
+	for (auto code : pRegRules->UnivElective) {
+		if (CC == code) return "UNIV";
+	}
+	for (auto code : pRegRules->TrackCompulsory) {
+		if (CC == code) return "TRACK";
+	}
+	for (auto code : pRegRules->TrackElective) {
+		if (CC == code) return "TRACK";
+	}
+	for (auto code : pRegRules->MajorCompulsory) {
+		if (CC == code) return "MAJOR";
+	}
+	for (auto code : pRegRules->MajorElective) {
+			if (CC == code) return "MAJOR";
+	}
+	for (auto vecCode : pRegRules->ConCompulsory) {
+		for (auto code : vecCode) {
+			if (CC == code) return "CON";
+		}
+	}
+	for (auto vecCode : pRegRules->ConElective) {
+		for (auto code : vecCode) {
+			if (CC == code) return "CON";
+		}
+	}
+}
 
 SEMESTER Registrar::str2sem(string str) {
 	if (str == "Fall" || str == "fall") {
