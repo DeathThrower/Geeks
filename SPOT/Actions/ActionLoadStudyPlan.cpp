@@ -29,8 +29,12 @@ bool ActionLoadStudyPlan::Execute() {
     string filepath = openfilename("Open Study Plan file");
     if (filepath != "") {
         pReg->getStudyPlan()->clearStudyPlan();
+
+        //setting the major from the file path of file
         string major = filepath.substr(filepath.find("Files") + 6, filepath.find("StudyPlan") - filepath.find("Files") - 7);
         pReg->getStudyPlan()->setMajor(pReg->str2maj(major));
+
+        //open the file and get the data from it 
         ifstream finput;
         finput.open(filepath);
         char* pch;
@@ -47,6 +51,7 @@ bool ActionLoadStudyPlan::Execute() {
             year = pch[5] - '0';
             while (pch != NULL) {
                 if (index == 1) {
+                    //error checking if the file has a wrong semester name
                     sem = pReg->str2sem(pch);
                     if (sem==SEM_CNT) {
                         pReg->getGUI()->PrintMsg("Error!!!! unknown Semester name in the file: " + string(pch));
@@ -55,6 +60,7 @@ bool ActionLoadStudyPlan::Execute() {
                     }
                 }
                 else if(index!=0){
+                    //error checking if the file has a wrong course code
                     //course = pReg->getCourseInfo(pReg->getRules(), pch);
                     //if (course.Code!="") {
                         Course* pC = new Course(pch, /*course.Title*/ "hi", 3 /*course.Credits*/);

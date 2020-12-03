@@ -55,13 +55,14 @@ string Registrar::getCourseType(Course_Code CC) const {
 }
 
 SEMESTER Registrar::str2sem(string str) {
-	if (str == "Fall" || str == "fall") {
+	transform(str.begin(), str.end(), str.begin(), ::tolower);
+	if (str == "fall") {
 		return FALL;
 	}
-	else if (str == "Spring" || str == "spring") {
+	else if (str == "spring") {
 		return SPRING;
 	}
-	else if (str == "Summer" || str == "summer") {
+	else if (str == "summer") {
 		return SUMMER;
 	}
 	return SEM_CNT;

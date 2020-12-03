@@ -3,7 +3,7 @@
 #include "..\Registrar.h"
 
 
-//Class responsible for importing studyplan from file
+//Class responsible for importing rules from file
 class ActionLoadRules : public Action {
 public:
 	ActionLoadRules(Registrar*);

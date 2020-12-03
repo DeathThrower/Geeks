@@ -3,7 +3,7 @@
 #include "..\Registrar.h"
 
 
-//Class responsible for saveing studyplan to a file
+//Class responsible for importing course catalog from a file
 class ActionImportCatalog : public Action {
 public:
 	ActionImportCatalog(Registrar*);

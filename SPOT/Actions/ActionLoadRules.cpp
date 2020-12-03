@@ -11,8 +11,20 @@ ActionLoadRules::~ActionLoadRules()
 
 bool ActionLoadRules::Execute() {
     pReg->clearRules();
-    string filepath = " ";
     Rules* myRules = pReg->getRules();
+
+    //generate the file path       --- the generation of the file path will change when we got the rules files
+    char result[MAX_PATH];
+    string str = string(result, GetModuleFileName(NULL, result, MAX_PATH));
+    str = str.erase(str.length() - 18, 18);
+    int ind = str.find("\\");
+    while (ind != string::npos) {
+        str.replace(ind, 1, "/");
+        ind = str.find("\\");
+    }
+    string filepath = str + "SPOT/Files/Rules.txt";
+
+    //open the file and get the data from it
     ifstream finput;
     finput.open(filepath);
     char* pch;
