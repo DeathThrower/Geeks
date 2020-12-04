@@ -159,11 +159,19 @@ Action* Registrar::CreateRequiredAction()
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
-		RequiredAction = new ActionLoadStudyPlan(this);// ActionAddCourse(this);  //error don't forget to fix it
+		RequiredAction = new ActionAddCourse(this);
 		break;
-
+	case DEL_CRS:
+		RequiredAction = new ActionDeleteCourse(this);
+		break;
+	case SAVE:
+		RequiredAction = new ActionSaveStudyPlan(this);
+		break;
 	case LOAD:
 		RequiredAction = new ActionLoadStudyPlan(this);
+		break;
+	case REPLACE:
+		RequiredAction = new ActionReplaceCourse(this);
 		break;
 	case RIGHTCLICK:
 		// Adjusted this to create an ActionDisplayCourseInfo object instead
@@ -175,8 +183,7 @@ Action* Registrar::CreateRequiredAction()
 		//TODO: Add case for each action
 
 	case EXIT:
-		RequiredAction = new ActionReplaceCourse(this);//exit(1);
-		break;
+		exit(1);
 	}
 	return RequiredAction;
 }

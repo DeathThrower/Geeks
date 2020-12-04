@@ -50,10 +50,10 @@ void GUI::CreateMenu() const
 		ind = str.find("\\");
 	}
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = str+"SPOT/GUI/Images/Menu/add-file.jpg";
-	MenuItemImages[ITM_ex1] = str+"SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ADD] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex1] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_ex2] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/add-file.jpg";
 	MenuItemImages[ITM_ex4] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_ex5] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_ex6] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
@@ -116,7 +116,7 @@ void GUI::DrawCourse(const Course* pCrs)
 	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
 	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
 	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD , BY_NAME, "Gramound");
-	pWind->SetPen(MsgColor);
+	pWind->SetPen(DARKBLUE);
 
 	ostringstream crd;
 	crd<< "crd:" << pCrs->getCredits();
@@ -212,6 +212,7 @@ ActionData GUI::GetUserAction(string msg) const
 			//[1] If user clicks on the Menu bar
 			if (y >= 0 && y < MenuBarHeight)
 			{
+				/*
 				//Check whick Menu item was clicked
 				//==> This assumes that menu items are lined up horizontally <==
 				int ClickedItemOrder = (x / MenuItemWidth);
@@ -224,6 +225,25 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_EXIT: return ActionData{ EXIT };		//Exit
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
+				}*/
+
+				if (5 <= x & x <= 55) {
+					return ActionData{ ADD_CRS };
+				}
+				else if (70 <= x & x <= 120){
+					return ActionData{ DEL_CRS };
+				}
+				else if (135 <= x & x <= 185) {
+					return ActionData{ SAVE };
+				}
+				else if (200 <= x & x <= 250) {
+					return ActionData{ LOAD };
+				}
+				else if (265 <= x & x <= 315) {
+					return ActionData{ REPLACE };
+				}
+				else if (1290 <= x & x <= 1340) {
+					return ActionData{ EXIT };
 				}
 			}
 
