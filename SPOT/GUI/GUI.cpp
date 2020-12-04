@@ -5,7 +5,7 @@
 
 GUI::GUI()
 { 
-	pWind = new window(1360, 768,-10,0);
+	pWind = new window(1360, 745,-10,0);
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
@@ -134,14 +134,14 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	//Then each course should be drawn inside rect of its year/sem
 
 	pWind->SetPen(RED, 5);
-	pWind->DrawRectangle(15, 80, 1330, 700, FRAME);
+	pWind->DrawRectangle(15, 120, 1330, 685, FRAME);
 	
 	pWind->SetPen(BLUE, 3);
 	for (int i = 1; i <= 4; i++)
 	{
-		pWind->DrawLine(15 + (i * 263), 100, 15 + (i * 263), 680);
+		pWind->DrawLine(15 + (i * 263), 140, 15 + (i * 263), 670);
 	}
-	pWind->DrawLine(40, 130, 1310, 130);
+	pWind->DrawLine(40, 170, 1310, 170);
 
 	pWind->SetPen(LIGHTBLUE, 2);
 	for (int i = 1; i <= 3*5; i++)
@@ -149,32 +149,33 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 		if (i % 3 == 0)
 			i++;
 
-		pWind->DrawLine(15 + i*87.67, 140, 15 + i*87.67, 650);
+		pWind->DrawLine(15 + i*87.67, 180, 15 + i*87.67, 650);
 
 	}
 
 	for (int i = 0; i < 5; i++)
 	{
-		pWind->DrawLine(30+(i*263), 165, 260+(i*263), 165);
+		pWind->DrawLine(30+(i*263), 205, 260+(i*263), 205);
 	}
 
 	pWind->SetFont(CRS_HEIGHT * 0.8, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(BROWN);
-	pWind->DrawString(100, 95, "Year 1");
-	pWind->DrawString(100 + 263, 95, "Year 2");
-	pWind->DrawString(100 + 2*263, 95, "Year 3");
-	pWind->DrawString(100 + 3*263, 95, "Year 4");
-	pWind->DrawString(100 + 4*263, 95, "Year 5");
+	pWind->DrawString(100, 135, "Year 1");
+	pWind->DrawString(100 + 263, 135, "Year 2");
+	pWind->DrawString(100 + 2*263, 135, "Year 3");
+	pWind->DrawString(100 + 3*263, 135, "Year 4");
+	pWind->DrawString(100 + 4*263, 135, "Year 5");
 
 	pWind->SetFont(CRS_HEIGHT * 0.5, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(DARKGREEN);
 	for (int i = 0; i < 5; i++)
 	{
-		pWind->DrawString(55 + i * 263, 140, "Fall");
-		pWind->DrawString(120 + i * 263, 140, "Spring");
-		pWind->DrawString(200 + i * 263, 140, "Summer");
+		pWind->DrawString(55 + i * 263, 180, "Fall");
+		pWind->DrawString(120 + i * 263, 180, "Spring");
+		pWind->DrawString(200 + i * 263, 180, "Summer");
 	}
-	
+ 
+
 }
 
 
