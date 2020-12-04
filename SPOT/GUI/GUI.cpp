@@ -110,7 +110,7 @@ void GUI::DrawCourse(const Course* pCrs)
 	pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
 	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
-	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
+	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-1, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
 	int Code_x = gInfo.x + CRS_WIDTH * 0.15;

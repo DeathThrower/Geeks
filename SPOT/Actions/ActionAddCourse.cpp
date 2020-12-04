@@ -12,11 +12,11 @@ bool ActionAddCourse::Execute()
 	CourseInfo co;
 	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
 	Course_Code code = pGUI->GetSrting();
-	/*co = pReg->getCourseInfo(pReg->getRules(), code);
+	/*co = pReg->getCourseInfo(code);
 	while (co.Code == "") {
 		pGUI->PrintMsg("Error!! unknown course code, please try again");
 		Course_Code code = pGUI->GetSrting();
-		co = pReg->getCourseInfo(pReg->getRules(), code);
+		co = pReg->getCourseInfo(code);
 	}*/
 
 

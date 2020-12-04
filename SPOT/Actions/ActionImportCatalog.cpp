@@ -1,6 +1,6 @@
 #include "ActionImportCatalog.h"
 #include <algorithm>
-#include <iostream>
+
 ActionImportCatalog::ActionImportCatalog(Registrar* p) :Action(p)
 {
 }

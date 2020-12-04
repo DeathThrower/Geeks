@@ -9,7 +9,6 @@
 #include "Actions/ActionImportCatalog.h"
 #include "Actions/ActionDisplayCourseInfo.h"
 #include  <algorithm>
-//#include<iostream>
 
 
 CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
@@ -52,6 +51,7 @@ string Registrar::getCourseType(Course_Code CC) const {
 			if (CC == code) return "CON";
 		}
 	}
+	return "NOT";
 }
 
 SEMESTER Registrar::str2sem(string str) {
@@ -131,6 +131,7 @@ Registrar::Registrar()
 	pRegRules = new Rules;  // create a Rules struct
 	ActionLoadCourseOffering(this).Execute();
 	ActionImportCatalog(this).Execute();
+	ActionLoadRules(this).Execute();
 }
 
 //return a pointer to Rules

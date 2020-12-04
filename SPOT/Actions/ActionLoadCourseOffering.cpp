@@ -40,7 +40,7 @@ bool ActionLoadCourseOffering::Execute() {
                 }
             }
             else if (index!=0) {
-                //if (pReg->getCourseInfo(pReg->getRules(), pch).Code=="") {
+                //if (pReg->getCourseInfo(pch).Code=="") {
                 //   pReg->getGUI()->PrintMsg("Error!!!! unknown course in the file: " + string(pch));
                 //   Sleep(10000);
                 //}
