@@ -118,13 +118,13 @@ void GUI::CreateMenu() const
 	}
 	string MenuItemImages[ITM_CNT];
 	MenuItemImages[ITM_ADD] = str + "SPOT/GUI/Images/Menu/add-file.jpg";
-	MenuItemImages[ITM_ex1] = str + "SPOT/GUI/Images/Menu/delete.jpg";
-	MenuItemImages[ITM_ex2] = str + "SPOT/GUI/Images/Menu/save.jpg";
-	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/load.jpg";
-	MenuItemImages[ITM_ex4] = str + "SPOT/GUI/Images/Menu/replace.jpg";
-	MenuItemImages[ITM_ex5] = str + "SPOT/GUI/Images/Menu/reorder.jpg";
-	MenuItemImages[ITM_ex6] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/Exit.jpg";
+	MenuItemImages[DEL_CRS] = str + "SPOT/GUI/Images/Menu/delete.jpg";
+	MenuItemImages[SAVE] = str + "SPOT/GUI/Images/Menu/save.jpg";
+	MenuItemImages[LOAD] = str + "SPOT/GUI/Images/Menu/load.jpg";
+	MenuItemImages[REPLACE] = str + "SPOT/GUI/Images/Menu/replace.jpg";
+	MenuItemImages[REORDER] = str + "SPOT/GUI/Images/Menu/reorder.jpg";
+	MenuItemImages[NOTES] = str + "SPOT/GUI/Images/Menu/notes.jpg";
+	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/exit.jpg";
 
 
 	//TODO: Prepare image for each menu item and add it to the list

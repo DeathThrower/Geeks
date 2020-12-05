@@ -1,6 +1,5 @@
 #include "ActionReorderCourses.h"
 #include "..\Registrar.h"
-#include  <iostream>
 
 ActionReorderCourses::ActionReorderCourses(Registrar* p) :Action(p)
 {
@@ -41,11 +40,8 @@ bool ActionReorderCourses::Execute()
 		pReg->getGUI()->PrintMsg("Now drag and drop ,,,, Press ""Esc"" if finished ");
 		// Dragging voodoo
 		if (bDragging == false) {
-			cout << "1" << endl;
 			if (pWind->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_DOWN) {
-				cout << "2" << endl;
 				if (((iX > RectULX) && (iX < (RectULX + RectWidth))) && ((iY > RectULY) && (iY < (RectULY + RectHight)))) {
-					cout << "3"<<endl;
 					bDragging = true;
 					iXOld = iX; iYOld = iY;
 				}
@@ -67,17 +63,16 @@ bool ActionReorderCourses::Execute()
 			}
 
 		}
-		std::cout << iXOld << iYOld;
 		// Draw course
 		course->setGfxInfo(graphicsInfo{ RectULX, RectULY });
 		pReg->UpdateInterface();
 	}
-	/*int year = RectULX
-	SEMESTER sem = SEMESTER();
+	int year = ((RectULX-20)/263)+1;
+	int sem = ((RectULX - 20) % 263)/88;
 	Course* copyCourse(course);
 	pReg->getStudyPlan()->DeleteCourse(RectULX, RectULY);
-	pReg->getStudyPlan()->AddCourse(copyCourse, sem, year);
-	pWind->SetBuffering(false);*/
+	pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem));
+	pWind->SetBuffering(false);
     return true;
 }
 
