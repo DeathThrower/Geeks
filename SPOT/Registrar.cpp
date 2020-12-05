@@ -8,9 +8,8 @@
 #include "Actions/ActionLoadRules.h"
 #include "Actions/ActionImportCatalog.h"
 #include "Actions/ActionDisplayCourseInfo.h"
-#include "Actions/ActionAddNotes.h"
+
 #include  <algorithm>
-//#include<iostream>
 
 
 CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
@@ -53,6 +52,7 @@ string Registrar::getCourseType(Course_Code CC) const {
 			if (CC == code) return "CON";
 		}
 	}
+	return "NOT";
 }
 
 SEMESTER Registrar::str2sem(string str) {
@@ -132,6 +132,7 @@ Registrar::Registrar()
 	pRegRules = new Rules;  // create a Rules struct
 	ActionLoadCourseOffering(this).Execute();
 	ActionImportCatalog(this).Execute();
+	ActionLoadRules(this).Execute();
 }
 
 //return a pointer to Rules
@@ -159,23 +160,25 @@ Action* Registrar::CreateRequiredAction()
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
-		RequiredAction = new ActionAddCourse(this);// ActionAddCourse(this);  //error don't forget to fix it
+		RequiredAction = new ActionLoadStudyPlan(this);// ActionAddCourse(this);  //error don't forget to fix it
 		break;
-
 	case LOAD:
 		RequiredAction = new ActionLoadStudyPlan(this);
 		break;
+	case REPLACE:
+		RequiredAction = new ActionReplaceCourse(this);
+		break;
 	case RIGHTCLICK:
-		// Adjusted this to create an ActionDisplayCourseInfo object instead
-		//displayCourseInfo(actData.x, actData.y);
-		//int x, y;
-		//getGUI()->getWindow()->WaitMouseClick(x, y);
 		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
+		int x, y;
+		getGUI()->getWindow()->WaitMouseClick(x, y);
 		break;
 		//TODO: Add case for each action
-
+	case REORDER:
+		RequiredAction = new ActionReorderCourses(this);
+		break;
 	case EXIT:
-		RequiredAction = new ActionLoadStudyPlan(this);//exit(1);
+		RequiredAction = new ActionReplaceCourse(this);//exit(1);
 		break;
 	}
 	return RequiredAction;

@@ -1,6 +1,5 @@
 #include "ActionLoadStudyPlan.h"
 #include <fstream>
-#include <iostream>
 
 string ActionLoadStudyPlan::openfilename(string title, char* filter, HWND owner) const {
     OPENFILENAME ofn;
@@ -41,12 +40,12 @@ bool ActionLoadStudyPlan::Execute() {
         char* context = nullptr;
         const int size = 100;
         char line[size];
-        int index, year, x = 0, y = 180;
+        int index, year, x = 0, y;
         SEMESTER sem = FALL;
         CourseInfo course;
         while (finput.getline(line, size)) {
             index = 0;
-            y = 180;
+            y = 215;
             pch = strtok_s(line, ",", &context);
             year = pch[5] - '0';
             while (pch != NULL) {
@@ -61,19 +60,19 @@ bool ActionLoadStudyPlan::Execute() {
                 }
                 else if(index!=0){
                     //error checking if the file has a wrong course code
-                    //course = pReg->getCourseInfo(pReg->getRules(), pch);
+                    //course = pReg->getCourseInfo(pch);
                     //if (course.Code!="") {
                         Course* pC = new Course(pch, /*course.Title*/ "hi", 3 /*course.Credits*/);
                         switch (sem)
                         {
                         case FALL:
-                            x = (year - 1) * 265 + 5;
+                            x = (year - 1) * 263 + 20;
                             break;
                         case SPRING:
-                            x = (year - 1) * 265 + 90;
+                            x = (year - 1) * 263 + 106;
                             break;
                         case SUMMER:
-                            x = (year - 1) * 265 + 175;
+                            x = (year - 1) * 263 + 194;
                             break;
                         default:
                             break;

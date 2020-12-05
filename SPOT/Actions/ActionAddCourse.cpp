@@ -2,26 +2,26 @@
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 #include<string>
-ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
+ActionAddCourse::ActionAddCourse(Registrar* p) :Action(p)
 {
 }
 
 bool ActionAddCourse::Execute()
 {
-	GUI* pGUI = pReg->getGUI();	
+	GUI* pGUI = pReg->getGUI();
 	CourseInfo co;
 	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
 	Course_Code code = pGUI->GetSrting();
 	pGUI->PrintMsg("Enter Code Title :");
 	string Title = pGUI->GetSrting();
 	pGUI->PrintMsg("Enter Code Credits :");
-	string crds = pGUI->GetSrting(); 
+	string crds = pGUI->GetSrting();
 	int crd = std::stoi(crds);
 	/*co = pReg->getCourseInfo(pReg->getRules(), code);
 	while (co.Code == "") {
 		pGUI->PrintMsg("Error!! unknown course code, please try again");
 		Course_Code code = pGUI->GetSrting();
-		co = pReg->getCourseInfo(pReg->getRules(), code);
+		co = pReg->getCourseInfo(code);
 	}*/
 
 
@@ -36,9 +36,9 @@ bool ActionAddCourse::Execute()
 		//get coord where user clicked
 		x = actData.x;
 		y = actData.y;
-		
-		
-		
+
+
+
 		//graphicsInfo gInfo{ x, y };
 
 		//TODO: given course code, get course title, crd hours from registrar
@@ -63,16 +63,17 @@ bool ActionAddCourse::Execute()
 		if (sem == -1) { return false; }
 		SEMESTER SEM = static_cast<SEMESTER>(sem);
 		auto course = pS->getCourse(x, y);
-		auto plan =  pS->getPlan();
+		auto plan = pS->getPlan();
 		auto YEAR = plan[year];
 		auto SEM_ = YEAR->getCourses(sem);
 		graphicsInfo g;
-		if(SEM_.size()){
+		if (SEM_.size()) {
 			auto c = SEM_.end();
 			auto f = c - 1;
 			g = (*f)->getGfxInfo();
 			g.y += 45;
-		}else{
+		}
+		else {
 			g.x = year * 265 + 175;
 			g.y = 180;
 		}
@@ -80,9 +81,9 @@ bool ActionAddCourse::Execute()
 		pS->AddCourse(pC, year + 1, SEM);
 	}
 
-	
+
 	//TODO:
-	
+
 
 	return true;
 }

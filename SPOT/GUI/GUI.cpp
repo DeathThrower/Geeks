@@ -2,10 +2,11 @@
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
+#include <iostream>
 
 GUI::GUI()
 { 
-	pWind = new window(1360, 768,-10,0);
+	pWind = new window(1360, 745,-10,0);
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
@@ -14,6 +15,72 @@ GUI::GUI()
 
 window* GUI::getWindow() const{
 	return pWind;
+}
+
+Course* GUI::Drag_Drop(Course* course)
+{
+
+    // Flush out the input queues before beginning
+    pWind->FlushMouseQueue();
+    pWind->FlushKeyQueue();
+
+    pWind->SetBuffering(true);
+    bool bDragging = false;
+
+	int RectULX = course->getGfxInfo().x;
+	int RectULY = course->getGfxInfo().y;
+	int RectWidth = 75;
+	int RectHight = 40;
+
+    int iX = 0 , iY = 0;
+	
+    int iXOld = 0;
+    int iYOld = 0;
+
+    char cKeyData;
+	// Loop until there escape is pressed
+	while (pWind->GetKeyPress(cKeyData) != ESCAPE)
+	{
+		// Dragging voodoo
+		if (bDragging == false) {
+			if (pWind->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_DOWN) {
+				if (((iX > RectULX) && (iX < (RectULX + RectWidth))) && ((iY > RectULY) && (iY < (RectULY + RectHight)))) {
+					bDragging = true;
+					iXOld = iX; iYOld = iY;
+				}
+			}
+		}
+		else {
+			if (pWind->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_UP) {
+				bDragging = false;
+			}
+			else {
+				if (iX != iXOld) {
+					RectULX = RectULX + (iX - iXOld);
+					iXOld = iX;
+				}
+				if (iY != iYOld) {
+					RectULY = RectULY + (iY - iYOld);
+					iYOld = iY;
+				}
+			}
+
+		}
+		std::cout << iXOld << iYOld;
+		// Draw course
+		course->setGfxInfo(graphicsInfo{iXOld, iYOld});
+		DrawCourse(course);
+
+        // Update the screen buffer
+        pWind->UpdateBuffer();
+ 
+    }
+    
+	pWind->SetBuffering(false);
+
+
+
+	return course;
 }
 
 //Clears the status bar
@@ -50,10 +117,10 @@ void GUI::CreateMenu() const
 		ind = str.find("\\");
 	}
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = str+"SPOT/GUI/Images/Menu/add-file.jpg";
-	MenuItemImages[ITM_ex1] = str+"SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ADD] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex1] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_ex2] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/add-file.jpg";
 	MenuItemImages[ITM_ex4] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_ex5] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_ex6] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
@@ -110,13 +177,13 @@ void GUI::DrawCourse(const Course* pCrs)
 	pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
 	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
-	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
+	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-1, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
 	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
 	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
 	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD , BY_NAME, "Gramound");
-	pWind->SetPen(MsgColor);
+	pWind->SetPen(DARKBLUE);
 
 	ostringstream crd;
 	crd<< "crd:" << pCrs->getCredits();
@@ -134,47 +201,48 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	//Then each course should be drawn inside rect of its year/sem
 
 	pWind->SetPen(RED, 5);
-	pWind->DrawRectangle(15, 80, 1330, 700, FRAME);
+	pWind->DrawRectangle(15, 120, 1330, 685, FRAME);
 	
-	pWind->SetPen(BLUE, 3);
+	pWind->SetPen(DARKBLUE, 3);
 	for (int i = 1; i <= 4; i++)
 	{
-		pWind->DrawLine(15 + (i * 263), 100, 15 + (i * 263), 680);
+		pWind->DrawLine(15 + (i * 263), 140, 15 + (i * 263), 670);
 	}
-	pWind->DrawLine(40, 130, 1310, 130);
+	pWind->DrawLine(40, 170, 1310, 170);
 
-	pWind->SetPen(LIGHTBLUE, 2);
+	pWind->SetPen(BLUE, 2);
 	for (int i = 1; i <= 3*5; i++)
 	{
 		if (i % 3 == 0)
 			i++;
 
-		pWind->DrawLine(15 + i*87.67, 140, 15 + i*87.67, 650);
+		pWind->DrawLine(15 + i*87.67, 180, 15 + i*87.67, 650);
 
 	}
 
 	for (int i = 0; i < 5; i++)
 	{
-		pWind->DrawLine(30+(i*263), 165, 260+(i*263), 165);
+		pWind->DrawLine(30+(i*263), 205, 260+(i*263), 205);
 	}
 
 	pWind->SetFont(CRS_HEIGHT * 0.8, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(BROWN);
-	pWind->DrawString(100, 95, "Year 1");
-	pWind->DrawString(100 + 263, 95, "Year 2");
-	pWind->DrawString(100 + 2*263, 95, "Year 3");
-	pWind->DrawString(100 + 3*263, 95, "Year 4");
-	pWind->DrawString(100 + 4*263, 95, "Year 5");
+	pWind->DrawString(100, 135, "Year 1");
+	pWind->DrawString(100 + 263, 135, "Year 2");
+	pWind->DrawString(100 + 2*263, 135, "Year 3");
+	pWind->DrawString(100 + 3*263, 135, "Year 4");
+	pWind->DrawString(100 + 4*263, 135, "Year 5");
 
 	pWind->SetFont(CRS_HEIGHT * 0.5, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(DARKGREEN);
 	for (int i = 0; i < 5; i++)
 	{
-		pWind->DrawString(55 + i * 263, 140, "Fall");
-		pWind->DrawString(120 + i * 263, 140, "Spring");
-		pWind->DrawString(200 + i * 263, 140, "Summer");
+		pWind->DrawString(55 + i * 263, 180, "Fall");
+		pWind->DrawString(120 + i * 263, 180, "Spring");
+		pWind->DrawString(200 + i * 263, 180, "Summer");
 	}
-	
+ 
+
 }
 
 
@@ -211,6 +279,7 @@ ActionData GUI::GetUserAction(string msg) const
 			//[1] If user clicks on the Menu bar
 			if (y >= 0 && y < MenuBarHeight)
 			{
+				/*
 				//Check whick Menu item was clicked
 				//==> This assumes that menu items are lined up horizontally <==
 				int ClickedItemOrder = (x / MenuItemWidth);
@@ -223,6 +292,28 @@ ActionData GUI::GetUserAction(string msg) const
 				case ITM_EXIT: return ActionData{ EXIT };		//Exit
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
+				}*/
+
+				if (5 <= x && x <= 55) {
+					return ActionData{ ADD_CRS };
+				}
+				else if (70 <= x && x <= 120){
+					return ActionData{ DEL_CRS };
+				}
+				else if (135 <= x && x <= 185) {
+					return ActionData{ SAVE };
+				}
+				else if (200 <= x && x <= 250) {
+					return ActionData{ LOAD };
+				}
+				else if (265 <= x && x <= 315) {
+					return ActionData{ REPLACE };
+				}
+				else if (330 <= x && x <= 380) {
+					return ActionData{ REORDER };
+				}
+				else if (1290 <= x & x <= 1340) {
+					return ActionData{ EXIT };
 				}
 			}
 

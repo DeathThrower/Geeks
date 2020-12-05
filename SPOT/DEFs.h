@@ -26,8 +26,8 @@ enum ActionType
 	SAVE,		//Save a study plan to file
 	LOAD,		//Load a study plan from a file
 
-	UNDO,		//Undo the last Action preformed
-	REDO,		//Redo the last Action canceled
+	REPLACE,											//UNDO,		//Undo the last Action preformed
+	REORDER,										//REDO,		//Redo the last Action canceled
 
 	EXIT,		//Exit the application
 
