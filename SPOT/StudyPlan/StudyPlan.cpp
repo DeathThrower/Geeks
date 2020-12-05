@@ -41,7 +41,7 @@ vector<int> StudyPlan::getSem_Year(int x, int y)
 	vector<int> sy;
 	int sem = -1, j = 0;
 	for (auto i : plan) {
-		sem = i->getSem(x, y);
+		sem = i->getSem(x, y, j);
 		if (sem != -1) {
 			sy.insert(sy.end(), { sem,j });
 			return sy;

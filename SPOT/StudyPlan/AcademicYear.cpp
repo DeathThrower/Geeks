@@ -49,11 +49,22 @@ bool AcademicYear::DeleteCourse(int x, int y) {
 	return true;
 }
 
-int AcademicYear::getSem(int x, int y) {
+int AcademicYear::getSem(int x, int y, int year) {
 	int cX = 0,i = 0;
 	for (auto sem : YearCourses) {
 		int nCourses = sem.size();
-		if (!nCourses)break;
+		if (!nCourses) {
+			if (x >= (year ) * 263 + 20 && x <= (year ) * 263 + 106) {
+				return 0;
+			}
+			else if (x >= (year ) * 263 + 106 && x <= (year ) * 263 + 194) {
+				return 1;
+			}
+			else if (x >= (year ) * 263 + 194 && x <= (year ) * 263 + 194 + 86) {
+				return 2;
+			}
+			return -1;
+		};
 		auto course = sem.begin();
 		graphicsInfo ginfo = (*course)->getGfxInfo();
 		cX = ginfo.x;
