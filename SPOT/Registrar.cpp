@@ -174,11 +174,9 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionReplaceCourse(this);
 		break;
 	case RIGHTCLICK:
-		// Adjusted this to create an ActionDisplayCourseInfo object instead
-		//displayCourseInfo(actData.x, actData.y);
-		//int x, y;
-		//getGUI()->getWindow()->WaitMouseClick(x, y);
 		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
+		int x, y;
+		getGUI()->getWindow()->WaitMouseClick(x, y);
 		break;
 		//TODO: Add case for each action
 

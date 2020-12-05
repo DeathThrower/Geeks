@@ -679,69 +679,8 @@ int main()
     // Change the window title to something different
 	myWind.ChangeTitle("CMU Graphics Package Demo");
     
-	LineDemo(myWind);	
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-	RectangleDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-    
-	TriangleDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-
-	PolygonDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-	CircleDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-	EllipseDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-       
-	ArcDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-	BezierCurveDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-	TextDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-	ImageDemo(myWind);
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-    
-    
-   	Keyboard_MouseDemo(myWind); // -- KEYBOARD AND MOUSE INPUT DEMO --
-    WaitNClear(myWind); // Wait for a mouse click and clear the window
-
-   	GetColorDemo(myWind); 
     
     MouseState_DragDemo(myWind);
-
-	MoveByArrowsDemo(myWind);
-	WaitNClear(myWind);
-
-
-	///  Testing draw menu 
-	//First prepare a list of images and save their paths into array of strings
-	//The images MUST be in jpg format
-	const int count = 7;
-	const int menuHeight = 80,  menuItemWidth = 50;
-
-	string MenuIconsPaths[count];	
-	MenuIconsPaths[0] = "images\\copy.jpg";
-	MenuIconsPaths[1] = "images\\cut.jpg";
-	MenuIconsPaths[2] = "images\\delete.jpg";
-	MenuIconsPaths[3] = "images\\run.jpg";
-	MenuIconsPaths[4] = "images\\undo.jpg";
-	MenuIconsPaths[5] = "images\\redo.jpg";
-	MenuIconsPaths[6] = "images\\exit.jpg";
-	DrawMenuDemo(myWind, MenuIconsPaths, count, menuItemWidth, menuHeight);
-	
-
-	DetectMenuDemo(myWind, count, menuItemWidth, menuHeight);
-
-
 
 
 	return 0;

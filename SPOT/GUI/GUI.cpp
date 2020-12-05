@@ -227,22 +227,22 @@ ActionData GUI::GetUserAction(string msg) const
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar
 				}*/
 
-				if (5 <= x & x <= 55) {
+				if (5 <= x && x <= 55) {
 					return ActionData{ ADD_CRS };
 				}
-				else if (70 <= x & x <= 120){
+				else if (70 <= x && x <= 120){
 					return ActionData{ DEL_CRS };
 				}
-				else if (135 <= x & x <= 185) {
+				else if (135 <= x && x <= 185) {
 					return ActionData{ SAVE };
 				}
-				else if (200 <= x & x <= 250) {
+				else if (200 <= x && x <= 250) {
 					return ActionData{ LOAD };
 				}
-				else if (265 <= x & x <= 315) {
+				else if (265 <= x && x <= 315) {
 					return ActionData{ REPLACE };
 				}
-				else if (1290 <= x & x <= 1340) {
+				else if (1290 <= x && x <= 1340) {
 					return ActionData{ EXIT };
 				}
 			}
