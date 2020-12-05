@@ -17,7 +17,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>CgABAIBAAAQQQAAAJAAAEAAAhBAIAAgGAABAFAgAgHA=</HashCode>
+      <HashCode>CoABAIBAAAQQQAAAJAIAUAAAhBAIAAgGAABAFAgAgHA=</HashCode>
       <FileName>GUI\GUI.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -87,7 +87,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>BAAAAUAAAAAAAgACAAwQBEAABAEAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BCAAAUIBAAAAAgACAAwQBEIABAEAAAAAIAAIIAAAIAA=</HashCode>
       <FileName>StudyPlan\StudyPlan.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -124,12 +124,11 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AEAQAAAAAEAAQAAAQAAAAAAAQAAAAAAABAAAABAIAAY=</HashCode>
+      <HashCode>AEAQAECACAAAQAAIQAAAAAQASAAAAAAABAAAABAYIAY=</HashCode>
       <FileName>Registrar.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="pGUI" />
-      <Field Name="RegRules" />
       <Field Name="pSPlan" />
     </ShowAsAssociation>
   </Class>
@@ -139,8 +138,8 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>IUoEEIEqCLBMUEBAAKMIAgASAgUESAIAxQMwgwAEQgI=</HashCode>
-      <FileName>c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vector</FileName>
+      <HashCode>AWAEk4EqCrBsCEBAAOMIIAAyAAUEQBIghQkwgkAFUko=</HashCode>
+      <FileName>D:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.28.29333\include\vector</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="std::list&lt;_Ty, _Alloc&gt;" Collapsed="true">
@@ -152,15 +151,11 @@
   </Class>
   <Class Name="Course" Collapsed="true">
     <Position X="0.75" Y="3" Width="1.5" />
-    <Members>
-      <Method Name="~Course" Hidden="true" />
-      <Method Name="Course" Hidden="true" />
-    </Members>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>CIBAAQAAAAAAAECAAIAAAAAAIAABAEAAAAAAAIAAAAA=</HashCode>
+      <HashCode>CIBECQAAAAAABECAgIAAAAQAoBABAFAEAAAAAIAAAAA=</HashCode>
       <FileName>Courses\Course.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -174,7 +169,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>BAEAAQAAAAAAAgABAIQQBEAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAEAAQAAAAAAAgABAJQQBEIAJBAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>StudyPlan\AcademicYear.h</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -204,7 +199,7 @@
       <Field Name="UnivElective" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAABAhEAAABIAIQAAABAgAAIACAAAA=</HashCode>
+      <HashCode>AAACBAAEAAAAAAAABAhEAAABIAIQAAAAAgIAIASQABA=</HashCode>
       <FileName>Rules.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
