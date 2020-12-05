@@ -98,7 +98,7 @@ void AcademicYear::DrawMe(GUI* pGUI) const
 
 void AcademicYear::saveAcademicYear(ofstream& outdata, int yearnum) const {
 	for (int sem = FALL; sem < SEM_CNT; sem++) {
-		outdata << "Year " << yearnum;
+		outdata << "Year " << yearnum+1;
 		outdata << "," << Registrar::sem2str(SEMESTER(sem));
 		for (Course* course : getCourses(sem)) {
 			course->saveCourse(outdata);

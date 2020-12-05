@@ -32,7 +32,7 @@ bool ActionAddCourse::Execute()
 		//get coord where user clicked
 		x = actData.x;
 		y = actData.y;
-
+		if (!(15 < x && x < 1330 && 205 < y && y < 685)) return false;
 
 
 		//graphicsInfo gInfo{ x, y };

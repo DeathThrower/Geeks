@@ -68,7 +68,7 @@ bool ActionReorderCourses::Execute()
 		pReg->UpdateInterface();
 	}
 	int year = ((RectULX-20)/263)+1;
-	int sem = ((RectULX - 20) % 263)/88;
+	int sem = (((RectULX - 20) % 263)/88)+1;
 	Course* copyCourse(course);
 	pReg->getStudyPlan()->DeleteCourse(RectULX, RectULY);
 	pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem));
