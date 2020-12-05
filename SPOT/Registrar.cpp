@@ -8,6 +8,7 @@
 #include "Actions/ActionLoadRules.h"
 #include "Actions/ActionImportCatalog.h"
 #include "Actions/ActionDisplayCourseInfo.h"
+#include "Actions/ActionAddNotes.h"
 #include  <algorithm>
 //#include<iostream>
 
@@ -158,7 +159,7 @@ Action* Registrar::CreateRequiredAction()
 	switch (actData.actType)
 	{
 	case ADD_CRS:	//add_course action
-		RequiredAction = new ActionLoadStudyPlan(this);// ActionAddCourse(this);  //error don't forget to fix it
+		RequiredAction = new ActionAddCourse(this);// ActionAddCourse(this);  //error don't forget to fix it
 		break;
 
 	case LOAD:
@@ -174,7 +175,7 @@ Action* Registrar::CreateRequiredAction()
 		//TODO: Add case for each action
 
 	case EXIT:
-		RequiredAction = new ActionReplaceCourse(this);//exit(1);
+		RequiredAction = new ActionLoadStudyPlan(this);//exit(1);
 		break;
 	}
 	return RequiredAction;

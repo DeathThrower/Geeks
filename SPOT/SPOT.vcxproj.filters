@@ -170,6 +170,9 @@
     <ClCompile Include="Actions\ActionDisplayCourseInfo.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionAddNotes.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI\GUI.h">
@@ -275,6 +278,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionDisplayCourseInfo.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAddNotes.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

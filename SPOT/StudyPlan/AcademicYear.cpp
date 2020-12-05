@@ -21,6 +21,7 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 {
 	//TODO:
 	//This function still needs many checks to be compelete
+
 	YearCourses[sem].push_back(pC);
 	TotalCredits += pC->getCredits();
 
@@ -48,6 +49,24 @@ bool AcademicYear::DeleteCourse(int x, int y) {
 	return true;
 }
 
+int AcademicYear::getSem(int x, int y) {
+	int cX = 0,i = 0;
+	for (auto sem : YearCourses) {
+		int nCourses = sem.size();
+		if (!nCourses)break;
+		auto course = sem.begin();
+		graphicsInfo ginfo = (*course)->getGfxInfo();
+		cX = ginfo.x;
+		if (cX <= x && cX + 80 >= x) {
+			return i;
+		}
+		else if (cX <= x - 85 && cX >= x - 165) {
+			return i + 1;
+		}
+		i++;
+	}
+	return -1;
+}
 
 void AcademicYear::DrawMe(GUI* pGUI) const
 {
