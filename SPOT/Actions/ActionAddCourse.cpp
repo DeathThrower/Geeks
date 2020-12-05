@@ -12,11 +12,7 @@ bool ActionAddCourse::Execute()
 	CourseInfo co;
 	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
 	Course_Code code = pGUI->GetSrting();
-	pGUI->PrintMsg("Enter Code Title :");
-	string Title = pGUI->GetSrting();
-	pGUI->PrintMsg("Enter Code Credits :");
-	string crds = pGUI->GetSrting();
-	int crd = std::stoi(crds);
+
 	/*co = pReg->getCourseInfo(pReg->getRules(), code);
 	while (co.Code == "") {
 		pGUI->PrintMsg("Error!! unknown course code, please try again");
@@ -44,18 +40,16 @@ bool ActionAddCourse::Execute()
 		//TODO: given course code, get course title, crd hours from registrar
 		//For now, we will add any dummy values
 		//string Title = "Test101";
-		//int crd = 0;
+		int crd = 0;
 		string Title = "Hello";
 		Course* pC = new Course(code, Title, crd);
+		//pC->setCredits(co.Credits);
+		//pC->setTitle(co.Title);
 		//pC->setPreReq(co.PreReqList);
 		//pC->setCoReq(co.CoReqList);
 		//pC->setType(pReg->getCourseType(co.Code));
-		//pC->setGfxInfo(gInfo);
 
-		//TODO: Ask registrar to add course to the year selected by the user
-		//TODO: add the course to the correct year obtained from registrar
 
-		//For the seke of demo, we will add the course to the 1st year, 1st semester
 		StudyPlan* pS = pReg->getStudyPlan();
 		vector<int> sy = pS->getSem_Year(x, y);
 		int year = sy.at(1);
@@ -74,8 +68,8 @@ bool ActionAddCourse::Execute()
 			g.y += 45;
 		}
 		else {
-			g.x = year * 265 + 175;
-			g.y = 180;
+			g.x = year * 265 + 194;
+			g.y = 215;
 		}
 		pC->setGfxInfo(g);
 		pS->AddCourse(pC, year + 1, SEM);

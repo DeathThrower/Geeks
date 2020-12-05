@@ -312,7 +312,10 @@ ActionData GUI::GetUserAction(string msg) const
 				else if (330 <= x && x <= 380) {
 					return ActionData{ REORDER };
 				}
-				else if (1290 <= x & x <= 1340) {
+				else if (395 <= x && x <= 445) {
+					return ActionData{ NOTES };
+				}
+				else if (1290 <= x && x <= 1340) {
 					return ActionData{ EXIT };
 				}
 			}
