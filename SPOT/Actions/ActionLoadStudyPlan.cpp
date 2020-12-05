@@ -45,7 +45,7 @@ bool ActionLoadStudyPlan::Execute() {
         CourseInfo course;
         while (finput.getline(line, size)) {
             index = 0;
-            y = 210;
+            y = 215;
             pch = strtok_s(line, ",", &context);
             year = pch[5] - '0';
             while (pch != NULL) {

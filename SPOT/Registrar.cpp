@@ -8,6 +8,7 @@
 #include "Actions/ActionLoadRules.h"
 #include "Actions/ActionImportCatalog.h"
 #include "Actions/ActionDisplayCourseInfo.h"
+#include "Actions/ActionReorderCourses.h"
 #include  <algorithm>
 
 
@@ -179,7 +180,9 @@ Action* Registrar::CreateRequiredAction()
 		getGUI()->getWindow()->WaitMouseClick(x, y);
 		break;
 		//TODO: Add case for each action
-
+	case REORDER:
+		RequiredAction = new ActionReorderCourses(this);
+		break;
 	case EXIT:
 		exit(1);
 	}

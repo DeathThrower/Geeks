@@ -27,7 +27,7 @@ enum ActionType
 	LOAD,		//Load a study plan from a file
 
 	REPLACE,											//UNDO,		//Undo the last Action preformed
-												//REDO,		//Redo the last Action canceled
+	REORDER,										//REDO,		//Redo the last Action canceled
 
 	EXIT,		//Exit the application
 

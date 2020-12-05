@@ -42,7 +42,7 @@ class GUI
 
 
 	color DrawColor = BLACK;		//Drawing color
-	color FillColor = YELLOW;		//Filling color (for courses)
+	color FillColor = SALMON;		//Filling color (for courses)
 	color HiColor = RED;			//Highlighting color
 	color ConnColor = GREEN;		//Connector color
 	color MsgColor = WHITE;			//Messages color
@@ -70,6 +70,8 @@ public:
 	string GetSrting() const;
 	
 	window* getWindow() const;
+
+	Course* Drag_Drop(Course* c);
 
 
 	

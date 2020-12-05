@@ -2,6 +2,7 @@
 #include "../Courses/Course.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
+#include <iostream>
 
 GUI::GUI()
 { 
@@ -14,6 +15,72 @@ GUI::GUI()
 
 window* GUI::getWindow() const{
 	return pWind;
+}
+
+Course* GUI::Drag_Drop(Course* course)
+{
+
+    // Flush out the input queues before beginning
+    pWind->FlushMouseQueue();
+    pWind->FlushKeyQueue();
+
+    pWind->SetBuffering(true);
+    bool bDragging = false;
+
+	int RectULX = course->getGfxInfo().x;
+	int RectULY = course->getGfxInfo().y;
+	int RectWidth = 75;
+	int RectHight = 40;
+
+    int iX = 0 , iY = 0;
+	
+    int iXOld = 0;
+    int iYOld = 0;
+
+    char cKeyData;
+	// Loop until there escape is pressed
+	while (pWind->GetKeyPress(cKeyData) != ESCAPE)
+	{
+		// Dragging voodoo
+		if (bDragging == false) {
+			if (pWind->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_DOWN) {
+				if (((iX > RectULX) && (iX < (RectULX + RectWidth))) && ((iY > RectULY) && (iY < (RectULY + RectHight)))) {
+					bDragging = true;
+					iXOld = iX; iYOld = iY;
+				}
+			}
+		}
+		else {
+			if (pWind->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_UP) {
+				bDragging = false;
+			}
+			else {
+				if (iX != iXOld) {
+					RectULX = RectULX + (iX - iXOld);
+					iXOld = iX;
+				}
+				if (iY != iYOld) {
+					RectULY = RectULY + (iY - iYOld);
+					iYOld = iY;
+				}
+			}
+
+		}
+		std::cout << iXOld << iYOld;
+		// Draw course
+		course->setGfxInfo(graphicsInfo{iXOld, iYOld});
+		DrawCourse(course);
+
+        // Update the screen buffer
+        pWind->UpdateBuffer();
+ 
+    }
+    
+	pWind->SetBuffering(false);
+
+
+
+	return course;
 }
 
 //Clears the status bar
@@ -136,14 +203,14 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->SetPen(RED, 5);
 	pWind->DrawRectangle(15, 120, 1330, 685, FRAME);
 	
-	pWind->SetPen(BLUE, 3);
+	pWind->SetPen(DARKBLUE, 3);
 	for (int i = 1; i <= 4; i++)
 	{
 		pWind->DrawLine(15 + (i * 263), 140, 15 + (i * 263), 670);
 	}
 	pWind->DrawLine(40, 170, 1310, 170);
 
-	pWind->SetPen(LIGHTBLUE, 2);
+	pWind->SetPen(BLUE, 2);
 	for (int i = 1; i <= 3*5; i++)
 	{
 		if (i % 3 == 0)
@@ -242,7 +309,10 @@ ActionData GUI::GetUserAction(string msg) const
 				else if (265 <= x && x <= 315) {
 					return ActionData{ REPLACE };
 				}
-				else if (1290 <= x && x <= 1340) {
+				else if (330 <= x && x <= 380) {
+					return ActionData{ REORDER };
+				}
+				else if (1290 <= x & x <= 1340) {
 					return ActionData{ EXIT };
 				}
 			}
