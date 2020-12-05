@@ -36,7 +36,7 @@ class GUI
 	static const int	WindWidth = 1360, WindHeight = 745,	//Window width and height
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 50,	//Status Bar Height
-		MenuBarHeight = 60,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
+		MenuBarHeight = 75,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
 		MenuItemWidth = 50;		//Width of each item in the menu
 
 

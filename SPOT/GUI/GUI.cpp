@@ -117,12 +117,12 @@ void GUI::CreateMenu() const
 		ind = str.find("\\");
 	}
 	string MenuItemImages[ITM_CNT];
-	MenuItemImages[ITM_ADD] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_ex1] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_ex2] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/add-file.jpg";
-	MenuItemImages[ITM_ex4] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
-	MenuItemImages[ITM_ex5] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
+	MenuItemImages[ITM_ADD] = str + "SPOT/GUI/Images/Menu/add-file.jpg";
+	MenuItemImages[ITM_ex1] = str + "SPOT/GUI/Images/Menu/delete.jpg";
+	MenuItemImages[ITM_ex2] = str + "SPOT/GUI/Images/Menu/save.jpg";
+	MenuItemImages[ITM_ex3] = str + "SPOT/GUI/Images/Menu/load.jpg";
+	MenuItemImages[ITM_ex4] = str + "SPOT/GUI/Images/Menu/replace.jpg";
+	MenuItemImages[ITM_ex5] = str + "SPOT/GUI/Images/Menu/reorder.jpg";
 	MenuItemImages[ITM_ex6] = str + "SPOT/GUI/Images/Menu/test-icon-28.jpg";
 	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/Exit.jpg";
 
@@ -241,7 +241,19 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 		pWind->DrawString(120 + i * 263, 180, "Spring");
 		pWind->DrawString(200 + i * 263, 180, "Summer");
 	}
- 
+
+
+
+	pWind->SetFont(CRS_HEIGHT * 0.38, ITALICIZED, BY_NAME, "ARIAL");
+	pWind->SetPen(WHITE);
+	pWind->DrawString(20 , 57, "Add ");
+	pWind->DrawString(75, 57, "Delete ");
+	pWind->DrawString(150, 57, "Save");
+	pWind->DrawString(210, 57, "Load");
+	pWind->DrawString(270, 57, "Replace");
+	pWind->DrawString(335, 57, "Reorder");
+	pWind->DrawString(390, 57, "Add Notes");
+	pWind->DrawString(1305, 57, "Exit");
 
 }
 

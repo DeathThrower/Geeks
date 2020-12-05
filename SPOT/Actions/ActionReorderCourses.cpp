@@ -22,6 +22,7 @@ bool ActionReorderCourses::Execute()
 	if (course==NULL) {
 		return false;
 	}
+	pReg->getGUI()->PrintMsg("Select a course");
 
 	int RectULX = course->getGfxInfo().x;
 	int RectULY = course->getGfxInfo().y;
@@ -37,7 +38,7 @@ bool ActionReorderCourses::Execute()
 	// Loop until there escape is pressed
 	while (pWind->GetKeyPress(cKeyData) != ESCAPE)
 	{
-		pReg->getGUI()->PrintMsg("now drag and drop");
+		pReg->getGUI()->PrintMsg("Now drag and drop ,,,, Press ""Esc"" if finished ");
 		// Dragging voodoo
 		if (bDragging == false) {
 			cout << "1" << endl;
@@ -71,8 +72,12 @@ bool ActionReorderCourses::Execute()
 		course->setGfxInfo(graphicsInfo{ RectULX, RectULY });
 		pReg->UpdateInterface();
 	}
-
-	pWind->SetBuffering(false);
+	/*int year = RectULX
+	SEMESTER sem = SEMESTER();
+	Course* copyCourse(course);
+	pReg->getStudyPlan()->DeleteCourse(RectULX, RectULY);
+	pReg->getStudyPlan()->AddCourse(copyCourse, sem, year);
+	pWind->SetBuffering(false);*/
     return true;
 }
 
