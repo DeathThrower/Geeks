@@ -20,6 +20,7 @@ public:
 	bool AddCourse(Course*, int year, SEMESTER);
 	Course* getCourse(int x, int y) const;
 	bool DeleteCourse(int ,int);
+	vector<int> getSem_Year(int, int);
 	Major getMajor();
 	void setMajor(Major nmajor);
 	void virtual DrawMe(GUI*) const;

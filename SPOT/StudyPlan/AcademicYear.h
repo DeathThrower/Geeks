@@ -25,6 +25,7 @@ public:
 	bool DeleteCourse(int, int);
 	void clearYear();
 	Course* getCourse(int x,int y)const;
+	int getSem(int, int); // get Semester & Year
 	void virtual DrawMe(GUI*) const;
 
 	void saveAcademicYear(ofstream& outdata, int yearnum) const;

@@ -8,7 +8,8 @@
 #include "Actions/ActionLoadRules.h"
 #include "Actions/ActionImportCatalog.h"
 #include "Actions/ActionDisplayCourseInfo.h"
-#include "Actions/ActionReorderCourses.h"
+#include "Actions/ActionAddNotes.h"
+
 #include  <algorithm>
 
 
@@ -159,7 +160,7 @@ Action* Registrar::CreateRequiredAction()
 
 	switch (actData.actType)
 	{
-	case ADD_CRS:	//add_course action
+	case ADD_CRS:
 		RequiredAction = new ActionAddCourse(this);
 		break;
 	case DEL_CRS:
@@ -175,18 +176,19 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionReplaceCourse(this);
 		break;
 	case RIGHTCLICK:
-		// Adjusted this to create an ActionDisplayCourseInfo object instead
-		//displayCourseInfo(actData.x, actData.y);
-		//int x, y;
-		//getGUI()->getWindow()->WaitMouseClick(x, y);
 		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
+		int x, y;
+		getGUI()->getWindow()->WaitMouseClick(x, y);
 		break;
-		//TODO: Add case for each action
 	case REORDER:
-		RequiredAction = new ActionReorderCourses(this);
+		//RequiredAction = new ActionReorderCourses(this);
+		break;
+	case NOTES:
+		RequiredAction = new ActionAddNotes(this);
 		break;
 	case EXIT:
-		exit(1);
+		RequiredAction = new ActionReplaceCourse(this);//exit(1);
+		break;
 	}
 	return RequiredAction;
 }

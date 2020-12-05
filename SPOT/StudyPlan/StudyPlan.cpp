@@ -36,6 +36,22 @@ bool StudyPlan::DeleteCourse(int x, int y)
 	return true;
 }
 
+vector<int> StudyPlan::getSem_Year(int x, int y) 
+{
+	vector<int> sy;
+	int sem = -1, j = 0;
+	for (auto i : plan) {
+		sem = i->getSem(x, y);
+		if (sem != -1) {
+			sy.insert(sy.end(), { sem,j });
+			return sy;
+		}
+		j++;
+	}
+	sy.insert(sy.end(), { -1,-1 });
+	return sy;
+}
+
 Course* StudyPlan::getCourse(int x, int y) const {
 	for (auto year :plan) {
 		Course* course = year->getCourse(x, y);
