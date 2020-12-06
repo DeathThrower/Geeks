@@ -1,5 +1,6 @@
 #include "ActionReorderCourses.h"
 #include "..\Registrar.h"
+#include <iostream>
 
 ActionReorderCourses::ActionReorderCourses(Registrar* p) :Action(p)
 {
@@ -68,7 +69,8 @@ bool ActionReorderCourses::Execute()
 		pReg->UpdateInterface();
 	}
 	int year = ((RectULX-20)/263)+1;
-	int sem = (((RectULX - 20) % 263)/88)+1;
+	int sem = (((RectULX - 15) % 263)/88);
+	cout << sem<<"  "<<RectULX<<endl;
 	Course* copyCourse(course);
 	pReg->getStudyPlan()->DeleteCourse(RectULX, RectULY);
 	pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem));
