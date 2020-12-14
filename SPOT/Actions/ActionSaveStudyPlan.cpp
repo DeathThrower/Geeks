@@ -1,5 +1,6 @@
 #include "ActionSaveStudyPlan.h"
 
+//funciton that opens file selection window to let the user chose the path of the saving file
 string ActionSaveStudyPlan::savefilename(char* filter, HWND owner) const {
 	OPENFILENAME ofn;
 	char fileName[MAX_PATH] = ".txt";
@@ -27,8 +28,8 @@ bool ActionSaveStudyPlan::Execute() {
 	string filepath = savefilename();
 	if (filepath!="") {
 		ofstream outdata;
-		outdata.open(filepath,ios::trunc);
-		pReg->getStudyPlan()->saveStudyPlan(outdata);
+		outdata.open(filepath,ios::trunc); // open the file and overwrite it
+		pReg->getStudyPlan()->saveStudyPlan(outdata); // let the plan save itself
 		outdata.close();
 		return true;
 	}

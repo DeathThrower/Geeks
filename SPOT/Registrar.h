@@ -31,6 +31,7 @@ public:
 	// function to get the course information
 	CourseInfo getCourseInfo(Course_Code CC) const;
 
+	//return the type of the course (UNIV, Track, ......)
 	string getCourseType(Course_Code CC) const;
 
 	// function to display the course info
@@ -43,7 +44,7 @@ public:
 	static string sem2str(SEMESTER sem) ;
 
 	//convert string to Major
-	static Major  str2maj(string str);
+	//static Major  str2maj(string str);
 
 	~Registrar();
 };

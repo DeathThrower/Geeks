@@ -68,8 +68,7 @@ bool ActionAddCourse::Execute()
 			g.y += 45;
 		}
 		else {
-			int sems[] = { 20,106,194 };
-			g.x = (year) * 265 + sems[sem];
+			g.x = year * 263 + 20 + sem * 88;
 			g.y = 215;
 		}
 		pC->setGfxInfo(g);

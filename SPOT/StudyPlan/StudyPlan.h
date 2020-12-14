@@ -10,22 +10,36 @@ class StudyPlan:public Drawable
 	int TotalUnivCredits=0, TotalMajorCredits=0,
 		TotalTrackCredits=0, TotalConcentrationCredits=0,
 		TotalMinorCredits=0;
-	Major major=Major_NUM;
+	string major;
 	vector<AcademicYear*> plan;	//plan is a list of academic years
 
 	string PlanNotes;
 public:
 	StudyPlan(int yearnum=5);
 	vector<AcademicYear*> getPlan() const;
-	bool AddCourse(Course*, int year, SEMESTER);
+	//get the course using x and y coordinates if the course is not found return null
 	Course* getCourse(int x, int y) const;
+
+	//find how many courses who have the x and y coordinates inside of it. --inputs: x and y integers --outputs: n int represent the number of the courses
+	int getnCourse(int x, int y) const;
+
+	bool AddCourse(Course*, int year, SEMESTER);
+	//delete a course from a specific x and y coordinates (erase the course pointer from the vector) the inputs are the x and y coordinates
 	bool DeleteCourse(int ,int);
+
+	//return a semester and year in a vector of int and the inputs are a x and y coordinates
 	vector<int> getSem_Year(int, int);
-	Major getMajor();
-	void setMajor(Major nmajor);
-	void virtual DrawMe(GUI*) const;
+
+	string getMajor();
+	void setMajor(string nmajor);
+
+	//save the study plan into a file the inputs is the file object (ofstream)
 	void saveStudyPlan(ofstream& outdata) const;
+
+	//clear all the content of the plan (clear the courses in each year in each semester)
 	void clearStudyPlan();
+
+	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
 };
 

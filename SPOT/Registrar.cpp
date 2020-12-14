@@ -14,8 +14,14 @@
 
 
 CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
+	transform(CC.begin(), CC.end(), CC.begin(), ::tolower);
+	CC.erase(remove_if(CC.begin(), CC.end(), ::isspace), CC.end());
+	Course_Code code;
 	for (CourseInfo i : pRegRules->CourseCatalog) {
-		if (i.Code == CC) {
+		code = i.Code;
+		transform(code.begin(), code.end(), code.begin(), ::tolower);
+		code.erase(remove_if(code.begin(), code.end(), ::isspace), code.end());
+		if (code == CC) {
 			return i;
 		}
 	}
@@ -91,7 +97,7 @@ string Registrar::sem2str(SEMESTER sem) {
 	}
 }
 
-Major Registrar::str2maj(string str) {
+/*Major Registrar::str2maj(string str) {
 	transform(str.begin(), str.end(), str.begin(), ::toupper);
 	if (str == "CIE") {
 		return CIE;
@@ -123,7 +129,7 @@ Major Registrar::str2maj(string str) {
 	else {
 		return Major_NUM;
 	}
-}
+}*/
 
 
 Registrar::Registrar()
@@ -133,7 +139,6 @@ Registrar::Registrar()
 	pRegRules = new Rules;  // create a Rules struct
 	ActionLoadCourseOffering(this).Execute();
 	ActionImportCatalog(this).Execute();
-	ActionLoadRules(this).Execute();
 }
 
 //return a pointer to Rules

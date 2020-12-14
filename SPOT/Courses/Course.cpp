@@ -29,7 +29,7 @@ int Course::getCredits() const
 bool Course::isCourse(int x, int y) const {
 	int cY, cX;
 	cX = getGfxInfo().x; cY = getGfxInfo().y;
-	if (cX <= x && cX + 80 >= x && cY <= y && cY + 40 >= y) {
+	if (cX <= x && cX + 80 >= x && cY <= y && cY + 40 >= y) {  // checking if the x and y coordinates are inside the box of the course or not
 		return true;
 	}
 	else {

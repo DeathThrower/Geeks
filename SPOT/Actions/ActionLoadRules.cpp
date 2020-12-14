@@ -13,23 +13,24 @@ bool ActionLoadRules::Execute() {
     pReg->clearRules();
     Rules* myRules = pReg->getRules();
 
-    //generate the file path       --- the generation of the file path will change when we got the rules files
+    //generate the file path      
     char result[MAX_PATH];
     string str = string(result, GetModuleFileName(NULL, result, MAX_PATH));
     str = str.erase(str.length() - 18, 18);
-    int ind = str.find("\\");
-    while (ind != string::npos) {
-        str.replace(ind, 1, "/");
-        ind = str.find("\\");
+    int indx = str.find("\\");
+    while (indx != string::npos) {
+        str.replace(indx, 1, "/");
+        indx = str.find("\\");
     }
-    string filepath = str + "SPOT/Files/Rules.txt";
+    string filepath = str + "SPOT/Files/"+pReg->getStudyPlan()->getMajor()+"-Requirements.txt";
 
-    //open the file and get the data from it
+    //open the file and get the data from it. every case represent a line in the file and the default
+    //represent the concentration courses
     ifstream finput;
     finput.open(filepath);
     char* pch;
     char* context = nullptr;
-    const int size = 100;
+    const int size = 300;
     char line[size];
     int mline = 0,index=0;
     while (finput.getline(line, size)) {

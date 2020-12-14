@@ -18,12 +18,10 @@ vector<AcademicYear*> StudyPlan::getPlan() const {
 //year idetifies year number to add course to 1=first, 2 = 2nd,....
 bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 {
-	//TODO: add all requried checks to add the course 
 
 	plan[year - 1]->AddCourse(pC, sem);
 	TotalCredits += pC->getCredits();
 
-	//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
 
 	return true;
@@ -53,8 +51,8 @@ vector<int> StudyPlan::getSem_Year(int x, int y)
 }
 
 Course* StudyPlan::getCourse(int x, int y) const {
-	for (auto year :plan) {
-		Course* course = year->getCourse(x, y);
+	for (auto year :plan) {  // loop for every year
+		Course* course = year->getCourse(x, y);  // get the course from the year if the course is not found return null
 		if (course!=NULL) {
 			return course;
 		}
@@ -62,11 +60,19 @@ Course* StudyPlan::getCourse(int x, int y) const {
 	return NULL;
 }
 
-Major StudyPlan::getMajor() {
+int StudyPlan::getnCourse(int x, int y) const {
+	int n = 0;
+	for (auto year : plan) {  // loop for every year
+		n += year->getnCourse(x, y);
+	}
+	return n;
+}
+
+string StudyPlan::getMajor() {
 	return major;
 }
 
-void StudyPlan::setMajor(Major nmajor)
+void StudyPlan::setMajor(string nmajor)
 {
 	major = nmajor;
 }
@@ -75,7 +81,7 @@ void StudyPlan::clearStudyPlan() {
 	for (auto year : plan) {
 		year->clearYear();
 	}
-	major = Major_NUM;
+	major = "";
 	TotalCredits = 0;
 	TotalUnivCredits = 0;
 	TotalMajorCredits = 0;
@@ -93,7 +99,7 @@ void StudyPlan::DrawMe(GUI* pGUI) const
 
 void StudyPlan::saveStudyPlan(ofstream& outdata) const {
 	for (int i = 0; i < plan.size();i++) {
-		plan[i]->saveAcademicYear(outdata, i);
+		plan[i]->saveAcademicYear(outdata, i);  // let every year save it self
 	}
 }
 
