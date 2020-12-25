@@ -7,6 +7,10 @@ ActionCheck::~ActionCheck()
 {
 }
 
-bool ActionCheck::Execute() {
+string ActionCheck::checkPreCo() const {
+	return "";
+}
 
+bool ActionCheck::Execute() {
+	return true;
 }

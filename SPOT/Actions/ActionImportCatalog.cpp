@@ -14,9 +14,7 @@ bool ActionImportCatalog::Execute() {
         str.replace(ind, 1, "/");
         ind = str.find("\\");
     }
-    string filepath = str + "SPOT/Files/CourseCatalog.txt";
-    //ifstream finput;
-    //finput.open(filepath);
+    string filepath = str + "SPOT/Files/Catalog - 2020 12 19.txt";
     ifstream finput(filepath);
     char* pch;
     char* context = nullptr;
@@ -31,10 +29,10 @@ bool ActionImportCatalog::Execute() {
             switch (index)
             {
             case 0:
-                course.Title = pch;
+                course.Code = pch;
                 break;
             case 1:
-                course.Code = pch;
+                course.Title = pch;
                 break;
             case 2:
                 course.Credits = stoi(pch);

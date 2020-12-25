@@ -137,8 +137,8 @@ Registrar::Registrar()
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
 	pRegRules = new Rules;  // create a Rules struct
-	ActionLoadCourseOffering(this).Execute();
 	ActionImportCatalog(this).Execute();
+	ActionLoadCourseOffering(this).Execute();
 }
 
 //return a pointer to Rules

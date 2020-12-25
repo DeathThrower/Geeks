@@ -13,12 +13,12 @@ bool ActionAddCourse::Execute()
 	pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
 	Course_Code code = pGUI->GetSrting();
 
-	/*co = pReg->getCourseInfo(pReg->getRules(), code);
+	co = pReg->getCourseInfo(code);
 	while (co.Code == "") {
 		pGUI->PrintMsg("Error!! unknown course code, please try again");
 		Course_Code code = pGUI->GetSrting();
 		co = pReg->getCourseInfo(code);
-	}*/
+	}
 
 
 
@@ -35,19 +35,10 @@ bool ActionAddCourse::Execute()
 		if (!(15 < x && x < 1330 && 205 < y && y < 685)) return false;
 
 
-		//graphicsInfo gInfo{ x, y };
-
-		//TODO: given course code, get course title, crd hours from registrar
-		//For now, we will add any dummy values
-		//string Title = "Test101";
-		int crd = 0;
-		string Title = "Hello";
-		Course* pC = new Course(code, Title, crd);
-		//pC->setCredits(co.Credits);
-		//pC->setTitle(co.Title);
-		//pC->setPreReq(co.PreReqList);
-		//pC->setCoReq(co.CoReqList);
-		//pC->setType(pReg->getCourseType(co.Code));
+		Course* pC = new Course(co.Code, co.Title, co.Credits);
+		pC->setPreReq(co.PreReqList);
+		pC->setCoReq(co.CoReqList);
+		pC->setType(pReg->getCourseType(co.Code));
 
 
 		StudyPlan* pS = pReg->getStudyPlan();

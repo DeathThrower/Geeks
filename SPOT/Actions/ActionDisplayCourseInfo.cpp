@@ -13,10 +13,19 @@ bool ActionDisplayCourseInfo::Execute(int cx, int cy) //overload
 	
 	Course* course = pReg->getStudyPlan()->getCourse(cx, cy);
 	if (course == NULL) return false;
-	string courseInfo = "Course Title: "+course->getTitle()+" | Course Name: " + course->getCode() + " | No. of credits: " + to_string(course->getCredits());
+
+	// Creating the course info string that will be displayed in the screen
+	string courseInfo = "Course Title: "+course->getTitle()+" | Course Code: " + course->getCode() + " | No. credits: " + to_string(course->getCredits()) + " | CoreReq: ";
+	for (auto pre : course->getPreReq()) {
+		courseInfo += pre + ",";
+	}
+	courseInfo += " | CoreReq: ";
+	for (auto co : course->getCoReq()) {
+		courseInfo += co + ",";
+	}
+	//printing the the course info 
 	pReg->getGUI()->PrintMsg(courseInfo);
 	
-
 	return true;
 }
 

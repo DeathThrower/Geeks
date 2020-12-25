@@ -176,6 +176,9 @@
     <ClCompile Include="Actions\ActionReorderCourses.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionCheck.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI\GUI.h">
@@ -287,6 +290,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionReorderCourses.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionCheck.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

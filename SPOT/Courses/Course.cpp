@@ -9,21 +9,30 @@ Course::Course(Course_Code r_code, string r_title, int crd):code(r_code),Title(r
 Course::~Course()
 {
 }
+//getters
 
-Course_Code Course::getCode() const
-{
+Course_Code Course::getCode() const{
 	return code;
 }
 
-string Course::getTitle() const
-{
+string Course::getTitle() const{
 	return Title;
 }
 
-//return course credits
-int Course::getCredits() const
-{
+int Course::getCredits() const{
 	return credits;
+}
+
+vector<Course_Code> Course::getPreReq() const {
+	return PreReq;
+}
+
+vector<Course_Code> Course::getCoReq() const {
+	return CoReq;
+}
+
+string Course::getType() const {
+	return type;
 }
 
 bool Course::isCourse(int x, int y) const {

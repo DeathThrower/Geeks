@@ -20,14 +20,23 @@ class Course : public Drawable
 	vector<Course_Code> CoReq;	//list of prerequisites
 public:
 	Course(Course_Code r_code,string r_title, int crd);
+
+	//getters
+
 	string getTitle() const;
 	string getCode() const;
 	int getCredits() const;
+	vector<Course_Code> getPreReq() const;
+	vector<Course_Code> getCoReq() const;
+	string getType() const;
+
 	//return true if the point(x,y) is in the box of the course
 	bool isCourse(int x, int y) const;
 	void DrawMe(GUI*) const;
 	virtual ~Course();
+
 	/* setters*/
+
 	void setTitle(string title) ;
 	void setCode(Course_Code code)  ;
 	void setCredits(int credits) ;

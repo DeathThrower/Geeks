@@ -16,25 +16,25 @@ bool ActionReplaceCourse::Execute()
 		//get coord where user clicked
 		x = actData.x;
 		y = actData.y;
-		//CourseInfo co;
+		CourseInfo co;
 		pGUI->PrintMsg("Add Course to plan: Enter course Code(e.g. CIE202):");
 		Course_Code code = pGUI->GetSrting();
-		/*co = pReg->getCourseInfo(code);
+		co = pReg->getCourseInfo(code);
 		while (co.Code == "") {
 			pGUI->PrintMsg("Error!! unknown course code, please try again");
 			Course_Code code = pGUI->GetSrting();
-			co = pReg->getCourseInfo(pReg->getRules(), code);
-		}*/
+			co = pReg->getCourseInfo(code);
+		}
 		Course * course = pReg->getStudyPlan()->getCourse(x, y);
 		if (course == NULL) {
 			return false;
 		}
-		course->setCode(code);
-		course->setCredits(2);
-		/*course->setDone(done);
-		course->setPreReq(PreReq);
-		course->setCoReq(CoReq);
-		course->setTitle(title);*/
+		course->setCode(co.Code);
+		course->setCredits(co.Credits);
+		course->setPreReq(co.PreReqList);
+		course->setCoReq(co.CoReqList);
+		course->setTitle(co.Title);
+		course->setType(pReg->getCourseType(co.Code));
 		return true;
 	}
 	return false;

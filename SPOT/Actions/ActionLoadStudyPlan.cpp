@@ -66,25 +66,25 @@ bool ActionLoadStudyPlan::Execute() {
                 }
                 else if(index!=0){
                     //error checking if the file has a wrong course code and get the course info
-                    //course = pReg->getCourseInfo(pch);
-                    //if (course.Code!="") {
-                        Course* pC = new Course(pch, /*course.Title*/ "hi", 3 /*course.Credits*/);
+                    course = pReg->getCourseInfo(pch);   //get the course info of the course according to the course code gotten from the user
+                    if (course.Code!="") {
+                        Course* pC = new Course(pch, course.Title, course.Credits);
                         x = (year - 1) * 263 + 20 + static_cast<int>(sem) * 88;  // get the x coordinate of the course from the year and semester
-
+						//setting everything in the new course corresponding to the course gotten from getCourseInfo funtion
                         graphicsInfo gInfo{ x, y };
                         pC->setGfxInfo(gInfo);
-                        //pC->setPreReq(course.PreReqList);
-                        //pC->setCoReq(course.CoReqList);
-                        //pC->setType(pReg->getCourseType(course.Code));
+                        pC->setPreReq(course.PreReqList);
+                        pC->setCoReq(course.CoReqList);
+                        pC->setType(pReg->getCourseType(course.Code));
                         pReg->getStudyPlan()->AddCourse(pC, year, sem);
                         y += 45;  // at every new course update the y coordinates of course 
-                    //}
-                    //else {
-                    //    pReg->getGUI()->PrintMsg("Error!!!! unknown course in the file: "+string(pch));
-                    //    Sleep(5000);
-                    //    pReg->getStudyPlan()->clearStudyPlan();
-                    //    return false;
-                    //}
+                    }
+                    else {
+                        pReg->getGUI()->PrintMsg("Error!!!! unknown course in the file: "+string(pch));
+                        Sleep(5000);
+                        pReg->getStudyPlan()->clearStudyPlan();
+                        return false;
+                    }
                 }
 
                 pch = strtok_s(NULL, ",", &context);

@@ -9,7 +9,8 @@ ActionLoadCourseOffering::~ActionLoadCourseOffering()
 {}
 
 bool ActionLoadCourseOffering::Execute() {
-    char result[MAX_PATH];
+    //path correction block
+	char result[MAX_PATH];
     string str = string(result, GetModuleFileName(NULL, result, MAX_PATH));
     str = str.erase(str.length() - 18, 18);
     int ind = str.find("\\");
@@ -17,6 +18,8 @@ bool ActionLoadCourseOffering::Execute() {
         str.replace(ind, 1, "/");
         ind = str.find("\\");
     }
+
+
     string filepath = str+"SPOT/Files/CourseOffering.txt";
     ifstream finput(filepath);
     char* pch;
@@ -33,20 +36,21 @@ bool ActionLoadCourseOffering::Execute() {
         while (pch != NULL) {
             if (index == 1) {
                 sem = pReg->str2sem(pch);  //get the semester from the second index of the line 
-                if (sem == SEM_CNT) {
+                if (sem == SEM_CNT) {  //error checking if the file has undefined semester name
                     pReg->getGUI()->PrintMsg("Error!!!! unknown Semester name in the file: " + string(pch));
                     Sleep(5000);
-                    break;
+					return false;
                 }
             }
             else if (index!=0) {
-                //if (pReg->getCourseInfo(pch).Code=="") {
-                //   pReg->getGUI()->PrintMsg("Error!!!! unknown course in the file: " + string(pch));
-                //   Sleep(10000);
-                //}
-                //else {
+                if (pReg->getCourseInfo(pch).Code=="") {  //error checking if the file has undefined course code
+                   pReg->getGUI()->PrintMsg("Error!!!! unknown course in the file: " + string(pch));
+                   Sleep(5000);
+				   return false;
+                }
+                else {
                     year.Offerings[sem].push_back(pch);  // for the indexes other than 0 or 1 the indexes represent the courses and it will be added to the academic year
-                //}
+                }
             }
             pch = strtok_s(NULL, ",", &context);
             index++;
