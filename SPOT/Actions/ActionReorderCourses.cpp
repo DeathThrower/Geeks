@@ -12,7 +12,6 @@ bool ActionReorderCourses::Execute()
 	pWind->FlushMouseQueue();
 	pWind->FlushKeyQueue();
 
-	pWind->SetBuffering(true);
 	bool bDragging = false;
 
 	int year,sem;
@@ -28,12 +27,12 @@ bool ActionReorderCourses::Execute()
 
 	int iXOld = 0;
 	int iYOld = 0;
-	pReg->getGUI()->PrintMsg("Now drag and drop ,,,, Press ""Esc"" if finished ");
 	char cKeyData;
 	// Loop until there escape is pressed
 	while (pWind->GetKeyPress(cKeyData) != ESCAPE)
 	{
 		pReg->getGUI()->PrintMsg("Now drag and drop ,,,, Press ""Esc"" if finished ");
+		pReg->UpdateInterface();
 		// Dragging voodoo
 		if (bDragging == false) {
 			if (pWind->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_DOWN) {
@@ -82,8 +81,6 @@ bool ActionReorderCourses::Execute()
 						pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem));
 					}
 
-					//update the interface
-					pReg->UpdateInterface();
 				}
 				cX = 0;
 				cY = 0;
@@ -99,12 +96,10 @@ bool ActionReorderCourses::Execute()
 					iYOld = iY;
 				}
 				course->setGfxInfo(graphicsInfo{ cX,cY });
-				pReg->UpdateInterface();
 			}
 		}
 	}
 
-	pWind->SetBuffering(false);
     return true;
 }
 
