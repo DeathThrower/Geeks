@@ -10,6 +10,7 @@
 #include "Actions/ActionDisplayCourseInfo.h"
 #include "Actions/ActionAddNotes.h"
 #include "Actions/ActionReorderCourses.h"
+#include "Actions/ActionCheck.h"
 #include  <algorithm>
 
 
@@ -182,8 +183,7 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case RIGHTCLICK:
 		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
-		int x, y;
-		getGUI()->getWindow()->WaitMouseClick(x, y);
+		//ActionCheck(this).Execute();
 		break;
 	case REORDER:
 		RequiredAction = new ActionReorderCourses(this);
@@ -217,7 +217,6 @@ void Registrar::Run()
 		Action* pAct = CreateRequiredAction();
 		if (pAct)	//if user doesn't cancel
 		{
-
 			if (ExecuteAction(pAct))	//if action is not cancelled
 				UpdateInterface();
 		}

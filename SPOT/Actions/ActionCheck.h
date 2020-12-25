@@ -8,6 +8,6 @@ class ActionCheck :
 public:
 	ActionCheck(Registrar*);
 	bool Execute();
-	string checkPreCo() const;
+	void checkPreCo() const;
 	virtual ~ActionCheck();
 };

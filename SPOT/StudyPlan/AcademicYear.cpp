@@ -1,7 +1,7 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
 #include "../GUI/Drawable.h"
-
+#include <iostream>
 AcademicYear::AcademicYear()
 {
 	//TODO: make all necessary initializations
@@ -128,4 +128,15 @@ void AcademicYear::clearYear() {
 	TotalTrackCredits = 0;
 	TotalConcentrationCredits = 0;
 	TotalMinorCredits = 0;
+}
+
+int AcademicYear::getCoursePosition(int year, Course_Code CC) const {
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		for (auto course : YearCourses[sem]) {
+			if (course->getCode() == CC) {  // check for every course for the given course code if found return the course position
+				return year * 3 + sem;  //the position equation
+			}
+		}
+	}
+	return -1;  //if the course is not found in this year return -1
 }

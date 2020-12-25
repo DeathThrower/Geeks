@@ -40,7 +40,7 @@ bool ActionImportCatalog::Execute() {
             case 3:
                 if (pch[0] == 'C') {
                     string coreq = pch;
-                    coreq.erase(0 , 6);
+                    coreq.erase(0 , 7);
                     std::string delimiter = " and ";
                     size_t pos = 0;
                     std::string token;
@@ -51,7 +51,7 @@ bool ActionImportCatalog::Execute() {
                     }
                     course.CoReqList.push_back(coreq);
                 }
-                else {
+                /*else {
                     string prereq = pch;
                     prereq.erase(0, 7);
                     std::string delimiter = " and ";
@@ -63,11 +63,12 @@ bool ActionImportCatalog::Execute() {
                         prereq.erase(0, pos + delimiter.length());
                     }
                     course.PreReqList.push_back(prereq);
-                }
+					
+                }*/
                 break;
             case 4:
                 string prereq = pch;
-                prereq.erase(0, 7);
+                prereq.erase(0, 8);
                 std::string delimiter = " and ";
                 size_t pos = 0;
                 std::string token;

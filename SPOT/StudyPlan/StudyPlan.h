@@ -39,6 +39,12 @@ public:
 	//clear all the content of the plan (clear the courses in each year in each semester)
 	void clearStudyPlan();
 
+	//return the position of the course return -1 if not found || (position to int: year*3+semester)
+	int getCoursePosition(Course_Code) const;
+
+	//check the preReq and coReq and return a string represent a message to the user
+	string checkpreReqCoreReq() const;
+
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
 };
