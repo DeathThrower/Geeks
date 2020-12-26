@@ -1,5 +1,6 @@
 #include "ActionImportCatalog.h"
 #include <algorithm>
+#include <iostream>
 
 ActionImportCatalog::ActionImportCatalog(Registrar* p) :Action(p)
 {
@@ -21,8 +22,8 @@ bool ActionImportCatalog::Execute() {
     const int size = 500;
     char line[size];
     int index;
-    CourseInfo course;
     while (finput.getline(line, size)) {
+        CourseInfo course;
         index = 0;
         pch = strtok_s(line, ",", &context);
         while (pch != NULL) {
@@ -41,7 +42,7 @@ bool ActionImportCatalog::Execute() {
                 if (pch[0] == 'C') {
                     string coreq = pch;
                     coreq.erase(0 , 7);
-                    std::string delimiter = " and ";
+                    std::string delimiter = " And ";
                     size_t pos = 0;
                     std::string token;
                     while ((pos = coreq.find(delimiter)) != std::string::npos) {
@@ -51,10 +52,10 @@ bool ActionImportCatalog::Execute() {
                     }
                     course.CoReqList.push_back(coreq);
                 }
-                /*else {
+                else {
                     string prereq = pch;
-                    prereq.erase(0, 7);
-                    std::string delimiter = " and ";
+                    prereq.erase(0, 8);
+                    std::string delimiter = " And ";
                     size_t pos = 0;
                     std::string token;
                     while ((pos = prereq.find(delimiter)) != std::string::npos) {
@@ -64,12 +65,12 @@ bool ActionImportCatalog::Execute() {
                     }
                     course.PreReqList.push_back(prereq);
 					
-                }*/
+                }
                 break;
             case 4:
                 string prereq = pch;
                 prereq.erase(0, 8);
-                std::string delimiter = " and ";
+                std::string delimiter = " And ";
                 size_t pos = 0;
                 std::string token;
                 while ((pos = prereq.find(delimiter)) != std::string::npos) {
@@ -85,6 +86,7 @@ bool ActionImportCatalog::Execute() {
             index++;
         }
         pReg->getRules()->CourseCatalog.push_back(course);
+
     }
     finput.close();
     return true;

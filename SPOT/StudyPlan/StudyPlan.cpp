@@ -1,5 +1,5 @@
 #include "StudyPlan.h"
-
+#include <algorithm>
 
 
 StudyPlan::StudyPlan(int yearnum)
@@ -109,9 +109,12 @@ void StudyPlan::saveStudyPlan(ofstream& outdata) const {
 }
 
 int StudyPlan::getCoursePosition(Course_Code CC) const {
+	// code transformation to match all the posible cases of course code 
+	transform(CC.begin(), CC.end(), CC.begin(), ::tolower);
+	CC.erase(remove_if(CC.begin(), CC.end(), ::isspace), CC.end());
+
 	for (int i = 0; i < plan.size(); i++) {
 		int position = plan[i]->getCoursePosition(i, CC);  // check for every year if the course code exist or not
-
 		if (position != -1) {  // if the course exist return the course position
 			return position;
 		}

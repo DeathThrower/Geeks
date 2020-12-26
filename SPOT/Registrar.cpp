@@ -182,8 +182,8 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionReplaceCourse(this);
 		break;
 	case RIGHTCLICK:
-		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
-		//ActionCheck(this).Execute();
+		//ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
+		ActionCheck(this).Execute();
 		break;
 	case REORDER:
 		RequiredAction = new ActionReorderCourses(this);
