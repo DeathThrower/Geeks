@@ -45,6 +45,10 @@ public:
 	//check the preReq and coReq and return a string represent a message to the user
 	string checkpreReqCoreReq() const;
 
+	//check the program requirement 
+	string checkProgramReq(Rules* r) const;
+
+
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
 };

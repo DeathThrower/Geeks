@@ -9,5 +9,6 @@ public:
 	ActionCheck(Registrar*);
 	bool Execute();
 	void checkPreCo() const;
+	void checkProReq() const;
 	virtual ~ActionCheck();
 };

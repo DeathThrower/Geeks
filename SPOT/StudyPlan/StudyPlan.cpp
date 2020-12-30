@@ -12,6 +12,7 @@ StudyPlan::StudyPlan(int yearnum)
 
 StudyPlan::~StudyPlan()
 {
+	
 }
 
 
@@ -26,16 +27,30 @@ bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 
 	plan[year - 1]->AddCourse(pC, sem);
 	TotalCredits += pC->getCredits();
-
-
+	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
 
 	return true;
 }
 
 bool StudyPlan::DeleteCourse(int x, int y)
-{
-	for (auto i : plan)
-		i->DeleteCourse(x, y);
+{	
+	for (auto i : plan) {
+		auto pC = getCourse(x, y);
+		bool t = i->DeleteCourse(x, y);
+		if (t) {
+			int deleted_crd = pC->getCredits();
+			TotalCredits -= deleted_crd;
+			if (pC->getType() == "UNIV") TotalUnivCredits -= deleted_crd;
+			if (pC->getType() == "MAJOR") TotalMajorCredits -= deleted_crd;
+			if (pC->getType() == "CON") TotalConcentrationCredits -= deleted_crd;
+			if (pC->getType() == "TRACK") TotalTrackCredits -= deleted_crd;
+			break;
+		}
+	}
+	
 	return true;
 }
 
@@ -121,7 +136,44 @@ int StudyPlan::getCoursePosition(Course_Code CC) const {
 	}
 	return -1;  // if the course is not exist return -1
 }
-
+string StudyPlan::checkProgramReq(Rules *r) const {
+	string errorMsg;
+	if (TotalCredits != r->totalCredit) {
+		errorMsg = "Number of Credits " + to_string(TotalCredits) + " is not equal to required total number which is " + to_string(r->totalCredit);
+		return errorMsg;
+	}
+	if (TotalMajorCredits < r->ReqMajorCredits) {
+		errorMsg = "Number of Major Credits " + to_string(TotalMajorCredits) + " is  less than required Major number which is " + to_string(r->ReqMajorCredits);
+		return errorMsg;
+	}
+	if (TotalTrackCredits < r->ReqTrackCredits) {
+		errorMsg = "Number of Track Credits " + to_string(TotalTrackCredits) + " is less than required Track number which is " + to_string(r->ReqTrackCredits);
+		return errorMsg;
+	}
+	if (TotalUnivCredits < r->ReqUnivCredits) {
+		errorMsg = "Number of University Credits " + to_string(TotalUnivCredits) + " is less than required University number which is " + to_string(r->ReqUnivCredits);
+		return errorMsg;
+	}
+	for (auto courseCode : r->UnivCompulsory) {
+		if (getCoursePosition(courseCode) == -1) {
+			errorMsg = "Error Course : " + courseCode + " is University Compulsory but not found in the plan";
+			return errorMsg;
+		}
+	}
+	for (auto courseCode : r->TrackCompulsory) {
+		if (getCoursePosition(courseCode) == -1) {
+			errorMsg = "Error Course : " + courseCode + " is Track Compulsory but not found in the plan";
+			return errorMsg;
+		}
+	}
+	for (auto courseCode : r->MajorCompulsory) {
+		if (getCoursePosition(courseCode) == -1) {
+			errorMsg = "Error Course : " + courseCode + " is Major Compulsory but not found in the plan";
+			return errorMsg;
+		}
+	}
+	return "Everything is ok with The Program Requirement";
+}
 string StudyPlan::checkpreReqCoreReq() const {
 	for (int i = 0; i < plan.size(); i++) {						// loop aver every year
 		for (int sem = FALL; sem < SEM_CNT;sem++) {

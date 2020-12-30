@@ -24,7 +24,10 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 
 	YearCourses[sem].push_back(pC);
 	TotalCredits += pC->getCredits();
-
+	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
 	//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
 
@@ -32,11 +35,16 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 }
 
 bool AcademicYear::DeleteCourse(int x, int y) {
-	int cX, cY, i =0;
+	int cX, cY, i = 0;
 	for (auto sem : YearCourses) {
 		for (auto course = sem.begin(); course != sem.end(); ++course){
 			if ((*course)->isCourse(x,y)) {
-				TotalCredits -= (*course)->getCredits();
+				auto pC = (*course);
+				TotalCredits -= pC->getCredits();
+				if (pC->getType() == "UNIV") TotalUnivCredits -= pC->getCredits();
+				if (pC->getType() == "MAJOR") TotalMajorCredits -= pC->getCredits();
+				if (pC->getType() == "CON") TotalConcentrationCredits -= pC->getCredits();
+				if (pC->getType() == "TRACK") TotalTrackCredits -= pC->getCredits();
 				sem.erase(course);
 				YearCourses[i] = sem;
 				break;
