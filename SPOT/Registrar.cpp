@@ -11,6 +11,7 @@
 #include "Actions/ActionAddNotes.h"
 #include "Actions/ActionReorderCourses.h"
 #include "Actions/ActionCheck.h"
+#include "Actions/ActionSelectCourseStatus.h"
 #include  <algorithm>
 
 
@@ -166,6 +167,9 @@ Action* Registrar::CreateRequiredAction()
 
 	switch (actData.actType)
 	{
+	case DRAW_AREA:
+		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
+		break;
 	case ADD_CRS:
 		RequiredAction = new ActionAddCourse(this);
 		break;
@@ -182,8 +186,8 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionReplaceCourse(this);
 		break;
 	case RIGHTCLICK:
-		//ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
-		ActionCheck(this).Execute();
+		ActionSelectCourseStatus(this).Execute(actData.x, actData.y);
+		//ActionCheck(this).Execute();
 		break;
 	case REORDER:
 		RequiredAction = new ActionReorderCourses(this);

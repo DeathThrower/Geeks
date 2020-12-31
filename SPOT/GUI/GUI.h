@@ -24,6 +24,8 @@ class GUI
 		ITM_ex4,
 		ITM_ex5,
 		ITM_ex6,
+		ITM_ex7,
+
 
 
 		ITM_EXIT,		//Exit item
@@ -43,7 +45,7 @@ class GUI
 
 	color DrawColor = BLACK;		//Drawing color
 	color FillColor = SALMON;		//Filling color (for courses)
-	color HiColor = RED;			//Highlighting color
+	color HiColor = YELLOW;			//Highlighting color
 	color ConnColor = GREEN;		//Connector color
 	color MsgColor = WHITE;			//Messages color
 	color BkGrndColor = WHITE;	//Background color

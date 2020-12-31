@@ -65,7 +65,7 @@ bool ActionReorderCourses::Execute()
 					cX = (year - 1) * 263 + 20 + sem * 88;
 					course->setGfxInfo(graphicsInfo{ cX, cY });
 					
-					//error checking if the user put a course on another course					 uncompleted 
+					//error checking if the user put a course on another course					  
 					
 					if (pReg->getStudyPlan()->getnCourse(iX, iY) > 1	// if there is more than 1 course has inside the current x and y that's mean that
 						|| iX <15||iX> 1330 ||iY < 215 ||iY> 685){		// there is another course other than our course has inside the current x and y

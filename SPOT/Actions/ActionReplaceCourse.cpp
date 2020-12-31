@@ -26,6 +26,7 @@ bool ActionReplaceCourse::Execute()
 		}
 
 		course->setSelected(true);  //making a frame around the course
+		pReg->UpdateInterface();
 
 		//getting the course info from course catalog according to the course code given from the user
 		CourseInfo co;
@@ -46,6 +47,7 @@ bool ActionReplaceCourse::Execute()
 		course->setType(pReg->getCourseType(co.Code));
 
 		course->setSelected(false);  // clear the frame 
+		pReg->UpdateInterface();
 		return true;
 	}
 	return false;

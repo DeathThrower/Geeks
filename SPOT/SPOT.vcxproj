@@ -131,6 +131,7 @@
     <ClCompile Include="Actions\ActionReorderCourses.cpp" />
     <ClCompile Include="Actions\ActionReplaceCourse.cpp" />
     <ClCompile Include="Actions\ActionSaveStudyPlan.cpp" />
+    <ClCompile Include="Actions\ActionSelectCourseStatus.cpp" />
     <ClCompile Include="Courses\Course.cpp" />
     <ClCompile Include="GUI\CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="GUI\CMUgraphicsLib\colors.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Actions\ActionReorderCourses.h" />
     <ClInclude Include="Actions\ActionReplaceCourse.h" />
     <ClInclude Include="Actions\ActionSaveStudyPlan.h" />
+    <ClInclude Include="Actions\ActionSelectCourseStatus.h" />
     <ClInclude Include="Courses\Course.h" />
     <ClInclude Include="GUI\CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="GUI\CMUgraphicsLib\colors.h" />

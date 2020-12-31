@@ -4,6 +4,7 @@
 Course::Course(Course_Code r_code, string r_title, int crd):code(r_code),Title(r_title)
 {
 	credits = crd;
+	status = Done;
 }
 
 Course::~Course()
@@ -33,6 +34,10 @@ vector<Course_Code> Course::getCoReq() const {
 
 string Course::getType() const {
 	return type;
+}
+
+CStatus Course::getStatus() const{
+	return status;
 }
 
 bool Course::isCourse(int x, int y) const {
@@ -65,8 +70,8 @@ void Course::setCredits(int credits){
 void Course::setType(string type) {
 	this->type = type;
 }
-void Course::setDone(bool Done) {
-	this->Done = Done;
+void Course::setSatus(CStatus status) {
+	this->status = status;
 }
 void Course::setPreReq(vector<Course_Code> PreReq) {
 	this->PreReq = PreReq;

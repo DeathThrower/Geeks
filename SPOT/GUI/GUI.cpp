@@ -124,6 +124,7 @@ void GUI::CreateMenu() const
 	MenuItemImages[REPLACE] = str + "SPOT/GUI/Images/Menu/replace.jpg";
 	MenuItemImages[REORDER] = str + "SPOT/GUI/Images/Menu/reorder.jpg";
 	MenuItemImages[NOTES] = str + "SPOT/GUI/Images/Menu/notes.jpg";
+	MenuItemImages[CHECK] = str + "SPOT/GUI/Images/Menu/check.jpg";
 	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/exit.jpg";
 
 
@@ -170,10 +171,12 @@ void GUI::UpdateInterface() const
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawCourse(const Course* pCrs)
 {
-	if (pCrs->isSelected())
+	if (pCrs->isSelected()) {
 		pWind->SetPen(HiColor, 2);
-	else
-	pWind->SetPen(DrawColor, 2);
+	}
+	else {
+		pWind->SetPen(DrawColor, 2);
+	}
 	pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
 	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
@@ -253,6 +256,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->DrawString(270, 57, "Replace");
 	pWind->DrawString(335, 57, "Reorder");
 	pWind->DrawString(390, 57, "Add Notes");
+	pWind->DrawString(465, 57, "Check");
 	pWind->DrawString(1305, 57, "Exit");
 
 }
@@ -327,13 +331,16 @@ ActionData GUI::GetUserAction(string msg) const
 				else if (395 <= x && x <= 445) {
 					return ActionData{ NOTES };
 				}
+				//else if (410 <= x && x <= 460) {
+					//return ActionData{ CHECK };
+				//}
 				else if (1290 <= x && x <= 1340) {
 					return ActionData{ EXIT };
 				}
 			}
 
 			//[2] User clicks on the drawing area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight)
+			if(15 < x && x < 1330 && 205 < y && y < 685)
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}

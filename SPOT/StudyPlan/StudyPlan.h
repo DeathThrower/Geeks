@@ -13,6 +13,8 @@ class StudyPlan:public Drawable
 	string major;
 	vector<AcademicYear*> plan;	//plan is a list of academic years
 
+	int coursesStatus[3]{ 0,0,0 };  // array represent how many (Done(index 0), In progress(index 1), Pending(index 2)) course credits
+
 	string PlanNotes;
 public:
 	StudyPlan(int yearnum=5);
@@ -48,8 +50,11 @@ public:
 	//check the program requirement 
 	string checkProgramReq(Rules* r) const;
 
+
 	//check Number of credits per semester is within Range 
 	string checkCrSem(Rules* r) const;
+	//decrease the old status credits in the coursesStatus array and increase the new status credits
+	void changeCStatusCrd(CStatus Old, CStatus New, int crd);
 
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
