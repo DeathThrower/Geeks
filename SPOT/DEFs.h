@@ -30,6 +30,7 @@ enum ActionType
 	REORDER,										//REDO,		//Redo the last Action canceled
 
 	NOTES,
+	CHECK,
 
 	EXIT,		//Exit the application
 

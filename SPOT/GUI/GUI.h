@@ -24,6 +24,8 @@ class GUI
 		ITM_ex4,
 		ITM_ex5,
 		ITM_ex6,
+		ITM_ex7,
+
 
 
 		ITM_EXIT,		//Exit item
