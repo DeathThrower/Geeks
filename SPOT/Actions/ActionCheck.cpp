@@ -20,9 +20,16 @@ void ActionCheck::checkProReq() const {
 	char temp;
 	pReg->getGUI()->getWindow()->WaitKeyPress(temp);  // wait for the user to finish reading the message
 }
+void ActionCheck::checkCreditSem() const {
+	string Msg = pReg->getStudyPlan()->checkCrSem(pReg->getRules());
+	pReg->getGUI()->PrintMsg(Msg + " ... Press any key if you finished reading");
+	char temp;
+	pReg->getGUI()->getWindow()->WaitKeyPress(temp);  // wait for the user to finish reading the message
+}
 
 bool ActionCheck::Execute() {
 	checkPreCo();
 	checkProReq();
+	checkCreditSem();
 	return true;
 }

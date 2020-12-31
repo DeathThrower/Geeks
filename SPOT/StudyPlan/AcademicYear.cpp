@@ -15,7 +15,9 @@ AcademicYear::~AcademicYear()
 vector<Course*> AcademicYear::getCourses(int sem) const {
 	return YearCourses[sem];
 }
-
+array<int, 3> AcademicYear::getSemCredits() const {
+	return semCredits;
+}
 //Adds a course to this year in the spesified semester
 bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 {
@@ -24,10 +26,12 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 
 	YearCourses[sem].push_back(pC);
 	TotalCredits += pC->getCredits();
+	semCredits[sem] += pC->getCredits();
 	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
 	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
 	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
 	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
+
 	//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
 
@@ -41,18 +45,19 @@ bool AcademicYear::DeleteCourse(int x, int y) {
 			if ((*course)->isCourse(x,y)) {
 				auto pC = (*course);
 				TotalCredits -= pC->getCredits();
+				semCredits[i] -= pC->getCredits();
 				if (pC->getType() == "UNIV") TotalUnivCredits -= pC->getCredits();
 				if (pC->getType() == "MAJOR") TotalMajorCredits -= pC->getCredits();
 				if (pC->getType() == "CON") TotalConcentrationCredits -= pC->getCredits();
 				if (pC->getType() == "TRACK") TotalTrackCredits -= pC->getCredits();
 				sem.erase(course);
 				YearCourses[i] = sem;
-				break;
+				return true;//break;
 			}
 		}
 		i++;
 	}
-	return true;
+	return false;
 }
 
 int AcademicYear::getSem(int x, int y, int year) {

@@ -48,6 +48,8 @@ public:
 	//check the program requirement 
 	string checkProgramReq(Rules* r) const;
 
+	//check Number of credits per semester is within Range 
+	string checkCrSem(Rules* r) const;
 
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();

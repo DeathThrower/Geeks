@@ -10,5 +10,6 @@ public:
 	bool Execute();
 	void checkPreCo() const;
 	void checkProReq() const;
+	void checkCreditSem() const;
 	virtual ~ActionCheck();
 };

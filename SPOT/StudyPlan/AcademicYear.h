@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <array>
 #include "../Registrar.h"
 #include "..\Courses\Course.h"
 #include "../GUI/Drawable.h"
@@ -10,7 +11,7 @@ class AcademicYear:public Drawable
 	int TotalUnivCredits=0, TotalMajorCredits=0,
 		TotalTrackCredits=0, TotalConcentrationCredits=0,
 		TotalMinorCredits=0;
-
+	array<int, 3> semCredits = { 0,0,0 };
 	//Each year is an array of 3 lists of courses. Each list cossrsponds to a semester
 	//So YearCourses[FALL] is the list of FALL course in that year
 	//So YearCourses[SPRING] is the list of SPRING course in that year
@@ -23,7 +24,7 @@ public:
 	virtual ~AcademicYear();
 
 	vector<Course*> getCourses(int sem) const;
-
+	array<int, 3> getSemCredits() const;
 	bool AddCourse(Course*, SEMESTER );
 	bool DeleteCourse(int, int);
 

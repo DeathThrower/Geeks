@@ -174,8 +174,35 @@ string StudyPlan::checkProgramReq(Rules *r) const {
 	}
 	return "Everything is ok with The Program Requirement";
 }
+string StudyPlan::checkCrSem(Rules* r) const {
+	string errorMsg;
+	// I will hardcode these values even though in the future they might retrieved from a file. it should be as follows
+	// minCredits  = r->SemMinCredit 
+	int minCredits = 12; int maxCredits = 21, yearN = 1, semN=0;
+	for (auto year : plan) {
+		semN = 0;
+		for (auto semCredit : year->getSemCredits()) {
+			if (semN != 2) //Not summer
+			{
+				if (semCredit < minCredits || semCredit > maxCredits) {
+					errorMsg = "In Year " + to_string(yearN) + (!semN ? " Fall" :  " Spring" ) + " Semester has " + to_string(semCredit) + " credits which is out of bounds.";
+					return errorMsg;
+				}
+			}
+			else {
+				if (semCredit < 0 || semCredit > 8) {
+					errorMsg = "In Year " + to_string(yearN) + "Summer Semester has " + to_string(semCredit) + " credits which is out of bounds.";
+					return errorMsg;
+				}
+			}
+			semN++;
+		} 
+		yearN++;
+	}
+	return "SemCred Check: Success. Each Semester Total Credits is within bounds. ";
+}
 string StudyPlan::checkpreReqCoreReq() const {
-	for (int i = 0; i < plan.size(); i++) {						// loop aver every year
+	for (int i = 0; i < plan.size(); i++) {						// loop over every year
 		for (int sem = FALL; sem < SEM_CNT;sem++) {
 			for (auto course : plan[i]->getCourses(sem)) {		// loop over every course in every year
 				int cPosition = i * 3 + sem;					// get the course position;
