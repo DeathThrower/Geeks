@@ -170,10 +170,12 @@ void GUI::UpdateInterface() const
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawCourse(const Course* pCrs)
 {
-	if (pCrs->isSelected())
+	if (pCrs->isSelected()) {
 		pWind->SetPen(HiColor, 2);
-	else
-	pWind->SetPen(DrawColor, 2);
+	}
+	else {
+		pWind->SetPen(DrawColor, 2);
+	}
 	pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
 	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
@@ -333,7 +335,7 @@ ActionData GUI::GetUserAction(string msg) const
 			}
 
 			//[2] User clicks on the drawing area
-			if (y >= MenuBarHeight && y < WindHeight - StatusBarHeight)
+			if(15 < x && x < 1330 && 205 < y && y < 685)
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}

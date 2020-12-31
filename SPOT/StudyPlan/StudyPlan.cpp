@@ -27,6 +27,7 @@ bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 
 	plan[year - 1]->AddCourse(pC, sem);
 	TotalCredits += pC->getCredits();
+	coursesStatus[0] += pC->getCredits();
 	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
 	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
 	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
@@ -123,6 +124,11 @@ void StudyPlan::saveStudyPlan(ofstream& outdata) const {
 	}
 }
 
+void StudyPlan::changeCStatusCrd(CStatus Old, CStatus New, int crd) {
+	coursesStatus[static_cast<int>(Old)] -= crd;
+	coursesStatus[static_cast<int>(New)] += crd;
+}
+
 int StudyPlan::getCoursePosition(Course_Code CC) const {
 	// code transformation to match all the posible cases of course code 
 	transform(CC.begin(), CC.end(), CC.begin(), ::tolower);
@@ -172,7 +178,7 @@ string StudyPlan::checkProgramReq(Rules *r) const {
 			return errorMsg;
 		}
 	}
-	return "Everything is ok with The Program Requirement";
+	return "Everything is ok with The Program Requirements";
 }
 string StudyPlan::checkpreReqCoreReq() const {
 	for (int i = 0; i < plan.size(); i++) {						// loop aver every year
