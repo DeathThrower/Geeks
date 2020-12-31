@@ -1,5 +1,6 @@
 #include "ActionImportCatalog.h"
 #include <algorithm>
+#include <iostream>
 
 ActionImportCatalog::ActionImportCatalog(Registrar* p) :Action(p)
 {
@@ -14,27 +15,25 @@ bool ActionImportCatalog::Execute() {
         str.replace(ind, 1, "/");
         ind = str.find("\\");
     }
-    string filepath = str + "SPOT/Files/CourseCatalog.txt";
-    //ifstream finput;
-    //finput.open(filepath);
+    string filepath = str + "SPOT/Files/Catalog - 2020 12 19.txt";
     ifstream finput(filepath);
     char* pch;
     char* context = nullptr;
     const int size = 500;
     char line[size];
     int index;
-    CourseInfo course;
     while (finput.getline(line, size)) {
+        CourseInfo course;
         index = 0;
         pch = strtok_s(line, ",", &context);
         while (pch != NULL) {
             switch (index)
             {
             case 0:
-                course.Title = pch;
+                course.Code = pch;
                 break;
             case 1:
-                course.Code = pch;
+                course.Title = pch;
                 break;
             case 2:
                 course.Credits = stoi(pch);
@@ -42,8 +41,8 @@ bool ActionImportCatalog::Execute() {
             case 3:
                 if (pch[0] == 'C') {
                     string coreq = pch;
-                    coreq.erase(0 , 6);
-                    std::string delimiter = " and ";
+                    coreq.erase(0 , 7);
+                    std::string delimiter = " And ";
                     size_t pos = 0;
                     std::string token;
                     while ((pos = coreq.find(delimiter)) != std::string::npos) {
@@ -55,8 +54,8 @@ bool ActionImportCatalog::Execute() {
                 }
                 else {
                     string prereq = pch;
-                    prereq.erase(0, 7);
-                    std::string delimiter = " and ";
+                    prereq.erase(0, 8);
+                    std::string delimiter = " And ";
                     size_t pos = 0;
                     std::string token;
                     while ((pos = prereq.find(delimiter)) != std::string::npos) {
@@ -65,12 +64,13 @@ bool ActionImportCatalog::Execute() {
                         prereq.erase(0, pos + delimiter.length());
                     }
                     course.PreReqList.push_back(prereq);
+					
                 }
                 break;
             case 4:
                 string prereq = pch;
-                prereq.erase(0, 7);
-                std::string delimiter = " and ";
+                prereq.erase(0, 8);
+                std::string delimiter = " And ";
                 size_t pos = 0;
                 std::string token;
                 while ((pos = prereq.find(delimiter)) != std::string::npos) {
@@ -86,6 +86,7 @@ bool ActionImportCatalog::Execute() {
             index++;
         }
         pReg->getRules()->CourseCatalog.push_back(course);
+
     }
     finput.close();
     return true;

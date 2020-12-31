@@ -10,6 +10,8 @@
 #include "Actions/ActionDisplayCourseInfo.h"
 #include "Actions/ActionAddNotes.h"
 #include "Actions/ActionReorderCourses.h"
+#include "Actions/ActionCheck.h"
+#include "Actions/ActionSelectCourseStatus.h"
 #include  <algorithm>
 
 
@@ -137,8 +139,8 @@ Registrar::Registrar()
 	pGUI = new GUI;	//create interface object
 	pSPlan = new StudyPlan;	//create a study plan.
 	pRegRules = new Rules;  // create a Rules struct
-	ActionLoadCourseOffering(this).Execute();
 	ActionImportCatalog(this).Execute();
+	ActionLoadCourseOffering(this).Execute();
 }
 
 //return a pointer to Rules
@@ -165,6 +167,9 @@ Action* Registrar::CreateRequiredAction()
 
 	switch (actData.actType)
 	{
+	case DRAW_AREA:
+		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
+		break;
 	case ADD_CRS:
 		RequiredAction = new ActionAddCourse(this);
 		break;
@@ -181,9 +186,8 @@ Action* Registrar::CreateRequiredAction()
 		RequiredAction = new ActionReplaceCourse(this);
 		break;
 	case RIGHTCLICK:
-		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
-		int x, y;
-		getGUI()->getWindow()->WaitMouseClick(x, y);
+		ActionSelectCourseStatus(this).Execute(actData.x, actData.y);
+		//ActionCheck(this).Execute();
 		break;
 	case REORDER:
 		RequiredAction = new ActionReorderCourses(this);
@@ -217,7 +221,6 @@ void Registrar::Run()
 		Action* pAct = CreateRequiredAction();
 		if (pAct)	//if user doesn't cancel
 		{
-
 			if (ExecuteAction(pAct))	//if action is not cancelled
 				UpdateInterface();
 		}

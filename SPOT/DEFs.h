@@ -66,4 +66,9 @@ struct ActionData
 	Major_NUM
 };*/
 
-
+enum CStatus {
+	Done,
+	InProgress,
+	Pending,
+	NStatus
+};

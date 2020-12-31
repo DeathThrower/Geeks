@@ -13,6 +13,8 @@ class StudyPlan:public Drawable
 	string major;
 	vector<AcademicYear*> plan;	//plan is a list of academic years
 
+	int coursesStatus[3]{ 0,0,0 };  // array represent how many (Done(index 0), In progress(index 1), Pending(index 2)) course credits
+
 	string PlanNotes;
 public:
 	StudyPlan(int yearnum=5);
@@ -38,6 +40,18 @@ public:
 
 	//clear all the content of the plan (clear the courses in each year in each semester)
 	void clearStudyPlan();
+
+	//return the position of the course return -1 if not found || (position to int: year*3+semester)
+	int getCoursePosition(Course_Code) const;
+
+	//check the preReq and coReq and return a string represent a message to the user
+	string checkpreReqCoreReq() const;
+
+	//check the program requirement 
+	string checkProgramReq(Rules* r) const;
+
+	//decrease the old status credits in the coursesStatus array and increase the new status credits
+	void changeCStatusCrd(CStatus Old, CStatus New, int crd);
 
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();

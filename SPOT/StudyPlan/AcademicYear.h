@@ -32,6 +32,9 @@ public:
 
 	int getSem(int, int, int); // get Semester & Year
 
+	//return the position of the course return -1 if not found || (position to int: year*3+semester)
+	int getCoursePosition(int year,Course_Code) const;
+
 	void saveAcademicYear(ofstream& outdata, int yearnum) const;
 	void clearYear();
 };

@@ -25,7 +25,8 @@ bool ActionLoadRules::Execute() {
     string filepath = str + "SPOT/Files/"+pReg->getStudyPlan()->getMajor()+"-Requirements.txt";
 
     //open the file and get the data from it. every case represent a line in the file and the default
-    //represent the concentration courses
+    //represent the concentration courses  
+	// see the file format if you need more details
     ifstream finput;
     finput.open(filepath);
     char* pch;

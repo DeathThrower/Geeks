@@ -1,7 +1,7 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
 #include "../GUI/Drawable.h"
-
+#include <algorithm>
 AcademicYear::AcademicYear()
 {
 	//TODO: make all necessary initializations
@@ -24,7 +24,10 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 
 	YearCourses[sem].push_back(pC);
 	TotalCredits += pC->getCredits();
-
+	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
 	//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
 
@@ -32,11 +35,16 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
 }
 
 bool AcademicYear::DeleteCourse(int x, int y) {
-	int cX, cY, i =0;
+	int cX, cY, i = 0;
 	for (auto sem : YearCourses) {
 		for (auto course = sem.begin(); course != sem.end(); ++course){
 			if ((*course)->isCourse(x,y)) {
-				TotalCredits -= (*course)->getCredits();
+				auto pC = (*course);
+				TotalCredits -= pC->getCredits();
+				if (pC->getType() == "UNIV") TotalUnivCredits -= pC->getCredits();
+				if (pC->getType() == "MAJOR") TotalMajorCredits -= pC->getCredits();
+				if (pC->getType() == "CON") TotalConcentrationCredits -= pC->getCredits();
+				if (pC->getType() == "TRACK") TotalTrackCredits -= pC->getCredits();
 				sem.erase(course);
 				YearCourses[i] = sem;
 				break;
@@ -128,4 +136,19 @@ void AcademicYear::clearYear() {
 	TotalTrackCredits = 0;
 	TotalConcentrationCredits = 0;
 	TotalMinorCredits = 0;
+}
+
+int AcademicYear::getCoursePosition(int year, Course_Code CC) const {
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		for (auto course : YearCourses[sem]) {
+			Course_Code code = course->getCode();				// code transformation to match all the posible cases of course code CC
+			transform(code.begin(), code.end(), code.begin(), ::tolower);
+			code.erase(remove_if(code.begin(), code.end(), ::isspace), code.end());
+
+			if (code == CC) {  // check for every course for the given course code if found return the course position
+				return year * 3 + sem;  //the position equation
+			}
+		}
+	}
+	return -1;  //if the course is not found in this year return -1
 }
