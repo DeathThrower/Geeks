@@ -76,7 +76,7 @@ bool ActionLoadStudyPlan::Execute() {
                         pC->setPreReq(course.PreReqList);
                         pC->setCoReq(course.CoReqList);
                         pC->setType(pReg->getCourseType(course.Code));
-                        pReg->getStudyPlan()->AddCourse(pC, year, sem);
+                        pReg->getStudyPlan()->AddCourse(pC, year, sem, pReg);
                         y += 45;  // at every new course update the y coordinates of course 
                     }
                     else {

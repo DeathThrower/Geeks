@@ -22,10 +22,10 @@ vector<AcademicYear*> StudyPlan::getPlan() const {
 
 //adds a course to the study plan in certain year, semester
 //year idetifies year number to add course to 1=first, 2 = 2nd,....
-bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
+bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem , Registrar* pReg)
 {
 
-	plan[year - 1]->AddCourse(pC, sem);
+	plan[year - 1]->AddCourse(pC, sem, pReg);
 	TotalCredits += pC->getCredits();
 	coursesStatus[0] += pC->getCredits();
 	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();

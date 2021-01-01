@@ -19,23 +19,39 @@ array<int, 3> AcademicYear::getSemCredits() const {
 	return semCredits;
 }
 //Adds a course to this year in the spesified semester
-bool AcademicYear::AddCourse(Course* pC, SEMESTER sem)
+bool AcademicYear::AddCourse(Course* pC, SEMESTER sem, Registrar* pReg)
 {
 	//TODO:
 	//This function still needs many checks to be compelete
+	bool found = 0; 
+	vector<AcademicYearOfferings> offerings = pReg->getRules()->OfferingsList;
+	for (auto year : offerings) {
+		for (auto course_code : year.Offerings[sem]) {
+			if (course_code == pC->getCode()) {
+				found = 1;
+				break;
+			};
+		}
+	}
+	if (found) {
+		YearCourses[sem].push_back(pC);
+		TotalCredits += pC->getCredits();
+		semCredits[sem] += pC->getCredits();
+		if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+		if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+		if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+		if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
+	}
+	else {
 
-	YearCourses[sem].push_back(pC);
-	TotalCredits += pC->getCredits();
-	semCredits[sem] += pC->getCredits();
-	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
-	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
-	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
-	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
+		//TODO: acording to course type incremenet corrsponding toatl hours for that year
 
-	//TODO: acording to course type incremenet corrsponding toatl hours for that year
-
-
-	return true;
+		string Msg = "This course " + pC->getCode() + " isn't offered in " + (sem ? sem == 1 ? "Spring" : "Summer" : "Fall") + " semester ";
+		pReg->getGUI()->PrintMsg(Msg + " ... Press any key if you finished reading");
+		char temp;
+		pReg->getGUI()->getWindow()->WaitKeyPress(temp);  // wait for the user to finish
+	}
+	return found;
 }
 
 bool AcademicYear::DeleteCourse(int x, int y) {

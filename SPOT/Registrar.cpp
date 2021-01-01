@@ -187,13 +187,15 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case RIGHTCLICK:
 		ActionSelectCourseStatus(this).Execute(actData.x, actData.y);
-		//ActionCheck(this).Execute();
 		break;
 	case REORDER:
 		RequiredAction = new ActionReorderCourses(this);
 		break;
 	case NOTES:
 		RequiredAction = new ActionAddNotes(this);
+		break;
+	case CHECK:
+		ActionCheck(this).Execute();
 		break;
 	case EXIT:
 		exit(1);

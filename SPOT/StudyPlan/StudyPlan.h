@@ -25,7 +25,7 @@ public:
 	//find how many courses who have the x and y coordinates inside of it. --inputs: x and y integers --outputs: n int represent the number of the courses
 	int getnCourse(int x, int y) const;
 
-	bool AddCourse(Course*, int year, SEMESTER);
+	bool AddCourse(Course*, int year, SEMESTER , Registrar* pReg);
 	//delete a course from a specific x and y coordinates (erase the course pointer from the vector) the inputs are the x and y coordinates
 	bool DeleteCourse(int ,int);
 

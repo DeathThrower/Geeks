@@ -63,7 +63,7 @@ bool ActionAddCourse::Execute()
 			g.y = 215;
 		}
 		pC->setGfxInfo(g);
-		pS->AddCourse(pC, year + 1 , SEM);
+		pS->AddCourse(pC, year + 1 , SEM , pReg);
 	}
 
 

@@ -25,7 +25,7 @@ public:
 
 	vector<Course*> getCourses(int sem) const;
 	array<int, 3> getSemCredits() const;
-	bool AddCourse(Course*, SEMESTER );
+	bool AddCourse(Course*, SEMESTER , Registrar* pReg);
 	bool DeleteCourse(int, int);
 
 	Course* getCourse(int x,int y)const;

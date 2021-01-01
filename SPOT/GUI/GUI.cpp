@@ -331,9 +331,9 @@ ActionData GUI::GetUserAction(string msg) const
 				else if (395 <= x && x <= 445) {
 					return ActionData{ NOTES };
 				}
-				//else if (410 <= x && x <= 460) {
-					//return ActionData{ CHECK };
-				//}
+				else if (460 <= x && x <= 510) {
+					return ActionData{ CHECK };
+				}
 				else if (1290 <= x && x <= 1340) {
 					return ActionData{ EXIT };
 				}
