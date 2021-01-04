@@ -67,9 +67,8 @@ bool ActionReorderCourses::Execute()
 					
 					//error checking if the user put a course on another course					  
 					
-					if (pReg->getStudyPlan()->getnCourse(iX, iY) > 1	// if there is more than 1 course has inside the current x and y that's mean that
-						|| iX <15||iX> 1330 ||iY < 215 ||iY> 685){		// there is another course other than our course has inside the current x and y
-																		// or if the the x and y is out of course area
+					if (pReg->getStudyPlan()->getnCourse(iX, iY) > 1) {	// if there is more than 1 course has inside the current x and y that's mean that
+																		// there is another course other than our course has inside the current x and y
 																		// reset the x and y of the course to the initial x and y and sleep for 5 seconds
 						course->setGfxInfo(graphicsInfo{ cXold, cYold });
 						pReg->getGUI()->PrintMsg("Error!!! you can't put the course here, wait a second and continue drag and drop ");
