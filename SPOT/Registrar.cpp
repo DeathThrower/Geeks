@@ -33,31 +33,31 @@ CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
 }
 
 string Registrar::getCourseType(Course_Code CC) const {
-	for (auto code : pRegRules->UnivCompulsory) {
+	for (auto &code : pRegRules->UnivCompulsory) {
 		if (CC == code) return "UNIV";
 	}
-	for (auto code : pRegRules->UnivElective) {
+	for (auto &code : pRegRules->UnivElective) {
 		if (CC == code) return "UNIV";
 	}
-	for (auto code : pRegRules->TrackCompulsory) {
+	for (auto &code : pRegRules->TrackCompulsory) {
 		if (CC == code) return "TRACK";
 	}
-	for (auto code : pRegRules->TrackElective) {
+	for (auto &code : pRegRules->TrackElective) {
 		if (CC == code) return "TRACK";
 	}
-	for (auto code : pRegRules->MajorCompulsory) {
+	for (auto &code : pRegRules->MajorCompulsory) {
 		if (CC == code) return "MAJOR";
 	}
-	for (auto code : pRegRules->MajorElective) {
-			if (CC == code) return "MAJOR";
+	for (auto &code : pRegRules->MajorElective) {
+		if (CC == code) return "MAJOR";
 	}
-	for (auto vecCode : pRegRules->ConCompulsory) {
-		for (auto code : vecCode) {
+	for (auto &vecCode : pRegRules->ConCompulsory) {
+		for (auto &code : vecCode) {
 			if (CC == code) return "CON";
 		}
 	}
-	for (auto vecCode : pRegRules->ConElective) {
-		for (auto code : vecCode) {
+	for (auto &vecCode : pRegRules->ConElective) {
+		for (auto &code : vecCode) {
 			if (CC == code) return "CON";
 		}
 	}

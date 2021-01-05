@@ -31,7 +31,7 @@ bool ActionLoadRules::Execute() {
     finput.open(filepath);
     char* pch;
     char* context = nullptr;
-    const int size = 300;
+    const int size = 410;
     char line[size];
     int mline = 0,index=0;
     while (finput.getline(line, size)) {

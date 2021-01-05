@@ -78,7 +78,12 @@ bool ActionReorderCourses::Execute()
 						//moving the course inside the study plan by adding and deleting
 						Course* copyCourse(course);
 						pReg->getStudyPlan()->DeleteCourse(cX, cY);
-						pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem), pReg);
+						if (!(pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem), pReg))) {
+							year = ((cXold - 15) / 263) + 1;
+							sem = (((cXold - 15) % 263) / 88);
+							copyCourse->setGfxInfo(graphicsInfo{ cXold, cYold });
+							pReg->getStudyPlan()->AddCourse(copyCourse, year, static_cast<SEMESTER>(sem), pReg);
+						}
 					}
 
 				}

@@ -14,7 +14,7 @@ class StudyPlan:public Drawable
 	vector<AcademicYear*> plan;	//plan is a list of academic years
 
 	int coursesStatus[3]{ 0,0,0 };  // array represent how many (Done(index 0), In progress(index 1), Pending(index 2)) course credits
-
+	string studentLevel = "";
 	string PlanNotes;
 public:
 	StudyPlan(int yearnum=5);

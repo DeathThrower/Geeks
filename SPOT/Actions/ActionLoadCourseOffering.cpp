@@ -21,10 +21,11 @@ bool ActionLoadCourseOffering::Execute() {
 
 
     string filepath = str+"SPOT/Files/CourseOffering.txt";
-    ifstream finput(filepath);
+    ifstream finput;
+    finput.open(filepath);
     char* pch;
     char* context = nullptr;
-    const int size = 500;
+    const int size = 920;
     char line[size];
     int index ;  // represent the index of the line each "," is a separate between 2 indexes
     SEMESTER sem=FALL;

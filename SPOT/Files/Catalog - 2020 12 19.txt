@@ -127,6 +127,7 @@ Math 101,Calculus I,3,,
 MATH 102,Calculus II,3,,Prereq: MATH 101
 MATH 201,Linear Algebra and Vector Geometry,3,,Prereq: MATH 102
 MATH 202,Ordinary Differential Equations,3,,Prereq: MATH 102
+MATH 203,Introduction to Discrete Mathematics,1,,Prereq: CSCI 101
 MATH 301,Probability and Statistics,3,,Prereq: MATH 102
 MATH 302,Partial Differential Equations and Complex Analysis,3,,Prereq: MATH 202
 MATH 306,Numerical Analysis,3,,Prereq: MATH 201 And MATH 202
@@ -164,5 +165,63 @@ SCH 265,Geography of Egypt,2,,
 SCH 266,Sociology,2,,
 ENV XXX, ,3,,
 CIE XXX, ,3,,
+REE XXX, ,3,,
+NANENG XXX, ,3,,
 SCH XXX, ,2,,
-CIE 439, ,3,,
+CIE 439,Computer Architecture & Assembly Language,3,,Prereq: CIE 239
+MATSCI 201,Fundamentals of Materials Science and Engineering,3,,
+REE 201,Renewable Energy Systems,2,,
+REE 202,Mechanics of Materials,3,,Prereq: MATH 102 And PHYS 101
+REE 208,Engineering Dynamics,3,,Prereq: MATH 102 And PHYS 101
+REE 222,Introduction to Manufacturing Processes,3,,
+REE 302,Machine Design,3,,Prereq: REE 202 And MATSCI 201 And REE 222
+REE 307,Fluid Mechanics II,3,,Prereq: ENGR 207
+REE 308,Mechanical Vibrations,3,,Prereq: REE 208
+REE 322,Advanced Circuits Design,3,,Prereq: ENGR 201 And MATH 202
+REE 310,Control Systems,3,,Prereq: MATH 202
+REE 311,Electric Machines,3,,Prereq: ENGR 201 And MATH 202
+REE 312,Machine Design II,3,,Prereq: REE 302
+REE 406,Adnanced Thermodynamics,3,,Prereq: ENGR 205
+REE 407,Aerodynamics,3,,
+REE 409,Adnanced Control Systems,3,,Prereq: REE 310
+REE 411,Power Electronics,3,,Prereq: REE 322
+REE 470,Computer-Aided Design and Engineering,3,,Prereq: REE 312
+REE 415,Power Plant Technology,3,,Prereq: REE 406
+REE 419,Power Systems,3,,Prereq: REE 411
+REE 421,System Engineering,2,,
+REE 422,Optics and Photonics,3,,Prereq: PHYS 102 And MATH 202
+REE 430,Rotor Aerodynamics,3,,Prereq: REE 407
+REE 515,Thermal Solar Energy,3,,Prereq: REE 415
+REE 521,Smart Grid,3,,Prereq: REE 419
+REE 532,Photovoltaic Systems,3,,Prereq: REE 422
+REE 598,Senior Design Project I,1,,
+REE 599,Senior Design Project II,3,,Prereq: REE 598
+ENGR 201,Circuits & Electronics,3,,Prereq: PHYS 102 And MATH 102
+ENGR 218,Thermofluids,2,Coreq: MATH 202,Prereq: MATH 201 And PHYS 201
+ENGR 219,Introduction to Structural Mechanics,2,Coreq: MATH 201,Prereq: PHYS 101 
+NANENG 204,Digital Logic Design,2,,
+NANENG 203,Electric Circuits,3,,Prereq: PHYS 102 And MATH 102
+MATSCI 255,Introduction to Nanomaterials Synthesis,2,,Prereq: CHEM 102
+PHYS 202,Modern Physics,3,Coreq: PHYS 212,Prereq: MATH 201 And PHYS 201
+PHYS 212,Modern Physics Lab,1,Coreq: PHYS 202,
+NANENG 305,Physics Of Semiconductors,3,,Prereq: PHYS 202 And MATH 202
+NANENG 322,Electronic Circuit Design,3,,Prereq: NANENG 203
+NANENG 331,Electromagnetics,3,,Prereq: PHYS 201 And MATH 202
+NANENG 301,Micro/Nano Fabrication Techniques,3,,Prereq: CHEM 102 And MATSCI 201
+NANENG 307,Physics of Electronic Materials,3,,Prereq: NANENG 305
+NANENG 308,Solid State Devices,3,,Prereq: NANENG 305
+NANENG 312,C/C++ Programming Lab,1,,Prereq: CSCI 101 And MATH 306
+NANENG 335,Introduction to Photonics,3,,Prereq: PHYS 201
+NANENG 401,MEMS Design and Fabrication,3,,Prereq: NANENG 301
+NANENG 402,Modern Characterization Techniques,2,,Prereq: CHEM 102 And PHYS 202 And MATSCI 201
+NANENG 421,Analog Integrated Circuit Design,3,,Prereq: NANENG 322
+NANENG 424,Photovoltaics and Photonic Devices,3,,Prereq: NANENG 305
+NANENG 433,Computer Architecture & Assembly Language,3,,Prereq: NANENG 204 And NANENG 312
+NANENG 410,Real-Time Embedded System & Microcontroller Design,3,,Prereq: NANENG 204 And NANENG 312
+NANENG 422,ASIC and FPGA Design,3,,Prereq: NANENG 204
+NANENG 430,Principles of Microwave and Waveguides,3,,Prereq: NANENG 331
+NANENG 461,Communications Theory and Systems,3,,Prereq: MATH 301
+NANENG 512,Applied Digital Control and Drives,3,,Prereq: NANENG 312 And MATH 202
+NANENG 520,Advanced Devices,3,,Prereq: NANENG 308
+NANENG 598,Senior Design Project I,1,,
+NANENG 599,Senior Design Project II,3,,Prereq: NANENG 598

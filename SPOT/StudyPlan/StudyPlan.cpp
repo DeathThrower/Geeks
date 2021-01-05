@@ -25,15 +25,18 @@ vector<AcademicYear*> StudyPlan::getPlan() const {
 bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem , Registrar* pReg)
 {
 
-	plan[year - 1]->AddCourse(pC, sem, pReg);
-	TotalCredits += pC->getCredits();
-	coursesStatus[0] += pC->getCredits();
-	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
-	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
-	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
-	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
-
-	return true;
+	if (plan[year - 1]->AddCourse(pC, sem, pReg)) {
+		TotalCredits += pC->getCredits();
+		coursesStatus[0] += pC->getCredits();
+		if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+		if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+		if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+		if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool StudyPlan::DeleteCourse(int x, int y)
@@ -144,12 +147,16 @@ int StudyPlan::getCoursePosition(Course_Code CC) const {
 }
 string StudyPlan::checkProgramReq(Rules *r) const {
 	string errorMsg;
-	if (TotalCredits != r->totalCredit) {
-		errorMsg = "Number of Credits " + to_string(TotalCredits) + " is not equal to required total number which is " + to_string(r->totalCredit);
+	if (TotalCredits < r->totalCredit) {
+		errorMsg = "Number of Credits " + to_string(TotalCredits) + " is less than the required total number which is " + to_string(r->totalCredit);
+		return errorMsg;
+	}
+	if (TotalCredits > (r->totalCredit)+15) {
+		errorMsg = "Number of Credits " + to_string(TotalCredits) + " is more than the required allowed number which is " + to_string((r->totalCredit)+15);
 		return errorMsg;
 	}
 	if (TotalMajorCredits < r->ReqMajorCredits) {
-		errorMsg = "Number of Major Credits " + to_string(TotalMajorCredits) + " is  less than required Major number which is " + to_string(r->ReqMajorCredits);
+		errorMsg = "Number of Major Credits " + to_string(TotalMajorCredits) + " is less than required Major number which is " + to_string(r->ReqMajorCredits);
 		return errorMsg;
 	}
 	if (TotalTrackCredits < r->ReqTrackCredits) {
