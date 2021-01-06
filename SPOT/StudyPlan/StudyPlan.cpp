@@ -119,6 +119,7 @@ void StudyPlan::DrawMe(GUI* pGUI) const
 	//Plan draws all year inside it.
 	for (int i = 0; i < plan.size(); i++)
 		plan[i]->DrawMe(pGUI);
+	pGUI->DrawStuLevel(getStudLevel());
 }
 
 void StudyPlan::saveStudyPlan(ofstream& outdata) const {
@@ -130,6 +131,21 @@ void StudyPlan::saveStudyPlan(ofstream& outdata) const {
 void StudyPlan::changeCStatusCrd(CStatus Old, CStatus New, int crd) {
 	coursesStatus[static_cast<int>(Old)] -= crd;
 	coursesStatus[static_cast<int>(New)] += crd;
+}
+
+string StudyPlan::getStudLevel() const {
+	if (coursesStatus[0] <= 32) {
+		return "Freshman";
+	}
+	else if (coursesStatus[0] <= 64) {
+		return "Sophomore";
+	}
+	else if (coursesStatus[0] <= 96){
+		return "Junior";
+	}
+	else {
+		return "Senior";
+	}
 }
 
 int StudyPlan::getCoursePosition(Course_Code CC) const {

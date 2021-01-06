@@ -99,40 +99,6 @@ string Registrar::sem2str(SEMESTER sem) {
 	}
 }
 
-/*Major Registrar::str2maj(string str) {
-	transform(str.begin(), str.end(), str.begin(), ::toupper);
-	if (str == "CIE") {
-		return CIE;
-	}
-	else if (str == "ENV") {
-		return ENV;
-	}
-	else if (str == "NANOE") {
-		return NANOE;
-	}
-	else if (str == "REE") {
-		return REE;
-	}
-	else if (str == "SPC") {
-		return SPC;
-	}
-	else if (str == "PEU") {
-		return PEU;
-	}
-	else if (str == "BMS") {
-		return BMS;
-	}
-	else if (str == "MS") {
-		return MS;
-	}
-	else if (str == "NANOS") {
-		return NANOS;
-	}
-	else {
-		return Major_NUM;
-	}
-}*/
-
 
 Registrar::Registrar()
 {

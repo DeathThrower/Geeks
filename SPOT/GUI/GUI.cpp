@@ -396,6 +396,11 @@ string GUI::GetSrting() const
 
 }
 
+void GUI::DrawStuLevel(string SL) const {
+	pWind->SetFont(CRS_HEIGHT * 0.5, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(DARKGREEN);
+	pWind->DrawString(520, 57, SL);
+}
 
 
 GUI::~GUI()

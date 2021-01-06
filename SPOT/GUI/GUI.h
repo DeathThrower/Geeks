@@ -67,6 +67,9 @@ public:
 	void DrawAcademicYear(const AcademicYear*);
 	void UpdateInterface() const;
 	
+	//draw the student level
+	void DrawStuLevel(string) const;
+
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;
 	string GetSrting() const;
