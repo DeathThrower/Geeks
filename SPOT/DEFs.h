@@ -31,6 +31,7 @@ enum ActionType
 
 	NOTES,
 	CHECK,
+	ARROWS,
 
 	EXIT,		//Exit the application
 

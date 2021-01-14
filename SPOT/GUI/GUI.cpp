@@ -6,7 +6,7 @@
 
 GUI::GUI()
 { 
-	pWind = new window(1360, 745,-10,0);
+	pWind = new window(1920, 745,-10,0);
 	pWind->ChangeTitle(WindTitle);
 	ClearDrawingArea();
 	ClearStatusBar();
@@ -125,6 +125,7 @@ void GUI::CreateMenu() const
 	MenuItemImages[REORDER] = str + "SPOT/GUI/Images/Menu/reorder.jpg";
 	MenuItemImages[NOTES] = str + "SPOT/GUI/Images/Menu/notes.jpg";
 	MenuItemImages[CHECK] = str + "SPOT/GUI/Images/Menu/check.jpg";
+	MenuItemImages[ARROWS] = str + "SPOT/GUI/Images/Menu/arrows.jpg";
 	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/exit.jpg";
 
 
@@ -134,7 +135,7 @@ void GUI::CreateMenu() const
 	for (int i = 0; i<ITM_CNT-1; i++)
 		pWind->DrawImage(MenuItemImages[i], (i*65)+5, 5, MenuItemWidth, 50);
 
-	pWind->DrawImage(MenuItemImages[ITM_EXIT], 1290 , 5, MenuItemWidth, 50);
+	pWind->DrawImage(MenuItemImages[ITM_EXIT], 1485 , 5, MenuItemWidth, 50);
 
 }
 
@@ -205,7 +206,61 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 
 	pWind->SetPen(RED, 5);
 	pWind->DrawRectangle(15, 120, 1330, 685, FRAME);
-	
+
+	pWind->SetPen(RED, 3);
+	pWind->DrawRectangle(1340, 120, 1525, 160, FRAME);
+	pWind->SetFont(CRS_HEIGHT * 0.55, ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(DARKBLUE, 3);
+	pWind->DrawString(1350 , 130, "Student Information");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 190, 1500, 215, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 170, "Student Level:");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 225, 1500, 250, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 230, "GPA:");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 260, 1500, 285, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 260, "Major:");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 310, 1500, 335, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 290, "Double Major:");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 365, 1500, 390, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 345, "Concentration:");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 410, 1500, 435, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 390, "Double Concentration:");
+
+	pWind->SetPen(DARKSLATEBLUE, 2);
+	pWind->DrawRectangle(1385, 445, 1500, 470, FRAME);
+	pWind->SetPen(DARKCYAN, 3);
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
+	pWind->DrawString(1335, 450, "Minor:");
+
+	pWind->SetPen(RED, 3);
+	pWind->DrawRectangle(1340, 480, 1525, 520, FRAME);
+	pWind->SetFont(CRS_HEIGHT * 0.55, ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(DARKBLUE, 3);
+	pWind->DrawString(1350, 490, "Course Information");
+
 	pWind->SetPen(DARKBLUE, 3);
 	for (int i = 1; i <= 4; i++)
 	{
@@ -214,7 +269,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->DrawLine(40, 170, 1310, 170);
 
 	pWind->SetPen(BLUE, 2);
-	for (int i = 1; i <= 3*5; i++)
+	for (int i = 1; i <= 3*5 - 1; i++)
 	{
 		if (i % 3 == 0)
 			i++;
@@ -236,7 +291,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->DrawString(100 + 3*263, 135, "Year 4");
 	pWind->DrawString(100 + 4*263, 135, "Year 5");
 
-	pWind->SetFont(CRS_HEIGHT * 0.5, BOLD, BY_NAME, "Gramound");
+	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Gramound");
 	pWind->SetPen(DARKGREEN);
 	for (int i = 0; i < 5; i++)
 	{
@@ -257,7 +312,8 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->DrawString(335, 57, "Reorder");
 	pWind->DrawString(390, 57, "Add Notes");
 	pWind->DrawString(465, 57, "Check");
-	pWind->DrawString(1305, 57, "Exit");
+	pWind->DrawString(465 + 75, 57, "Arrows");
+	pWind->DrawString(1500, 57, "Exit");
 
 }
 
@@ -334,7 +390,7 @@ ActionData GUI::GetUserAction(string msg) const
 				else if (460 <= x && x <= 510) {
 					return ActionData{ CHECK };
 				}
-				else if (1290 <= x && x <= 1340) {
+				else if (1485 <= x && x <= 1900) {
 					return ActionData{ EXIT };
 				}
 			}
@@ -397,9 +453,9 @@ string GUI::GetSrting() const
 }
 
 void GUI::DrawStuLevel(string SL) const {
-	pWind->SetFont(CRS_HEIGHT * 0.5, BOLD, BY_NAME, "Gramound");
+	pWind->SetFont(CRS_HEIGHT * 0.45, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(DARKGREEN);
-	pWind->DrawString(520, 57, SL);
+	pWind->DrawString(1400, 195, SL);
 }
 
 
