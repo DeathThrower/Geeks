@@ -7,6 +7,7 @@ using namespace std;
 
 class Course;
 class AcademicYear;
+class StudyPlan;
 //user interface class
 class GUI
 {
@@ -68,7 +69,7 @@ public:
 	void UpdateInterface() const;
 	
 	//draw the student level
-	void DrawStuLevel(string) const;
+	void DrawStuInfo(const StudyPlan*) const;
 
 	//input functions
 	ActionData GUI::GetUserAction(string msg = "") const;

@@ -27,6 +27,7 @@ bool ActionLoadRules::Execute() {
     //open the file and get the data from it. every case represent a line in the file and the default
     //represent the concentration courses  
 	// see the file format if you need more details
+    bool condition = false; //condition for checking if the file exist or not
     ifstream finput;
     finput.open(filepath);
     char* pch;
@@ -114,6 +115,7 @@ bool ActionLoadRules::Execute() {
             }
             break;
         }
+        bool condition = true;
     }
-    return true;
+    return condition;
 }

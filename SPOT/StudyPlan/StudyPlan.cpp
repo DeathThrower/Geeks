@@ -92,13 +92,51 @@ int StudyPlan::getnCourse(int x, int y) const {
 	return n;
 }
 
-string StudyPlan::getMajor() {
+string StudyPlan::getMajor() const{
 	return major;
 }
 
 void StudyPlan::setMajor(string nmajor)
 {
 	major = nmajor;
+}
+
+string StudyPlan::getD_Major() const{
+	return D_major;
+}
+
+void StudyPlan::setD_Major(string nmajor)
+{
+	D_major = nmajor;
+}
+
+string StudyPlan::getCon() const{
+	return con;
+}
+
+void StudyPlan::setCon(string Con)
+{
+	con = Con;
+}
+
+string StudyPlan::getD_Con() const{
+	return D_con;
+}
+
+void StudyPlan::setD_Con(string Con)
+{
+	D_con = Con;
+}
+string StudyPlan::getMinor() const{
+	return minor;
+}
+
+void StudyPlan::setMinor(string Minor)
+{
+	minor = Minor;
+}
+float StudyPlan::getGPA() const {
+	return GPA;
 }
 
 void StudyPlan::clearStudyPlan() {
@@ -119,7 +157,7 @@ void StudyPlan::DrawMe(GUI* pGUI) const
 	//Plan draws all year inside it.
 	for (int i = 0; i < plan.size(); i++)
 		plan[i]->DrawMe(pGUI);
-	pGUI->DrawStuLevel(getStudLevel());
+	pGUI->DrawStuInfo(this);
 }
 
 void StudyPlan::saveStudyPlan(ofstream& outdata) const {

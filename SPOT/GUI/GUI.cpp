@@ -394,12 +394,42 @@ ActionData GUI::GetUserAction(string msg) const
 					return ActionData{ EXIT };
 				}
 			}
-
 			//[2] User clicks on the drawing area
-			if(15 < x && x < 1330 && 205 < y && y < 685)
+			if (15 < x && x < 1330 && 205 < y && y < 685)
 			{
 				return ActionData{ DRAW_AREA,x,y };	//user want clicks inside drawing area
 			}
+
+			//Change Major
+			if (1385 < x && x < 1500 && 260 < y && y < 285)
+			{
+				return ActionData{ SMAJOR,x,y };	//user want clicks inside the major box
+			}
+			//Change double major 
+			if (1385 < x && x < 1500 && 310 < y && y < 335)
+			{
+				return ActionData{ SD_MAJOR,x,y };	//user want clicks inside the double major
+			}
+			//Change concentration
+			if (1385 < x && x < 1500 && 365 < y && y < 390)
+			{
+				return ActionData{ SCON,x,y };	//user want clicks inside the concentration box
+			}
+			//Change double concentration
+			if (1385 < x && x < 1500 && 410 < y && y < 435)
+			{
+				return ActionData{ SD_CON,x,y };	//user want clicks inside the double concentration box
+			}
+			//Change minor
+			if (1385 < x && x < 1500 && 445 < y && y < 470)
+			{
+				return ActionData{ SMINOR,x,y };	//user want clicks inside the minor box
+			}
+			//calculate GPA
+			//if (1385 < x && x < 1500 && 225 < y && y < 250)
+			//{
+			//	return ActionData{ SGPA,x,y };	//user want clicks inside the GPA box
+			//}
 
 			//[3] User clicks on the status bar
 			return ActionData{ STATUS_BAR };
@@ -452,11 +482,18 @@ string GUI::GetSrting() const
 
 }
 
-void GUI::DrawStuLevel(string SL) const {
+void GUI::DrawStuInfo(const StudyPlan* plan) const {
 	pWind->SetFont(CRS_HEIGHT * 0.45, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(DARKGREEN);
-	pWind->DrawString(1400, 195, SL);
+	pWind->DrawString(1405, 195, plan->getStudLevel());
+	pWind->DrawString(1405, 230, to_string(plan->getGPA()));
+	pWind->DrawString(1405, 265, plan->getMajor());
+	pWind->DrawString(1405, 315, plan->getD_Major());
+	pWind->DrawString(1405, 370, plan->getCon());
+	pWind->DrawString(1405, 415, plan->getD_Con());
+	pWind->DrawString(1405, 450, plan->getMinor());
 }
+
 
 
 GUI::~GUI()

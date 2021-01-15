@@ -10,8 +10,14 @@ class StudyPlan:public Drawable
 	int TotalUnivCredits=0, TotalMajorCredits=0,
 		TotalTrackCredits=0, TotalConcentrationCredits=0,
 		TotalMinorCredits=0;
-	string major;
 	vector<AcademicYear*> plan;	//plan is a list of academic years
+
+	float GPA;
+	string major;
+	string D_major;
+	string con;
+	string D_con;
+	string minor;
 
 	int coursesStatus[3]{ 0,0,0 };  // array represent how many (Done(index 0), In progress(index 1), Pending(index 2)) course credits
 	
@@ -31,9 +37,20 @@ public:
 
 	//return a semester and year in a vector of int and the inputs are a x and y coordinates
 	vector<int> getSem_Year(int, int);
+	
+	//getters and setters
 
-	string getMajor();
+	string getMajor() const;
 	void setMajor(string nmajor);
+	string getD_Major() const;
+	void setD_Major(string nmajor);
+	string getCon() const;
+	void setCon(string nmajor);
+	string getD_Con() const;
+	void setD_Con(string nmajor);
+	string getMinor() const;
+	void setMinor(string nmajor);
+	float getGPA() const;
 
 	//save the study plan into a file the inputs is the file object (ofstream)
 	void saveStudyPlan(ofstream& outdata) const;

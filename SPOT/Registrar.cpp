@@ -130,7 +130,7 @@ Action* Registrar::CreateRequiredAction()
 {
 	ActionData actData = pGUI->GetUserAction("Pick and action...");
 	Action* RequiredAction = nullptr;
-
+	string str;
 	switch (actData.actType)
 	{
 	case DRAW_AREA:
@@ -162,6 +162,45 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case CHECK:
 		ActionCheck(this).Execute();
+		break;
+	case SMAJOR:
+		pGUI->PrintMsg("Enter your major");
+		str = pGUI->GetSrting();
+		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+		pSPlan->setMajor(str);
+		if (!ActionLoadRules(this).Execute()) {
+			pGUI->PrintMsg("Error undefined major");
+			Sleep(3000);
+		}
+		break;
+	case SD_MAJOR:
+		pGUI->PrintMsg("Enter your double major");
+		str = pGUI->GetSrting();
+		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+		pSPlan->setD_Major(str);
+		break;
+	case SCON:
+		pGUI->PrintMsg("Enter your concentration");
+		str = pGUI->GetSrting();
+		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+		pSPlan->setCon(str);
+		break;
+	case SD_CON:
+		pGUI->PrintMsg("Enter your double concentration");
+		str = pGUI->GetSrting();
+		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+		pSPlan->setD_Con(str);
+		break;
+	case SMINOR:
+		pGUI->PrintMsg("Enter your minor");
+		str = pGUI->GetSrting();
+		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+		pSPlan->setMinor(str);
 		break;
 	case EXIT:
 		exit(1);
