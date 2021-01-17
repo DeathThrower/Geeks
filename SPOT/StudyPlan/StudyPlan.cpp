@@ -199,50 +199,60 @@ int StudyPlan::getCoursePosition(Course_Code CC) const {
 	}
 	return -1;  // if the course is not exist return -1
 }
-string StudyPlan::checkProgramReq(Rules *r) const {
+vector<string> StudyPlan::checkProgramReq(Rules *r)  {
 	string errorMsg;
+	vector<string> errorMsgs;
 	if (TotalCredits < r->totalCredit) {
 		errorMsg = "Number of Credits " + to_string(TotalCredits) + " is less than the required total number which is " + to_string(r->totalCredit);
-		return errorMsg;
+		msg_errors.push_back(errorMsg);
+		errorMsgs.push_back(errorMsg);
 	}
 	if (TotalCredits > (r->totalCredit)+15) {
 		errorMsg = "Number of Credits " + to_string(TotalCredits) + " is more than the required allowed number which is " + to_string((r->totalCredit)+15);
-		return errorMsg;
+		msg_errors.push_back(errorMsg);
+		errorMsgs.push_back(errorMsg);
 	}
 	if (TotalMajorCredits < r->ReqMajorCredits) {
 		errorMsg = "Number of Major Credits " + to_string(TotalMajorCredits) + " is less than required Major number which is " + to_string(r->ReqMajorCredits);
-		return errorMsg;
+		msg_errors.push_back(errorMsg);
+		errorMsgs.push_back(errorMsg);
 	}
 	if (TotalTrackCredits < r->ReqTrackCredits) {
 		errorMsg = "Number of Track Credits " + to_string(TotalTrackCredits) + " is less than required Track number which is " + to_string(r->ReqTrackCredits);
-		return errorMsg;
+		msg_errors.push_back(errorMsg);
+		errorMsgs.push_back(errorMsg);
 	}
 	if (TotalUnivCredits < r->ReqUnivCredits) {
 		errorMsg = "Number of University Credits " + to_string(TotalUnivCredits) + " is less than required University number which is " + to_string(r->ReqUnivCredits);
-		return errorMsg;
+		msg_errors.push_back(errorMsg);
+		errorMsgs.push_back(errorMsg);
 	}
 	for (auto courseCode : r->UnivCompulsory) {
 		if (getCoursePosition(courseCode) == -1) {
 			errorMsg = "Error Course : " + courseCode + " is University Compulsory but not found in the plan";
-			return errorMsg;
+			msg_errors.push_back(errorMsg);
+			errorMsgs.push_back(errorMsg);
 		}
 	}
 	for (auto courseCode : r->TrackCompulsory) {
 		if (getCoursePosition(courseCode) == -1) {
 			errorMsg = "Error Course : " + courseCode + " is Track Compulsory but not found in the plan";
-			return errorMsg;
+			msg_errors.push_back(errorMsg);
+			errorMsgs.push_back(errorMsg);
 		}
 	}
 	for (auto courseCode : r->MajorCompulsory) {
 		if (getCoursePosition(courseCode) == -1) {
 			errorMsg = "Error Course : " + courseCode + " is Major Compulsory but not found in the plan";
-			return errorMsg;
+			msg_errors.push_back(errorMsg);
+			errorMsgs.push_back(errorMsg);
 		}
 	}
-	return "Everything is ok with The Program Requirements";
+	return errorMsgs;
 }
-string StudyPlan::checkCrSem(Rules* r) const {
+vector<string> StudyPlan::checkCrSem(Rules* r) {
 	string errorMsg;
+	vector<string> errorMsgs;
 	// I will hardcode these values even though in the future they might retrieved from a file. it should be as follows
 	// minCredits  = r->SemMinCredit 
 	int minCredits = 12; int maxCredits = 21, yearN = 1, semN=0;
@@ -253,22 +263,25 @@ string StudyPlan::checkCrSem(Rules* r) const {
 			{
 				if (semCredit < minCredits || semCredit > maxCredits) {
 					errorMsg = "In Year " + to_string(yearN) + (!semN ? " Fall" :  " Spring" ) + " Semester has " + to_string(semCredit) + " credits which is out of bounds.";
-					return errorMsg;
+					msg_errors.push_back(errorMsg);
+					errorMsgs.push_back(errorMsg);
 				}
 			}
 			else {
 				if (semCredit < 0 || semCredit > 8) {
 					errorMsg = "In Year " + to_string(yearN) + "Summer Semester has " + to_string(semCredit) + " credits which is out of bounds.";
-					return errorMsg;
+					msg_errors.push_back(errorMsg);
+					errorMsgs.push_back(errorMsg);
 				}
 			}
 			semN++;
 		} 
 		yearN++;
 	}
-	return "SemCred Check: Success. Each Semester Total Credits is within bounds. ";
+	return errorMsgs;
 }
-string StudyPlan::checkpreReqCoreReq() const {
+vector<string> StudyPlan::checkpreReqCoreReq() {
+	vector<string> errorMsgs;
 	for (int i = 0; i < plan.size(); i++) {						// loop over every year
 		for (int sem = FALL; sem < SEM_CNT;sem++) {
 			for (auto course : plan[i]->getCourses(sem)) {		// loop over every course in every year
@@ -281,11 +294,13 @@ string StudyPlan::checkpreReqCoreReq() const {
 					// is not found return the error message
 					if (preReqPosition > cPosition) {
 						string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " exist in year or semester higher";
-						return errorMsg;
+						msg_errors.push_back(errorMsg);
+						errorMsgs.push_back(errorMsg);
 					}
 					else if(preReqPosition == -1){
 						string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " is not found";
-						return errorMsg;
+						msg_errors.push_back(errorMsg);
+						errorMsgs.push_back(errorMsg);
 					}
 				}
 				for (Course_Code CC : course->getCoReq()) {	// loop over every course in the CoReq list in the course
@@ -295,15 +310,20 @@ string StudyPlan::checkpreReqCoreReq() const {
 					// is not found return the error message
 					if (coReqPosition != cPosition) {
 						string errorMsg = "Error in course " + course->getCode() + " : the CoReq course " + CC + " exist in year or semester different from the course";
-						return errorMsg;
+						msg_errors.push_back(errorMsg);
+						errorMsgs.push_back(errorMsg);
 					}
 					else if(coReqPosition == -1){
 						string errorMsg = "Error in course " + course->getCode() + " : the CoReq course " + CC + " is not found";
-						return errorMsg;
+						msg_errors.push_back(errorMsg);
+						errorMsgs.push_back(errorMsg);
 					}
 				}
 			}
 		}
 	}
-	return "Every thing is ok in the PreReq and CoReq Check";
+	return errorMsgs;
+}
+vector<string> StudyPlan::getErrorMsg() const{
+	return msg_errors;
 }

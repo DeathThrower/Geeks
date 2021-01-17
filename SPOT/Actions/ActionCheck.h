@@ -8,8 +8,6 @@ class ActionCheck :
 public:
 	ActionCheck(Registrar*);
 	bool Execute();
-	void checkPreCo() const;
-	void checkProReq() const;
-	void checkCreditSem() const;
+	void generateReport() const;
 	virtual ~ActionCheck();
 };
