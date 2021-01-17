@@ -26,7 +26,7 @@ public:
 	void Run();
 
 	//helper functions:
-
+	
 	
 	// function to get the course information
 	CourseInfo getCourseInfo(Course_Code CC) const;
@@ -35,7 +35,7 @@ public:
 	string getCourseType(Course_Code CC) const;
 
 	// function to display the course info
-	void displayCourseInfo( int x, int y);
+	//void displayCourseInfo( int x, int y);
 
 	// convert string to SEMESTER
 	static SEMESTER str2sem(string str) ;

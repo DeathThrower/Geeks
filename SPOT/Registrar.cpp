@@ -100,6 +100,7 @@ string Registrar::sem2str(SEMESTER sem) {
 }
 
 
+
 Registrar::Registrar()
 {
 	pGUI = new GUI;	//create interface object
@@ -131,6 +132,7 @@ Action* Registrar::CreateRequiredAction()
 	ActionData actData = pGUI->GetUserAction("Pick and action...");
 	Action* RequiredAction = nullptr;
 	string str;
+	int index = 0;
 	switch (actData.actType)
 	{
 	case DRAW_AREA:
@@ -189,11 +191,22 @@ Action* Registrar::CreateRequiredAction()
 		pSPlan->setCon(str);
 		break;
 	case SD_CON:
+		if (pSPlan->getD_Con() != "") {
+			index = stoi(pSPlan->getD_Con())-1;
+			pRegRules->totalCredit -= (pRegRules->ReqConCredits[index]);
+		}
 		pGUI->PrintMsg("Enter your double concentration");
 		str = pGUI->GetSrting();
-		transform(str.begin(), str.end(), str.begin(), ::toupper);
-		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
-		pSPlan->setD_Con(str);
+		if (stoi(str) <= pRegRules->NumConcentration && stoi(str) > 0) {
+			index = stoi(str) - 1;
+			str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+			pSPlan->setD_Con(str);
+			pRegRules->totalCredit += (pRegRules->ReqConCredits[index]);
+		}
+		else {
+			pGUI->PrintMsg("Error undefined concentration");
+			Sleep(3000);
+		}
 		break;
 	case SMINOR:
 		pGUI->PrintMsg("Enter your minor");
