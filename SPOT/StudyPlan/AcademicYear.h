@@ -36,6 +36,9 @@ public:
 	//return the position of the course return -1 if not found || (position to int: year*3+semester)
 	int getCoursePosition(int year,Course_Code) const;
 
+	//function overloading
+	int getCoursePosition(int year, Course_Code, int&) const;
+
 	void saveAcademicYear(ofstream& outdata, int yearnum) const;
 	void clearYear();
 };

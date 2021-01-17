@@ -173,3 +173,18 @@ int AcademicYear::getCoursePosition(int year, Course_Code CC) const {
 	}
 	return -1;  //if the course is not found in this year return -1
 }
+
+int AcademicYear::getCoursePosition(int year, Course_Code CC, int& crd) const {
+	for (int sem = FALL; sem < SEM_CNT; sem++) {
+		for (auto course : YearCourses[sem]) {
+			Course_Code code = course->getCode();				// code transformation to match all the posible cases of course code CC
+			transform(code.begin(), code.end(), code.begin(), ::tolower);
+			code.erase(remove_if(code.begin(), code.end(), ::isspace), code.end());
+			crd += course->getCredits();
+			if (code == CC) {  // check for every course for the given course code if found return the course position
+				return year * 3 + sem;  //the position equation
+			}
+		}
+	}
+	return -1;  //if the course is not found in this year return -1
+}

@@ -225,3 +225,5 @@ NANENG 512,Applied Digital Control and Drives,3,,Prereq: NANENG 312 And MATH 202
 NANENG 520,Advanced Devices,3,,Prereq: NANENG 308
 NANENG 598,Senior Design Project I,1,,
 NANENG 599,Senior Design Project II,3,,Prereq: NANENG 598
+NANENG 513,Adv. Nanodevices Fabrication Techniques,3,,Prereq: NANENG 301
+NANENG 515,Adv. MEMS Desgin &Fabrication Techniques,3,,Prereq: NANENG 401

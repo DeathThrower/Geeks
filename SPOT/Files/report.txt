@@ -1,8 +1,1 @@
-Error in course CHEM 111 : the CoReq course CHEM 101 exist in year or semester different from the course
-Error in course MATH 102 : the PreReq course MATH 101 is not found
-Error in course PHYS 102 : the PreReq course MATH 101 is not found
-Number of Credits 156 is less than the required total number which is 162
-Number of Track Credits 34 is less than required Track number which is 40
-Error Course : CHEM 101 is Track Compulsory but not found in the plan
-Error Course : Math 101 is Track Compulsory but not found in the plan
-In Year 1 Fall Semester has 11 credits which is out of bounds.
+Number of Credits 162 is less than the required total number which is 168

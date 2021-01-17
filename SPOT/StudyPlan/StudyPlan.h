@@ -66,11 +66,17 @@ public:
 	//return the position of the course return -1 if not found || (position to int: year*3+semester)
 	int getCoursePosition(Course_Code) const;
 
+	//function overloading
+	int getCoursePosition(Course_Code, int&) const;
+
 	//check the preReq and coReq and return a string represent a message to the user
 	vector<string> checkpreReqCoreReq();
 
 	//check the program requirement 
 	vector<string> checkProgramReq(Rules* r);
+
+	//check the double concentration
+	vector<string> checkD_Con(Rules* pRules);
 
 	//return the student level based on the number of credits of the done classes
 	string getStudLevel() const;

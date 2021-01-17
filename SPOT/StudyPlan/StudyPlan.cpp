@@ -199,6 +199,21 @@ int StudyPlan::getCoursePosition(Course_Code CC) const {
 	}
 	return -1;  // if the course is not exist return -1
 }
+
+int StudyPlan::getCoursePosition(Course_Code CC, int& crd) const {
+	// code transformation to match all the posible cases of course code 
+	transform(CC.begin(), CC.end(), CC.begin(), ::tolower);
+	CC.erase(remove_if(CC.begin(), CC.end(), ::isspace), CC.end());
+
+	for (int i = 0; i < plan.size(); i++) {
+		int position = plan[i]->getCoursePosition(i, CC, crd);  // check for every year if the course code exist or not
+		if (position != -1) {  // if the course exist return the course position
+			return position;
+		}
+	}
+	return -1;  // if the course is not exist return -1
+}
+
 vector<string> StudyPlan::checkProgramReq(Rules *r)  {
 	string errorMsg;
 	vector<string> errorMsgs;
@@ -248,6 +263,9 @@ vector<string> StudyPlan::checkProgramReq(Rules *r)  {
 			errorMsgs.push_back(errorMsg);
 		}
 	}
+	if (errorMsgs.empty()) {
+		errorMsgs.push_back("Everything is OK");
+	}
 	return errorMsgs;
 }
 vector<string> StudyPlan::checkCrSem(Rules* r) {
@@ -277,6 +295,9 @@ vector<string> StudyPlan::checkCrSem(Rules* r) {
 			semN++;
 		} 
 		yearN++;
+	}
+	if (errorMsgs.empty()) {
+		errorMsgs.push_back("Everything is OK");
 	}
 	return errorMsgs;
 }
@@ -322,7 +343,34 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 			}
 		}
 	}
+	if (errorMsgs.empty()) {
+		errorMsgs.push_back("Everything is OK");
+	}
 	return errorMsgs;
+}
+
+vector<string> StudyPlan::checkD_Con(Rules* pRules) {
+	vector<string> msgs;
+	if (D_con != "") {
+		int index = stoi(D_con) - 1;
+		int crd = 0;
+		vector<Course_Code> conCourses = pRules->ConCompulsory[index];
+		for (Course_Code course : conCourses) {
+			if (getCoursePosition(course, crd) == -1) {
+				msgs.push_back("Error Course : " + course + " is Double Concentration Compulsory but not found in the plan");
+			}
+		}
+		if (crd < pRules->ReqConCredits[index]) {
+			msgs.push_back("Number of Credits " + to_string(crd) + " is less than the required number for double concentration which is " + to_string(pRules->ReqConCredits[index]));
+		}
+		if (msgs.empty()) {
+			msgs.push_back("Everything is OK");
+		}
+	}
+	else {
+		msgs.push_back("You have not choosen a double major");
+	}
+	return msgs;
 }
 vector<string> StudyPlan::getErrorMsg() const{
 	return msg_errors;
