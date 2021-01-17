@@ -19,60 +19,71 @@ void ActionCheck::generateReport() const {
 }
 
 bool ActionCheck::Execute() {
-	vector<string> checkPreCo, checkProg, checkCrSem, checkD_Con;
+	vector<string> checkPreCo, checkProg, checkCrSem, checkD_Con, conReq;
 	checkPreCo = pReg->getStudyPlan()->checkpreReqCoreReq();
 	checkProg = pReg->getStudyPlan()->checkProgramReq(pReg->getRules());
 	checkCrSem = pReg->getStudyPlan()->checkCrSem(pReg->getRules());
 	checkD_Con = pReg->getStudyPlan()->checkD_Con(pReg->getRules());
+	conReq = pReg->getStudyPlan()->checkConcentrationReq(pReg->getRules());
 	window* win = new window(1320, 768, -10, 0);
 	win->SetPen(BLACK, 1);
 	win->SetBrush(RED);
-	win->DrawRectangle(1250, 720, 1300, 750);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	win->DrawString(1256, 726, "EXIT");
+	win->DrawRectangle(1180, 680, 1300, 750);
+	win->SetFont(55, BOLD, BY_NAME, "Arial");
+	win->DrawString(1186, 686, "EXIT");
 	int x, y = 0;
 	win->SetPen(RED, 2);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
 	win->DrawString(5, 5 + y, "Prereq and Coreq Check (Critical issue) : ");
 	win->SetPen(BLACK, 2);
-	win->SetFont(15, BOLD, BY_NAME, "Arial");
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
 	for (string msg : checkPreCo) {
-		y += 20;
+		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}
 	y += 25;
 	win->SetPen(RED, 2);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
 	win->DrawString(5, 5 + y, "Program requirement Check (Critical issue) :");
 	win->SetPen(BLACK, 2);
-	win->SetFont(15, BOLD, BY_NAME, "Arial");
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
 	for (string msg : checkProg) {
-		y += 20;
+		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}
 	y += 25;
-	win->SetPen(RED, 2);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
+	win->SetPen(YELLOW, 2);
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
 	win->DrawString(5, 5 + y, "Credit per Semester Check (Moderate issue) :");
 	win->SetPen(BLACK, 2);
-	win->SetFont(15, BOLD, BY_NAME, "Arial");
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
 	for (string msg : checkCrSem) {
-		y += 20;
+		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}
 	y += 25;
 	win->SetPen(RED, 2);
-	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	win->DrawString(5, 5 + y, "Double Concentration Check (Moderate issue) :");
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
+	win->DrawString(5, 5 + y, "concentration validity Check (Critical issue) :");
 	win->SetPen(BLACK, 2);
-	win->SetFont(15, BOLD, BY_NAME, "Arial");
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
+	for (string msg : conReq) {
+		y += 25;
+		win->DrawString(5, 5 + y, msg);
+	}
+	y += 25;
+	win->SetPen(RED, 2);
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
+	win->DrawString(5, 5 + y, "Double Concentration Check (Critical issue) :");
+	win->SetPen(BLACK, 2);
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
 	for (string msg : checkD_Con) {
-		y += 20;
+		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}
 	while (true) {
 		win->WaitMouseClick(x, y);
-		if (1250 < x && x < 1300 && 720 < y && y < 750) {
+		if (1180 < x && x < 1300 && 680 < y && y < 750) {
 			delete win;
 			break;
 		}

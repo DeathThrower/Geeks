@@ -1,1 +1,3 @@
-Number of Credits 162 is less than the required total number which is 168
+Number of Credits 0 is less than the required total number which is 6
+Error Course : NANENG 501 is Concentration Compulsory but not found in the concentration
+Error Course : NANENG 522 is Concentration Compulsory but not found in the concentration

@@ -75,6 +75,9 @@ public:
 	//check the program requirement 
 	vector<string> checkProgramReq(Rules* r);
 
+	//check the concentration requirement 
+	vector<string> checkConcentrationReq(Rules* r);
+
 	//check the double concentration
 	vector<string> checkD_Con(Rules* pRules);
 

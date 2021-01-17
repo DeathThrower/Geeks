@@ -215,6 +215,7 @@ NANENG 335,Introduction to Photonics,3,,Prereq: PHYS 201
 NANENG 401,MEMS Design and Fabrication,3,,Prereq: NANENG 301
 NANENG 402,Modern Characterization Techniques,2,,Prereq: CHEM 102 And PHYS 202 And MATSCI 201
 NANENG 421,Analog Integrated Circuit Design,3,,Prereq: NANENG 322
+NANENG 422, ,3,,
 NANENG 424,Photovoltaics and Photonic Devices,3,,Prereq: NANENG 305
 NANENG 433,Computer Architecture & Assembly Language,3,,Prereq: NANENG 204 And NANENG 312
 NANENG 410,Real-Time Embedded System & Microcontroller Design,3,,Prereq: NANENG 204 And NANENG 312
@@ -227,3 +228,5 @@ NANENG 598,Senior Design Project I,1,,
 NANENG 599,Senior Design Project II,3,,Prereq: NANENG 598
 NANENG 513,Adv. Nanodevices Fabrication Techniques,3,,Prereq: NANENG 301
 NANENG 515,Adv. MEMS Desgin &Fabrication Techniques,3,,Prereq: NANENG 401
+NANENG 501,Advanced Digital ASIC Design,3,,Prereq: NANENG 422
+NANENG 522,Advanced RF/Mixed Signal ICs,3,,Prereq: NANENG 421

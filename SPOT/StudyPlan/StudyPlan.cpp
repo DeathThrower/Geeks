@@ -349,6 +349,41 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 	return errorMsgs;
 }
 
+vector<string> StudyPlan::checkConcentrationReq(Rules* r)
+{
+	vector<string> errorMsgs;
+	string errorMsg;
+	if (con != "") {
+		int conNum = stoi(con) - 1;
+		if (TotalConcentrationCredits < (r->ReqConCredits).at(conNum))
+		{
+			errorMsg = "Number of Credits " + to_string(TotalConcentrationCredits) + " is less than the required total number which is " + to_string((r->ReqConCredits).at(conNum));
+			msg_errors.push_back(errorMsg);
+			errorMsgs.push_back(errorMsg);
+		}
+		if (TotalConcentrationCredits > (r->ReqConCredits).at(conNum))
+		{
+			errorMsg = "Number of Credits " + to_string(TotalConcentrationCredits) + " is more than the required total number which is " + to_string((r->ReqConCredits).at(conNum));
+			msg_errors.push_back(errorMsg);
+			errorMsgs.push_back(errorMsg);
+		}
+		for (auto courseCode : (r->ConCompulsory).at(conNum)) {
+			if (getCoursePosition(courseCode) == -1) {
+				errorMsg = "Error Course : " + courseCode + " is Concentration Compulsory but not found in the concentration";
+				msg_errors.push_back(errorMsg);
+				errorMsgs.push_back(errorMsg);
+			}
+		}
+		if (errorMsgs.empty()) {
+			errorMsgs.push_back("Everything is OK");
+		}
+	}
+	else {
+		errorMsgs.push_back("You have not choosen a concentration");
+	}
+	return errorMsgs;
+}
+
 vector<string> StudyPlan::checkD_Con(Rules* pRules) {
 	vector<string> msgs;
 	if (D_con != "") {
@@ -368,7 +403,7 @@ vector<string> StudyPlan::checkD_Con(Rules* pRules) {
 		}
 	}
 	else {
-		msgs.push_back("You have not choosen a double major");
+		msgs.push_back("You have not choosen a double concentration");
 	}
 	return msgs;
 }

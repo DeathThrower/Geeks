@@ -186,9 +186,10 @@ Action* Registrar::CreateRequiredAction()
 	case SCON:
 		pGUI->PrintMsg("Enter your concentration");
 		str = pGUI->GetSrting();
-		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
-		pSPlan->setCon(str);
+		if (stoi(str) <= pRegRules->NumConcentration && stoi(str) > 0) {
+			pSPlan->setCon(str);
+		}
 		break;
 	case SD_CON:
 		if (pSPlan->getD_Con() != "") {
@@ -197,9 +198,9 @@ Action* Registrar::CreateRequiredAction()
 		}
 		pGUI->PrintMsg("Enter your double concentration");
 		str = pGUI->GetSrting();
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 		if (stoi(str) <= pRegRules->NumConcentration && stoi(str) > 0) {
 			index = stoi(str) - 1;
-			str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 			pSPlan->setD_Con(str);
 			pRegRules->totalCredit += (pRegRules->ReqConCredits[index]);
 		}
