@@ -94,15 +94,21 @@ void GUI::ClearDrawingArea() const
 
 void GUI::ClearStatusBar() const
 {
-	pWind->SetBrush(StatusBarColor);
-	pWind->SetPen(StatusBarColor);
+	color BarColor = color(54, 74, 94);
+	//pWind->SetBrush(StatusBarColor);
+	//pWind->SetPen(StatusBarColor);
+	pWind->SetBrush(BarColor);
+	pWind->SetPen(BarColor);
 	pWind->DrawRectangle(0, WindHeight - StatusBarHeight, WindWidth, WindHeight);
 }
 
 void GUI::CreateMenu() const
 {
-	pWind->SetBrush(StatusBarColor);
-	pWind->SetPen(StatusBarColor);
+	color BarColor = color(54, 74, 94);
+	//pWind->SetBrush(StatusBarColor);
+	//pWind->SetPen(StatusBarColor);
+	pWind->SetBrush(BarColor);
+	pWind->SetPen(BarColor);
 	pWind->DrawRectangle(0, 0, WindWidth, MenuBarHeight);
 
 	//You can draw the menu icons any way you want.
@@ -152,6 +158,7 @@ void GUI::PrintMsg(string msg) const
 	// Print the Message
 	pWind->SetFont(20, BOLD , BY_NAME, "Arial");
 	pWind->SetPen(MsgColor);
+
 	pWind->DrawString(MsgX, WindHeight - MsgY, msg);
 }
 
@@ -172,23 +179,53 @@ void GUI::UpdateInterface() const
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawCourse(const Course* pCrs)
 {
+	string crsType =  pCrs->getType();
+	cout << crsType << endl;
+	int roundWidth = 0; int roundHeight = 0;
+	color fontColor = WHITE;
+	color borderColor = color(40,40,40);
+	color fillingColor = color(54, 74, 94);
+	if (crsType == "UNIV")
+	{
+		// fillingColor =RGB(29, 161, 242)
+		fillingColor.ucRed = 29;
+		fillingColor.ucGreen = 161;
+		fillingColor.ucBlue = 242;
+			
+	}
+	else if (crsType == "TRACK") {
+		// fillingColor =RGB(119, 123, 126) 
+		fillingColor.ucRed = 119;
+		fillingColor.ucGreen = 123;
+		fillingColor.ucBlue = 126;
+	}
+	else if (crsType == "MAJOR") {
+		// fillingColor =RGB(28, 32, 73) 17, 72, 128
+		fillingColor.ucRed = 17;
+		fillingColor.ucGreen = 72;
+		fillingColor.ucBlue = 128;
+	}
+
+	//
 	if (pCrs->isSelected()) {
 		pWind->SetPen(HiColor, 2);
 	}
 	else {
 		pWind->SetPen(DrawColor, 2);
 	}
-	pWind->SetBrush(FillColor);
+	pWind->SetPen(borderColor , 2);
+	//pWind->SetBrush(FillColor); 
+	pWind->SetBrush(fillingColor);
 	graphicsInfo gInfo = pCrs->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
+	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT, FILLED, roundWidth,roundHeight);
 	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-1, gInfo.y + CRS_HEIGHT / 2);
 	
 	//Write the course code and credit hours.
 	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
 	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
 	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD , BY_NAME, "Gramound");
-	pWind->SetPen(DARKBLUE);
-
+	//pWind->SetPen(DARKBLUE);
+	pWind->SetPen(fontColor);
 	ostringstream crd;
 	crd<< "crd:" << pCrs->getCredits();
 	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
@@ -198,16 +235,18 @@ void GUI::DrawCourse(const Course* pCrs)
 void GUI::DrawAcademicYear(const AcademicYear* pY) 
 {
 	graphicsInfo gInfo = pY->getGfxInfo();
-
+	color masterColor = color(54, 74, 94);
 	///TODO: compelete this function to:
 	//		1- Draw a rectangle for the academic year 
 	//		2- Draw a sub-rectangle for each semester
 	//Then each course should be drawn inside rect of its year/sem
 
-	pWind->SetPen(RED, 5);
+	//pWind->SetPen(RED, 5);
+	pWind->SetPen(masterColor, 5);
 	pWind->DrawRectangle(15, 120, 1330, 685, FRAME);
-
-	pWind->SetPen(RED, 3);
+	
+	//pWind->SetPen(RED, 5);
+	pWind->SetPen(masterColor, 3);
 	pWind->DrawRectangle(1340, 120, 1525, 160, FRAME);
 	pWind->SetFont(CRS_HEIGHT * 0.55, ITALICIZED, BY_NAME, "Arial");
 	pWind->SetPen(DARKBLUE, 3);
@@ -284,7 +323,8 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	}
 
 	pWind->SetFont(CRS_HEIGHT * 0.8, BOLD, BY_NAME, "Gramound");
-	pWind->SetPen(BROWN);
+	//pWind->SetPen(BROWN);
+	pWind->SetPen(masterColor);
 	pWind->DrawString(100, 135, "Year 1");
 	pWind->DrawString(100 + 263, 135, "Year 2");
 	pWind->DrawString(100 + 2*263, 135, "Year 3");
