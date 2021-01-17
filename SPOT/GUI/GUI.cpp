@@ -180,7 +180,6 @@ void GUI::UpdateInterface() const
 void GUI::DrawCourse(const Course* pCrs)
 {
 	string crsType =  pCrs->getType();
-	cout << crsType << endl;
 	int roundWidth = 0; int roundHeight = 0;
 	color fontColor = WHITE;
 	color borderColor = color(40,40,40);

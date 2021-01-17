@@ -12,15 +12,17 @@ class StudyPlan:public Drawable
 		TotalMinorCredits=0;
 	vector<AcademicYear*> plan;	//plan is a list of academic years
 
-	float GPA;
-	string major;
-	string D_major;
-	string con;
-	string D_con;
-	string minor;
-
+	float GPA = 0;
+	string major = "";
+	string D_major = "";
+	string con = "";
+	string D_con = "";
+	string minor = "";
+	
 	int coursesStatus[3]{ 0,0,0 };  // array represent how many (Done(index 0), In progress(index 1), Pending(index 2)) course credits
 	
+	vector<string> msg_errors; //Contains all error messages
+
 	string PlanNotes;
 public:
 	StudyPlan(int yearnum=5);
@@ -52,6 +54,9 @@ public:
 	void setMinor(string nmajor);
 	float getGPA() const;
 
+	// get error messages vector
+	vector<string> getErrorMsg() const;
+
 	//save the study plan into a file the inputs is the file object (ofstream)
 	void saveStudyPlan(ofstream& outdata) const;
 
@@ -62,16 +67,16 @@ public:
 	int getCoursePosition(Course_Code) const;
 
 	//check the preReq and coReq and return a string represent a message to the user
-	string checkpreReqCoreReq() const;
+	vector<string> checkpreReqCoreReq();
 
 	//check the program requirement 
-	string checkProgramReq(Rules* r) const;
+	vector<string> checkProgramReq(Rules* r);
 
 	//return the student level based on the number of credits of the done classes
 	string getStudLevel() const;
 
 	//check Number of credits per semester is within Range 
-	string checkCrSem(Rules* r) const;
+	vector<string> checkCrSem(Rules* r);
 	//decrease the old status credits in the coursesStatus array and increase the new status credits
 	void changeCStatusCrd(CStatus Old, CStatus New, int crd);
 
