@@ -304,7 +304,7 @@ vector<string> StudyPlan::checkCrSem(Rules* r) {
 vector<string> StudyPlan::checkpreReqCoreReq() {
 	vector<string> errorMsgs;
 	for (int i = 0; i < plan.size(); i++) {						// loop over every year
-		for (int sem = FALL; sem < SEM_CNT;sem++) {
+		for (int sem = FALL; sem < SEM_CNT; sem++) {
 			for (auto course : plan[i]->getCourses(sem)) {		// loop over every course in every year
 				int cPosition = i * 3 + sem;					// get the course position;
 
@@ -315,11 +315,13 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 					// is not found return the error message
 					if (preReqPosition > cPosition) {
 						string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " exist in year or semester higher";
+						course->setIssue("Critical");
 						msg_errors.push_back(errorMsg);
 						errorMsgs.push_back(errorMsg);
 					}
-					else if(preReqPosition == -1){
+					else if (preReqPosition == -1) {
 						string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " is not found";
+						course->setIssue("Critical");
 						msg_errors.push_back(errorMsg);
 						errorMsgs.push_back(errorMsg);
 					}
@@ -331,11 +333,13 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 					// is not found return the error message
 					if (coReqPosition != cPosition) {
 						string errorMsg = "Error in course " + course->getCode() + " : the CoReq course " + CC + " exist in year or semester different from the course";
+						course->setIssue("Critical");
 						msg_errors.push_back(errorMsg);
 						errorMsgs.push_back(errorMsg);
 					}
-					else if(coReqPosition == -1){
+					else if (coReqPosition == -1) {
 						string errorMsg = "Error in course " + course->getCode() + " : the CoReq course " + CC + " is not found";
+						course->setIssue("Critical");
 						msg_errors.push_back(errorMsg);
 						errorMsgs.push_back(errorMsg);
 					}
@@ -348,6 +352,7 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 	}
 	return errorMsgs;
 }
+
 
 vector<string> StudyPlan::checkConcentrationReq(Rules* r)
 {

@@ -179,10 +179,11 @@ void GUI::UpdateInterface() const
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawCourse(const Course* pCrs)
 {
-	string crsType =  pCrs->getType();
+	string crsType = pCrs->getType();
+	string issType = pCrs->getIssue();
 	int roundWidth = 0; int roundHeight = 0;
 	color fontColor = WHITE;
-	color borderColor = color(40,40,40);
+	color borderColor = color(40, 40, 40);
 	color fillingColor = color(54, 74, 94);
 	if (crsType == "UNIV")
 	{
@@ -190,7 +191,7 @@ void GUI::DrawCourse(const Course* pCrs)
 		fillingColor.ucRed = 29;
 		fillingColor.ucGreen = 161;
 		fillingColor.ucBlue = 242;
-			
+
 	}
 	else if (crsType == "TRACK") {
 		// fillingColor =RGB(119, 123, 126) 
@@ -204,7 +205,20 @@ void GUI::DrawCourse(const Course* pCrs)
 		fillingColor.ucGreen = 72;
 		fillingColor.ucBlue = 128;
 	}
-
+	if (issType == "Critical")
+	{
+		// fillingColor =RGB(28, 32, 73) 17, 72, 128
+		fillingColor.ucRed = 255;
+		fillingColor.ucGreen = 50;
+		fillingColor.ucBlue = 50;
+	}
+	else if (issType == "Modetate")
+	{
+		// fillingColor =RGB(28, 32, 73) 17, 72, 128
+		fillingColor.ucRed = 255;
+		fillingColor.ucGreen = 255;
+		fillingColor.ucBlue = 20;
+	}
 	//
 	if (pCrs->isSelected()) {
 		pWind->SetPen(HiColor, 2);

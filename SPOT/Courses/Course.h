@@ -15,11 +15,12 @@ class Course : public Drawable
 	string Title;		//course title: e.g. "Fundamentals of Computer Programming"
 	int credits;	//no. of course credits
 	string type;	//Univ, track, or major.....etc.
+	string issue = "None";
 	CStatus status;		//Done or not yet?
 	vector<Course_Code> PreReq;	//list of prerequisites
 	vector<Course_Code> CoReq;	//list of prerequisites
 public:
-	Course(Course_Code r_code,string r_title, int crd);
+	Course(Course_Code r_code, string r_title, int crd);
 
 	//getters
 
@@ -29,6 +30,8 @@ public:
 	vector<Course_Code> getPreReq() const;
 	vector<Course_Code> getCoReq() const;
 	string getType() const;
+	void setIssue(string issue);
+	string getIssue() const;
 	CStatus getStatus() const;
 
 	//return true if the point(x,y) is in the box of the course
@@ -38,14 +41,14 @@ public:
 
 	/* setters*/
 
-	void setTitle(string title) ;
-	void setCode(Course_Code code)  ;
-	void setCredits(int credits) ;
-	void setType(string type) ;
+	void setTitle(string title);
+	void setCode(Course_Code code);
+	void setCredits(int credits);
+	void setType(string type);
 	void setSatus(CStatus cs);
 	void setPreReq(vector<Course_Code> PreReq);
 	void setCoReq(vector<Course_Code> CoReq);
 
-	void saveCourse(ofstream & outdata) const;
+	void saveCourse(ofstream& outdata) const;
 
 };

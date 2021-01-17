@@ -1,7 +1,8 @@
+
 #include "Course.h"
 #include "../GUI/GUI.h"
 
-Course::Course(Course_Code r_code, string r_title, int crd):code(r_code),Title(r_title)
+Course::Course(Course_Code r_code, string r_title, int crd) :code(r_code), Title(r_title)
 {
 	credits = crd;
 	status = Done;
@@ -12,15 +13,15 @@ Course::~Course()
 }
 //getters
 
-Course_Code Course::getCode() const{
+Course_Code Course::getCode() const {
 	return code;
 }
 
-string Course::getTitle() const{
+string Course::getTitle() const {
 	return Title;
 }
 
-int Course::getCredits() const{
+int Course::getCredits() const {
 	return credits;
 }
 
@@ -36,7 +37,15 @@ string Course::getType() const {
 	return type;
 }
 
-CStatus Course::getStatus() const{
+string Course::getIssue() const {
+	return issue;
+}
+
+void Course::setIssue(string issue) {
+	this->issue = issue;
+}
+
+CStatus Course::getStatus() const {
 	return status;
 }
 
@@ -64,7 +73,7 @@ void Course::setTitle(const string title) {
 void Course::setCode(Course_Code code) {
 	this->code = code;
 }
-void Course::setCredits(int credits){
+void Course::setCredits(int credits) {
 	this->credits = credits;
 }
 void Course::setType(string type) {
