@@ -357,7 +357,7 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 
 				for (Course_Code CC : course->getPreReq()) {	// loop over every course in the PreReq list in the course
 					int preReqPosition = getCoursePosition(CC); // get the preReq course position
-
+					course->setIssue("None");
 					// if the preReq course position is more than or equal the course position (the preReq course in a higher year or semesyter) or the preReq 
 					// is not found return the error message
 					if (preReqPosition >= cPosition) {
@@ -410,6 +410,7 @@ vector<string> StudyPlan::checkOffering(Rules* r) {
 		for (int sem = FALL;  sem < SEM_CNT ; sem++) {
 			for (auto course : year->getCourses(sem)) {
 				found = 0;
+				course->setIssue("None");
 				for (auto year : offerings) {
 					for (auto course_code : year.Offerings[sem]) {
 						if (course_code == course->getCode()) {

@@ -182,7 +182,7 @@ void GUI::DrawCourse(const Course* pCrs)
 	if (pCrs->getVisible())
 	{
 		string crsType = pCrs->getType();
-		string issType = pCrs->getIssue();
+		string issType = pCrs->getIssue(); 
 		int roundWidth = 0; int roundHeight = 0;
 		color fontColor = WHITE;
 		color borderColor = color(40, 40, 40);
@@ -213,6 +213,7 @@ void GUI::DrawCourse(const Course* pCrs)
 			fillingColor.ucRed = 255;
 			fillingColor.ucGreen = 50;
 			fillingColor.ucBlue = 50;
+			issType = "None";
 		}
 		else if (issType == "Moderate")
 		{
