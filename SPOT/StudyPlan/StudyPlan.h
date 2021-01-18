@@ -52,6 +52,7 @@ public:
 	void setD_Con(string nmajor);
 	string getMinor() const;
 	void setMinor(string nmajor);
+	bool loadMinor(string str, Rules* pRegRules);
 	float getGPA() const;
 
 	// get error messages vector
