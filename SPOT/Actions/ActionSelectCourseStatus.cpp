@@ -29,7 +29,16 @@ bool ActionSelectCourseStatus::Execute(int cx, int cy) {   //overload
 		return false;
 	}
 	course->setSatus(NewStatus);
-
+	while (course->getGrade() == "" && NewStatus == Done) {
+		pReg->getGUI()->PrintMsg("Please Enter " + course->getCode() + " Grade or type Exit to return to the previous course status : ");
+		string grd = pReg->getGUI()->GetSrting();
+		if (grd == "Exit") {
+			course->setSatus(OldStatus);
+			course->setGrade("");
+			break;
+		};
+		course->setGrade(grd);
+	}
 	pReg->getStudyPlan()->changeCStatusCrd(OldStatus, NewStatus,course->getCredits());
 
 	course->setSelected(false);  //making a frame around the course

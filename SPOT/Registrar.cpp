@@ -15,6 +15,7 @@
 #include  <algorithm>
 
 
+
 CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
 	transform(CC.begin(), CC.end(), CC.begin(), ::tolower);
 	CC.erase(remove_if(CC.begin(), CC.end(), ::isspace), CC.end());
@@ -224,6 +225,9 @@ Action* Registrar::CreateRequiredAction()
 			pGUI->PrintMsg(">>> Minor Requirement Loaded successfully.");
 			Sleep(3000);
 		}
+		break;
+	case SGPA:
+		pSPlan->calculateGPA(this);
 		break;
 	case EXIT:
 		exit(1);

@@ -10,11 +10,13 @@ using namespace std;
 //Base class for all types of courses
 class Course : public Drawable
 {
+	string Grades[9];
 	// Title and code were const
 	Course_Code code;	//course code: e.g. "CIE202". This is the course ID
 	string Title;		//course title: e.g. "Fundamentals of Computer Programming"
 	int credits;	//no. of course credits
 	string type;	//Univ, track, or major.....etc.
+	string Grade = "";
 	string issue = "None";
 	CStatus status;		//Done or not yet?
 	vector<Course_Code> PreReq;	//list of prerequisites
@@ -27,6 +29,7 @@ public:
 	string getTitle() const;
 	string getCode() const;
 	int getCredits() const;
+	string getGrade() const;
 	vector<Course_Code> getPreReq() const;
 	vector<Course_Code> getCoReq() const;
 	string getType() const;
@@ -50,5 +53,6 @@ public:
 	void setCoReq(vector<Course_Code> CoReq);
 
 	void saveCourse(ofstream& outdata) const;
-
+	
+	bool setGrade(string letter);
 };

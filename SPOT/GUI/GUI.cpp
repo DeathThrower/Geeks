@@ -272,7 +272,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->DrawString(1335, 170, "Student Level:");
 
 	pWind->SetPen(DARKSLATEBLUE, 2);
-	pWind->DrawRectangle(1385, 225, 1500, 250, FRAME);
+	pWind->DrawRectangle(120, 225, 1500, 250, FRAME);
 	pWind->SetPen(DARKCYAN, 3);
 	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
 	pWind->DrawString(1335, 230, "GPA:");
@@ -479,10 +479,10 @@ ActionData GUI::GetUserAction(string msg) const
 				return ActionData{ SMINOR,x,y };	//user want clicks inside the minor box
 			}
 			//calculate GPA
-			//if (1385 < x && x < 1500 && 225 < y && y < 250)
-			//{
-			//	return ActionData{ SGPA,x,y };	//user want clicks inside the GPA box
-			//}
+			if (120 < x && x < 150 && 70 < y && y < 100)
+			{
+				return ActionData{ SGPA,x,y };	//user want clicks inside the GPA box
+			}
 
 			//[3] User clicks on the status bar
 			return ActionData{ STATUS_BAR };
@@ -539,7 +539,7 @@ void GUI::DrawStuInfo(const StudyPlan* plan) const {
 	pWind->SetFont(CRS_HEIGHT * 0.45, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(DARKGREEN);
 	pWind->DrawString(1405, 195, plan->getStudLevel());
-	pWind->DrawString(1405, 230, to_string(plan->getGPA()));
+	pWind->DrawString(120, 90, to_string(plan->getGPA()));
 	pWind->DrawString(1405, 265, plan->getMajor());
 	pWind->DrawString(1405, 315, plan->getD_Major());
 	pWind->DrawString(1405, 370, plan->getCon());
