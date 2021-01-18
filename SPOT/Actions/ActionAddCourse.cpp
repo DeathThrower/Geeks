@@ -22,7 +22,7 @@ bool ActionAddCourse::Execute()
 
 
 
-	ActionData actData = pGUI->GetUserAction("Select a year to add coures to:(To be implemented in phase1) we will just draw coures where user clicks");
+	ActionData actData = pGUI->GetUserAction("Select a year to add coures to: ");
 	//TODO: add input validation
 
 	int x, y;

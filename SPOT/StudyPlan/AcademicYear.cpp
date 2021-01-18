@@ -22,27 +22,15 @@ array<int, 3> AcademicYear::getSemCredits() const {
 bool AcademicYear::AddCourse(Course* pC, SEMESTER sem, Registrar* pReg)
 {
 	//TODO:
-	//This function still needs many checks to be compelete
-	bool found = 1;
-	if (found) {
-		YearCourses[sem].push_back(pC);
-		TotalCredits += pC->getCredits();
-		semCredits[sem] += pC->getCredits();
-		if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
-		if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
-		if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
-		if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
-	}
-	else {
 
-		//TODO: acording to course type incremenet corrsponding toatl hours for that year
-
-		string Msg = "This course " + pC->getCode() + " isn't offered in " + (sem ? sem == 1 ? "Spring" : "Summer" : "Fall") + " semester ";
-		pReg->getGUI()->PrintMsg(Msg + " ... Press any key if you finished reading");
-		char temp;
-		pReg->getGUI()->getWindow()->WaitKeyPress(temp);  // wait for the user to finish
-	}
-	return found;
+	YearCourses[sem].push_back(pC);
+	TotalCredits += pC->getCredits();
+	semCredits[sem] += pC->getCredits();
+	if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+	if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+	if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+	if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
+	return 1;
 }
 
 bool AcademicYear::DeleteCourse(int x, int y) {
@@ -68,10 +56,7 @@ bool AcademicYear::DeleteCourse(int x, int y) {
 }
 
 int AcademicYear::getSem(int x, int y, int year) {
-	int cX = 0,i = 0;
 	for (auto sem : YearCourses) {
-		int nCourses = sem.size();
-		if (!nCourses) {
 			if (x >= (year ) * 263 + 20 && x <= (year ) * 263 + 108) {
 				return 0;
 			}
@@ -81,8 +66,6 @@ int AcademicYear::getSem(int x, int y, int year) {
 			else if (x >= (year ) * 263 + 196 && x <= (year ) * 263 + 196 + 88) {
 				return 2;
 			}
-			return -1;
-		};
 	}
 	return -1;
 }

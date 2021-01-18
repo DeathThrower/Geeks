@@ -1,5 +1,6 @@
-Error in course CIE 202 : the PreReq course CSCI 101 is not found
-Error in course MATH 308 : the PreReq course CSCI 101 is not found
-Number of Credits 160 is less than the required total number which is 162
-Number of Track Credits 38 is less than required Track number which is 40
-Error Course : CSCI 101 is Track Compulsory but not found in the plan
+In Year 1Summer Semester has 12 credits which is out of bounds.
+In this semester you need an overload petetion.
+This course CIE XXX isn't offered in Summer semester 
+This course CIE XXX isn't offered in Summer semester 
+This course ENGR 210 isn't offered in Summer semester 
+This course MATH 301 isn't offered in Summer semester 
