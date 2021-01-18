@@ -184,7 +184,17 @@ Action* Registrar::CreateRequiredAction()
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 		pSPlan->setD_Major(str);
-		break;
+		if (pSPlan->loadDMajor(str, pRegRules)) {
+			pGUI->PrintMsg(">>> Either the Major itself or the Major File doesn't exist");
+			Sleep(3000);
+		}
+		else {
+			pGUI->PrintMsg(">>> Major Requirement Loaded successfully.");
+			Sleep(3000);
+		}
+		
+			break;
+		
 	case SCON:
 		pGUI->PrintMsg("Enter your concentration");
 		str = pGUI->GetSrting();

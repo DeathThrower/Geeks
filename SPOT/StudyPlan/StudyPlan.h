@@ -98,6 +98,8 @@ public:
 	//calaculate GPA
 	void calculateGPA(Registrar *);
 
+	bool loadDMajor(string DMajor, Rules* myRules);
+
 	//convert letter to GPA Points 
 	float getLetterGPA(string letter) const;
 

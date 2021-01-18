@@ -57,9 +57,11 @@ struct Rules	//contains all objects for registrations rules
 	vector<Course_Code> MajorCompulsory;//Major Compulsory courses
 	vector<Course_Code> MajorElective;	//Major Elective courses
 
-	vector<Course_Code> MinorCompulsory;//Major Compulsory courses
+	vector<Course_Code> MinorCompulsory; //Major Compulsory courses
+	vector<Course_Code> DMajorCompulsory; //Double Major Compulsory courses
 
 	vector<vector<Course_Code>> ConCompulsory;  //Compulsory courses for every concentration
 	vector<vector<Course_Code>> ConElective;  //Elective courses for every concentration
+
 };
 
