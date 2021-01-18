@@ -8,8 +8,7 @@ ActionCheck::~ActionCheck()
 
 void ActionCheck::generateReport() const {
 	vector<string> errorMsgs = pReg->getStudyPlan()->getErrorMsg();
-	string file_path = "Files/report.txt";
-	remove(file_path.c_str());
+	string file_path = "report.txt";
 	ofstream file;
 	file.open(file_path);
 	for (auto msg : errorMsgs) {
@@ -54,12 +53,12 @@ bool ActionCheck::Execute() {
 		win->DrawString(5, 5 + y, msg);
 	}
 	y += 25;
-	win->SetPen(RED, 2);
+	win->SetPen(YELLOW, 2);
 	win->SetFont(25, BOLD, BY_NAME, "Arial");
 	win->DrawString(5, 5 + y, "Course Offering Check (Moderate issue) :");
 	win->SetPen(BLACK, 2);
 	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	for (string msg : checkD_Con) {
+	for (string msg : offering) {
 		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}
@@ -69,7 +68,7 @@ bool ActionCheck::Execute() {
 	win->DrawString(5, 5 + y, "Credit per Semester Check (Moderate issue) :");
 	win->SetPen(BLACK, 2);
 	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	for (string msg : offering) {
+	for (string msg : checkCrSem) {
 		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}

@@ -329,6 +329,18 @@ vector<string> StudyPlan::checkCrSem(Rules* r) {
 					msg_errors.push_back(errorMsg);
 					errorMsgs.push_back(errorMsg);
 				}
+				if (semCredit < minCredits) {
+					errorMsg = "In this semester you need an underload petetion.";
+					msg_errors.push_back(errorMsg);
+					errorMsgs.push_back(errorMsg);
+				}
+				if (semCredit > maxCredits) {
+					errorMsg = "In this semester you need an overload petetion.";
+					msg_errors.push_back(errorMsg);
+					errorMsgs.push_back(errorMsg);
+				}
+				
+
 			}
 			else {
 				if (semCredit < 0 || semCredit > 8) {
@@ -427,6 +439,9 @@ vector<string> StudyPlan::checkOffering(Rules* r) {
 				}
 			}
 		}
+	}
+	if (errorMsgs.empty()) {
+		errorMsgs.push_back("Everything is OK");
 	}
 	return errorMsgs;
 }
