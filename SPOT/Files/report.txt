@@ -1,0 +1,39 @@
+Number of Credits 149 is less than the required total number which is 277
+In Year 5 Spring Semester has 3 credits which is out of bounds.
+In this semester you need an underload petetion.
+Number of Credits 0 is less than the required total number which is 6
+Error Course : NANENG 513 is Concentration Compulsory but not found in the concentration
+Error Course : NANENG 515 is Concentration Compulsory but not found in the concentration
+Course  CIE 202 is in CIE Minor Compulsory but not found in the plan.
+Course  CIE 205 is in CIE Minor Compulsory but not found in the plan.
+Course  CIE 206 is in CIE Minor Compulsory but not found in the plan.
+Course  CIE 302 is in CIE Minor Compulsory but not found in the plan.
+Course   CIE 417 is in CIE Minor Compulsory but not found in the plan.
+Course  ENGR 201 is in REE Double Major Compulsory but not found in the plan.
+Course  ENGR 205 is in REE Double Major Compulsory but not found in the plan.
+Course  ENGR 207 is in REE Double Major Compulsory but not found in the plan.
+Course  ENGR 346 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 201 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 202 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 208 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 222 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 302 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 307 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 308 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 310 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 311 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 312 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 322 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 406 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 407 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 409 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 411 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 415 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 419 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 421 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 422 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 430 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 470 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 515 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 521 is in REE Double Major Compulsory but not found in the plan.
+Course  REE 532 is in REE Double Major Compulsory but not found in the plan.

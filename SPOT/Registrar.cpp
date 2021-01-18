@@ -183,16 +183,20 @@ Action* Registrar::CreateRequiredAction()
 		str = pGUI->GetSrting();
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
-		pSPlan->setD_Major(str);
-		if (!pSPlan->loadDMajor(str, pRegRules)) {
-			pGUI->PrintMsg(">>> Either the Major itself or the Major File doesn't exist");
-			Sleep(3000);
+		if (str == "") {
+			pSPlan->setD_Major(str);
 		}
 		else {
-			pGUI->PrintMsg(">>> Major Requirement Loaded successfully.");
-			Sleep(3000);
+			if (!pSPlan->loadDMajor(str, pRegRules)) {
+				pGUI->PrintMsg(">>> Either the Major itself or the Major File doesn't exist");
+				Sleep(3000);
+			}
+			else {
+				pSPlan->setD_Major(str);
+				pGUI->PrintMsg(">>> Major Requirement Loaded successfully.");
+				Sleep(3000);
+			}
 		}
-		
 			break;
 		
 	case SCON:
@@ -211,14 +215,19 @@ Action* Registrar::CreateRequiredAction()
 		pGUI->PrintMsg("Enter your double concentration");
 		str = pGUI->GetSrting();
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
-		if (stoi(str) <= pRegRules->NumConcentration && stoi(str) > 0) {
-			index = stoi(str) - 1;
+		if (str == "") {
 			pSPlan->setD_Con(str);
-			pRegRules->totalCredit += (pRegRules->ReqConCredits[index]);
 		}
 		else {
-			pGUI->PrintMsg("Error undefined concentration");
-			Sleep(3000);
+			if (stoi(str) <= pRegRules->NumConcentration && stoi(str) > 0) {
+				index = stoi(str) - 1;
+				pSPlan->setD_Con(str);
+				pRegRules->totalCredit += (pRegRules->ReqConCredits[index]);
+			}
+			else {
+				pGUI->PrintMsg("Error undefined concentration");
+				Sleep(3000);
+			}
 		}
 		break;
 	case SMINOR: //SMINOR 
@@ -226,15 +235,19 @@ Action* Registrar::CreateRequiredAction()
 		str = pGUI->GetSrting();
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
-		if (!pSPlan->loadMinor(str, pRegRules))
-		{
-			pGUI->PrintMsg(">>> Either the Minor itself or the Minor File doesn't exist");
-			Sleep(3000);
-		}
-		else {
+		if (str == "") {
 			pSPlan->setMinor(str);
-			pGUI->PrintMsg(">>> Minor Requirement Loaded successfully.");
-			Sleep(3000);
+		}else{
+			if (!pSPlan->loadMinor(str, pRegRules))
+			{
+				pGUI->PrintMsg(">>> Either the Minor itself or the Minor File doesn't exist");
+				Sleep(3000);
+			}
+			else {
+				pSPlan->setMinor(str);
+				pGUI->PrintMsg(">>> Minor Requirement Loaded successfully.");
+				Sleep(3000);
+			}
 		}
 		break;
 	case SGPA:
