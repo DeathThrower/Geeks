@@ -209,7 +209,7 @@ Action* Registrar::CreateRequiredAction()
 			Sleep(3000);
 		}
 		break;
-	case SMINOR:
+	case SMINOR: 
 		pGUI->PrintMsg("Enter your minor[All Caps]:");
 		str = pGUI->GetSrting();
 		transform(str.begin(), str.end(), str.begin(), ::toupper);

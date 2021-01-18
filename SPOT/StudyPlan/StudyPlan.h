@@ -78,6 +78,7 @@ public:
 
 	//check the concentration requirement 
 	vector<string> checkConcentrationReq(Rules* r);
+	vector<string> checkMinorReq(Rules* r);
 
 	//check the double concentration
 	vector<string> checkD_Con(Rules* pRules);

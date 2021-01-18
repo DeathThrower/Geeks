@@ -1,3 +1,6 @@
-Number of Credits 0 is less than the required total number which is 6
-Error Course : NANENG 501 is Concentration Compulsory but not found in the concentration
-Error Course : NANENG 522 is Concentration Compulsory but not found in the concentration
+Number of Credits 156 is less than the required total number which is 168
+Number of Major Credits 75 is less than required Major number which is 81
+Error Course : CIE 417 is Major Compulsory but not found in the plan
+Error Course : CIE 425 is Major Compulsory but not found in the plan
+In Year 4 Fall Semester has 11 credits which is out of bounds.
+Error Course : CIE 417 isCIEMinor Compulsory but not found in the plan.
