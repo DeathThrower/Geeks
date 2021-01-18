@@ -1,6 +1,4 @@
-Number of Credits 149 is less than the required total number which is 277
-In Year 5 Spring Semester has 3 credits which is out of bounds.
-In this semester you need an underload petetion.
+Number of Credits 162 is less than the required total number which is 277
 Number of Credits 0 is less than the required total number which is 6
 Error Course : NANENG 513 is Concentration Compulsory but not found in the concentration
 Error Course : NANENG 515 is Concentration Compulsory but not found in the concentration
@@ -37,3 +35,10 @@ Course  REE 470 is in REE Double Major Compulsory but not found in the plan.
 Course  REE 515 is in REE Double Major Compulsory but not found in the plan.
 Course  REE 521 is in REE Double Major Compulsory but not found in the plan.
 Course  REE 532 is in REE Double Major Compulsory but not found in the plan.
+Number of Credits 162 is less than the required total number which is 271
+Number of Credits 0 is less than the required total number which is 6
+Error Course : NANENG 513 is Concentration Compulsory but not found in the concentration
+Error Course : NANENG 515 is Concentration Compulsory but not found in the concentration
+Number of Credits 168 is less than the required total number which is 271
+This course NANENG 513 isn't offered in Spring semester 
+This course NANENG 515 isn't offered in Spring semester 
