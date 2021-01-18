@@ -210,11 +210,20 @@ Action* Registrar::CreateRequiredAction()
 		}
 		break;
 	case SMINOR:
-		pGUI->PrintMsg("Enter your minor");
+		pGUI->PrintMsg("Enter your minor[All Caps]:");
 		str = pGUI->GetSrting();
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 		pSPlan->setMinor(str);
+		if (!pSPlan->loadMinor(str, pRegRules))
+		{
+			pGUI->PrintMsg(">>> Either the Minor itself or the Minor File doesn't exist");
+			Sleep(3000);
+		}
+		else {
+			pGUI->PrintMsg(">>> Minor Requirement Loaded successfully.");
+			Sleep(3000);
+		}
 		break;
 	case EXIT:
 		exit(1);

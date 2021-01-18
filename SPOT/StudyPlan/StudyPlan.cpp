@@ -1,5 +1,6 @@
 #include "StudyPlan.h"
 #include <algorithm>
+#include <sstream>
 
 
 StudyPlan::StudyPlan(int yearnum)
@@ -134,6 +135,50 @@ string StudyPlan::getMinor() const{
 void StudyPlan::setMinor(string Minor)
 {
 	minor = Minor;
+}
+bool StudyPlan::loadMinor(string str, Rules * pRegRules)
+{
+	
+	//
+	string file_name = str+"-minor.txt";
+	ifstream rfile_(file_name);
+	if (rfile_.is_open())
+	{
+		//line by line
+		string line;
+		vector<string> lines;
+		while (getline(rfile_, line))
+		{
+			lines.push_back(line);
+		}
+		pRegRules->totalMinorCredit = stoi(lines[0]);
+		pRegRules->totalCredit += stoi(lines[0]);
+		if (lines[1].size() > 0)
+		{
+			stringstream minorComp(lines[1]);
+			while (minorComp.good())
+			{
+				string substr;
+				getline(minorComp, substr, ',');
+				pRegRules->MinorCompulsory.push_back(substr);
+			}
+		}
+		if (lines[2].size() > 0)
+		{
+			stringstream minorElec(lines[1]);
+			while (minorElec.good())
+			{
+				string substr;
+				getline(minorElec, substr, ',');
+				pRegRules->MinorElective.push_back(substr);
+			}
+		}
+		
+
+		rfile_.close();
+		return true;
+	}
+	return false;
 }
 float StudyPlan::getGPA() const {
 	return GPA;
