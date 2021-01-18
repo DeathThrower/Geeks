@@ -63,7 +63,10 @@ bool ActionAddCourse::Execute()
 			g.y = 215;
 		}
 		pC->setGfxInfo(g);
-		pS->AddCourse(pC, year + 1 , SEM , pReg);
+		if (!pS->AddCourse(pC, year + 1, SEM, pReg)) {
+			pReg->getGUI()->PrintMsg("Error!!! this course is already in the studyplan");
+			Sleep(2000);
+		}
 	}
 
 
