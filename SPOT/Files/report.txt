@@ -1,6 +1,0 @@
-Number of Credits 162 is less than the required total number which is 177
-Course  CIE 202 is in CIE Minor Compulsory but not found in the plan.
-Course  CIE 205 is in CIE Minor Compulsory but not found in the plan.
-Course  CIE 206 is in CIE Minor Compulsory but not found in the plan.
-Course  CIE 302 is in CIE Minor Compulsory but not found in the plan.
-Course   CIE 417 is in CIE Minor Compulsory but not found in the plan.
