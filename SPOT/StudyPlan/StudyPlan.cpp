@@ -25,19 +25,14 @@ vector<AcademicYear*> StudyPlan::getPlan() const {
 //year idetifies year number to add course to 1=first, 2 = 2nd,....
 bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem , Registrar* pReg)
 {
-	if (getCoursePosition(pC->getCode()) == -1) {
-		if (plan[year - 1]->AddCourse(pC, sem, pReg)) {
-			TotalCredits += pC->getCredits();
-			coursesStatus[0] += pC->getCredits();
-			if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
-			if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
-			if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
-			if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
-			return true;
-		}
-		else {
-			return false;
-		}
+	if (plan[year - 1]->AddCourse(pC, sem, pReg)) {
+		TotalCredits += pC->getCredits();
+		coursesStatus[0] += pC->getCredits();
+		if (pC->getType() == "UNIV") TotalUnivCredits += pC->getCredits();
+		if (pC->getType() == "MAJOR") TotalMajorCredits += pC->getCredits();
+		if (pC->getType() == "CON") TotalConcentrationCredits += pC->getCredits();
+		if (pC->getType() == "TRACK") TotalTrackCredits += pC->getCredits();
+		return true;
 	}
 	else {
 		return false;
