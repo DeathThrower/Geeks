@@ -1,5 +1,6 @@
-Error in course CIE 202 : the PreReq course CSCI 101 is not found
-Error in course MATH 308 : the PreReq course CSCI 101 is not found
-Number of Credits 160 is less than the required total number which is 162
-Number of Track Credits 38 is less than required Track number which is 40
-Error Course : CSCI 101 is Track Compulsory but not found in the plan
+Number of Credits 162 is less than the required total number which is 177
+Course  CIE 202 is in CIE Minor Compulsory but not found in the plan.
+Course  CIE 205 is in CIE Minor Compulsory but not found in the plan.
+Course  CIE 206 is in CIE Minor Compulsory but not found in the plan.
+Course  CIE 302 is in CIE Minor Compulsory but not found in the plan.
+Course   CIE 417 is in CIE Minor Compulsory but not found in the plan.

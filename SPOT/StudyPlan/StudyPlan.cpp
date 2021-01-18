@@ -149,7 +149,7 @@ bool StudyPlan::loadMinor(string minor, Rules * pRegRules)
 		str.replace(indx, 1, "/");
 		indx = str.find("\\");
 	}
-	string file_name = str+ minor +"-minor.txt";
+	string file_name = str + "SPOT/Files/" + minor +"-minor.txt";
 	ifstream rfile_(file_name);
 	if (rfile_.is_open())
 	{
@@ -342,8 +342,8 @@ vector<string> StudyPlan::checkCrSem(Rules* r) {
 
 			}
 			else {
-				if (semCredit < 0 || semCredit > 8) {
-					errorMsg = "In Year " + to_string(yearN) + "Summer Semester has " + to_string(semCredit) + " credits which is out of bounds.";
+				if (semCredit > 8) {
+					errorMsg = "In this semester you need an overload petetion.";
 					msg_errors.push_back(errorMsg);
 					errorMsgs.push_back(errorMsg);
 				}
