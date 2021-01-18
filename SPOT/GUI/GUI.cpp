@@ -311,11 +311,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->SetFont(CRS_HEIGHT * 0.5, ITALICIZED, BY_NAME, "Arial");
 	pWind->DrawString(1335, 450, "Minor:");
 
-	pWind->SetPen(RED, 3);
-	pWind->DrawRectangle(1340, 480, 1525, 520, FRAME);
-	pWind->SetFont(CRS_HEIGHT * 0.55, ITALICIZED, BY_NAME, "Arial");
-	pWind->SetPen(DARKBLUE, 3);
-	pWind->DrawString(1350, 490, "Course Information");
+
 
 	pWind->SetPen(DARKBLUE, 3);
 	for (int i = 1; i <= 4; i++)
