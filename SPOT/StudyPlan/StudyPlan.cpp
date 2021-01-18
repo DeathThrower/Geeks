@@ -136,11 +136,19 @@ void StudyPlan::setMinor(string Minor)
 {
 	minor = Minor;
 }
-bool StudyPlan::loadMinor(string str, Rules * pRegRules)
+bool StudyPlan::loadMinor(string minor, Rules * pRegRules)
 {
 	
 	//
-	string file_name = str+"-minor.txt";
+	char result[MAX_PATH];
+	string str = string(result, GetModuleFileName(NULL, result, MAX_PATH));
+	str = str.erase(str.length() - 18, 18);
+	int indx = str.find("\\");
+	while (indx != string::npos) {
+		str.replace(indx, 1, "/");
+		indx = str.find("\\");
+	}
+	string file_name = str+ minor +"-minor.txt";
 	ifstream rfile_(file_name);
 	if (rfile_.is_open())
 	{

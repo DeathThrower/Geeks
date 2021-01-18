@@ -184,7 +184,7 @@ Action* Registrar::CreateRequiredAction()
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 		pSPlan->setD_Major(str);
-		if (pSPlan->loadDMajor(str, pRegRules)) {
+		if (!pSPlan->loadDMajor(str, pRegRules)) {
 			pGUI->PrintMsg(">>> Either the Major itself or the Major File doesn't exist");
 			Sleep(3000);
 		}
