@@ -82,6 +82,9 @@ public:
 	//check the double concentration
 	vector<string> checkD_Con(Rules* pRules);
 
+	//check course offering
+	vector<string> checkOffering(Rules* r);;
+
 	//return the student level based on the number of credits of the done classes
 	string getStudLevel() const;
 

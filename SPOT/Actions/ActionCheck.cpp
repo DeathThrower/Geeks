@@ -1,5 +1,4 @@
 #include "ActionCheck.h"
-
 ActionCheck::ActionCheck(Registrar* p) :Action(p)
 {
 }
@@ -9,9 +8,10 @@ ActionCheck::~ActionCheck()
 
 void ActionCheck::generateReport() const {
 	vector<string> errorMsgs = pReg->getStudyPlan()->getErrorMsg();
-	string file_name = "report.txt";
+	string file_path = "Files/report.txt";
+	remove(file_path.c_str());
 	ofstream file;
-	file.open(file_name);
+	file.open(file_path);
 	for (auto msg : errorMsgs) {
 		file << msg << endl;
 	}
@@ -19,12 +19,13 @@ void ActionCheck::generateReport() const {
 }
 
 bool ActionCheck::Execute() {
-	vector<string> checkPreCo, checkProg, checkCrSem, checkD_Con, conReq;
+	vector<string> checkPreCo, checkProg, checkCrSem, checkD_Con, conReq, offering;
 	checkPreCo = pReg->getStudyPlan()->checkpreReqCoreReq();
 	checkProg = pReg->getStudyPlan()->checkProgramReq(pReg->getRules());
 	checkCrSem = pReg->getStudyPlan()->checkCrSem(pReg->getRules());
 	checkD_Con = pReg->getStudyPlan()->checkD_Con(pReg->getRules());
 	conReq = pReg->getStudyPlan()->checkConcentrationReq(pReg->getRules());
+	offering = pReg->getStudyPlan()->checkOffering(pReg->getRules());
 	window* win = new window(1320, 768, -10, 0);
 	win->SetPen(BLACK, 1);
 	win->SetBrush(RED);
@@ -52,15 +53,26 @@ bool ActionCheck::Execute() {
 		win->DrawString(5, 5 + y, msg);
 	}
 	y += 25;
+	win->SetPen(RED, 2);
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
+	win->DrawString(5, 5 + y, "Course Offering Check (Moderate issue) :");
+	win->SetPen(BLACK, 2);
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
+	for (string msg : checkD_Con) {
+		y += 25;
+		win->DrawString(5, 5 + y, msg);
+	}
+	y += 25;
 	win->SetPen(YELLOW, 2);
 	win->SetFont(25, BOLD, BY_NAME, "Arial");
 	win->DrawString(5, 5 + y, "Credit per Semester Check (Moderate issue) :");
 	win->SetPen(BLACK, 2);
 	win->SetFont(20, BOLD, BY_NAME, "Arial");
-	for (string msg : checkCrSem) {
+	for (string msg : offering) {
 		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}
+
 	y += 25;
 	win->SetPen(RED, 2);
 	win->SetFont(25, BOLD, BY_NAME, "Arial");

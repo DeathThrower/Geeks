@@ -23,16 +23,7 @@ bool AcademicYear::AddCourse(Course* pC, SEMESTER sem, Registrar* pReg)
 {
 	//TODO:
 	//This function still needs many checks to be compelete
-	bool found = 1; 
-	vector<AcademicYearOfferings> offerings = pReg->getRules()->OfferingsList;
-	/*for (auto year : offerings) {
-		for (auto course_code : year.Offerings[sem]) {
-			if (course_code == pC->getCode()) {
-				found = 1;
-				break;
-			};
-		}
-	}*/
+	bool found = 1;
 	if (found) {
 		YearCourses[sem].push_back(pC);
 		TotalCredits += pC->getCredits();

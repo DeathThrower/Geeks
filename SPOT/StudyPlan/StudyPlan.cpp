@@ -398,7 +398,38 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 	return errorMsgs;
 }
 
-
+vector<string> StudyPlan::checkOffering(Rules* r) {
+	vector<AcademicYearOfferings> offerings = r->OfferingsList;
+	vector<string> errorMsgs;
+	string errorMsg;
+	bool found;
+	for (auto year : plan) {
+		for (int sem = FALL;  sem < SEM_CNT ; sem++) {
+			for (auto course : year->getCourses(sem)) {
+				found = 0;
+				for (auto year : offerings) {
+					for (auto course_code : year.Offerings[sem]) {
+						if (course_code == course->getCode()) {
+							found = 1;
+							break;
+						};
+					}
+					if (found)break;
+				}
+				if (!found) {
+					errorMsg = "This course " + course->getCode() + " isn't offered in " + (sem ? sem == 1 ? "Spring" : "Summer" : "Fall") + " semester ";
+					course->setIssue("Moderate");
+					msg_errors.push_back(errorMsg);
+					errorMsgs.push_back(errorMsg);
+				}
+				else {
+					continue;
+				}
+			}
+		}
+	}
+	return errorMsgs;
+}
 vector<string> StudyPlan::checkConcentrationReq(Rules* r)
 {
 	vector<string> errorMsgs;
