@@ -358,10 +358,11 @@ vector<string> StudyPlan::checkpreReqCoreReq() {
 				for (Course_Code CC : course->getPreReq()) {	// loop over every course in the PreReq list in the course
 					int preReqPosition = getCoursePosition(CC); // get the preReq course position
 
-					// if the preReq course position is more than the course position (the preReq course in a higher year or semesyter) or the preReq 
+					// if the preReq course position is more than or equal the course position (the preReq course in a higher year or semesyter) or the preReq 
 					// is not found return the error message
-					if (preReqPosition > cPosition) {
-						string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " exist in year or semester higher";
+					if (preReqPosition >= cPosition) {
+						//string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " exist in year or semester higher";
+						string errorMsg = "Error in course " + course->getCode() + " : the PreReq course " + CC + " does not exist in year or semester lower";
 						course->setIssue("Critical");
 						msg_errors.push_back(errorMsg);
 						errorMsgs.push_back(errorMsg);

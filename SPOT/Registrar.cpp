@@ -140,9 +140,9 @@ Action* Registrar::CreateRequiredAction()
 	case DRAW_AREA:
 		ActionDisplayCourseInfo(this).Execute(actData.x, actData.y);
 		break;
-	case ADD_CRS:
+	/*case ADD_CRS:
 		RequiredAction = new ActionAddCourse(this);
-		break;
+		break;*/
 	case DEL_CRS:
 		RequiredAction = new ActionDeleteCourse(this);
 		break;
@@ -211,7 +211,7 @@ Action* Registrar::CreateRequiredAction()
 			Sleep(3000);
 		}
 		break;
-	case SMINOR: 
+	case ADD_CRS: //SMINOR 
 		pGUI->PrintMsg("Enter your minor[All Caps]:");
 		str = pGUI->GetSrting();
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
