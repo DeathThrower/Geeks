@@ -415,3 +415,32 @@ vector<string> StudyPlan::checkD_Con(Rules* pRules) {
 vector<string> StudyPlan::getErrorMsg() const{
 	return msg_errors;
 }
+
+float StudyPlan::getLetterGPA(string letter) const {
+	string Grades[] = { "A","A-","B+","B","B*","C+","C","C-","F" };
+	int index = distance(Grades, std::find(Grades, Grades + 9, letter));
+	if (letter == "F" || index == 9 ) return 0;
+	return 4 - (index / 3.0);
+}
+void StudyPlan::calculateGPA(Registrar *pReg){
+	float tCrds = 0 , tPoints = 0;
+	GUI* pGUI = pReg->getGUI();
+	for (auto year : plan) {
+		for (int sem = FALL; sem < SEM_CNT; sem++) {
+			for (auto course : year->getCourses(sem)) {
+				if (course->getStatus() == Done) {
+					string grade = course->getGrade();
+					while (grade == "") {
+						pGUI->PrintMsg("Please Enter " + course->getCode() + " Grade or type Exit if you want to stop GPA Calculation : ");
+						string grd = pGUI->GetSrting();
+						if (grd == "Exit")  return;
+						course->setGrade(grd);
+					}
+					tPoints += getLetterGPA(grade) * course->getCredits();
+					tCrds += course->getCredits();
+				}
+			}
+		}
+	}
+	GPA = tPoints / tCrds;
+}

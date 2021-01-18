@@ -2,8 +2,13 @@
 #include "Course.h"
 #include "../GUI/GUI.h"
 
+
 Course::Course(Course_Code r_code, string r_title, int crd) :code(r_code), Title(r_title)
 {
+	string g[] = { "A","A-","B+","B","B*","C+","C","C-","F" };
+	for (int i = 0; i < 9; i++) {
+		Grades[i] = g[i];
+	}
 	credits = crd;
 	status = Done;
 }
@@ -12,6 +17,10 @@ Course::~Course()
 {
 }
 //getters
+
+string Course::getGrade() const {
+	return Grade;
+}
 
 Course_Code Course::getCode() const {
 	return code;
@@ -88,7 +97,15 @@ void Course::setPreReq(vector<Course_Code> PreReq) {
 void Course::setCoReq(vector<Course_Code> CoReq) {
 	this->CoReq = CoReq;
 }
-
+bool Course::setGrade(string letter) {
+	bool found = 0;
+	for (auto i : Grades) {
+		if (letter == i) found = 1;
+	}
+	if(!found) return 0;
+	this->Grade = letter;
+	return true;
+}
 void Course::saveCourse(ofstream& outdata) const {
 	outdata << "," << getCode();
 }

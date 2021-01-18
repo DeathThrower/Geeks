@@ -89,6 +89,12 @@ public:
 	//decrease the old status credits in the coursesStatus array and increase the new status credits
 	void changeCStatusCrd(CStatus Old, CStatus New, int crd);
 
+	//calaculate GPA
+	void calculateGPA(Registrar *);
+
+	//convert letter to GPA Points 
+	float getLetterGPA(string letter) const;
+
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
 };

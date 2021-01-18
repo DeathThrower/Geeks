@@ -15,6 +15,7 @@
 #include  <algorithm>
 
 
+
 CourseInfo Registrar::getCourseInfo(Course_Code CC) const {
 	transform(CC.begin(), CC.end(), CC.begin(), ::tolower);
 	CC.erase(remove_if(CC.begin(), CC.end(), ::isspace), CC.end());
@@ -215,6 +216,9 @@ Action* Registrar::CreateRequiredAction()
 		transform(str.begin(), str.end(), str.begin(), ::toupper);
 		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 		pSPlan->setMinor(str);
+		break;
+	case SGPA:
+		pSPlan->calculateGPA(this);
 		break;
 	case EXIT:
 		exit(1);
