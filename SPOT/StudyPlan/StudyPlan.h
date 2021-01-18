@@ -37,6 +37,7 @@ public:
 	//delete a course from a specific x and y coordinates (erase the course pointer from the vector) the inputs are the x and y coordinates
 	bool DeleteCourse(int ,int);
 
+	void viewFilter(bool all, int year, int sem, bool major, bool univ, bool track);
 	//return a semester and year in a vector of int and the inputs are a x and y coordinates
 	vector<int> getSem_Year(int, int);
 	

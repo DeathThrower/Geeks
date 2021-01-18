@@ -31,8 +31,7 @@ enum ActionType
 
 	NOTES,
 	CHECK,
-	ARROWS,
-
+	TOGGLEVIEW,
 	EXIT,		//Exit the application
 
 	STATUS_BAR,	//A click on the status bar
@@ -47,7 +46,7 @@ enum ActionType
 	SCON,
 	SD_CON,
 	SMINOR,
-	SGPA
+	SGPA,
 	//TODO: Add more action types
 
 };

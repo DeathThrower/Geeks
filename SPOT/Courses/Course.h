@@ -18,6 +18,7 @@ class Course : public Drawable
 	string type;	//Univ, track, or major.....etc.
 	string Grade = "";
 	string issue = "None";
+	bool visible= true;
 	CStatus status;		//Done or not yet?
 	vector<Course_Code> PreReq;	//list of prerequisites
 	vector<Course_Code> CoReq;	//list of prerequisites
@@ -33,9 +34,11 @@ public:
 	vector<Course_Code> getPreReq() const;
 	vector<Course_Code> getCoReq() const;
 	string getType() const;
+	bool getVisible() const;
 	void setIssue(string issue);
 	string getIssue() const;
 	CStatus getStatus() const;
+	void setVisible(bool visible) ;
 
 	//return true if the point(x,y) is in the box of the course
 	bool isCourse(int x, int y) const;

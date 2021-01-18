@@ -163,16 +163,6 @@ bool StudyPlan::loadMinor(string str, Rules * pRegRules)
 				pRegRules->MinorCompulsory.push_back(substr);
 			}
 		}
-		if (lines[2].size() > 0)
-		{
-			stringstream minorElec(lines[1]);
-			while (minorElec.good())
-			{
-				string substr;
-				getline(minorElec, substr, ',');
-				pRegRules->MinorElective.push_back(substr);
-			}
-		}
 		
 
 		rfile_.close();
@@ -544,18 +534,80 @@ void StudyPlan::calculateGPA(Registrar *pReg){
 		for (int sem = FALL; sem < SEM_CNT; sem++) {
 			for (auto course : year->getCourses(sem)) {
 				if (course->getStatus() == Done) {
-					string grade = course->getGrade();
-					while (grade == "") {
+					while (course->getGrade() == "") {
 						pGUI->PrintMsg("Please Enter " + course->getCode() + " Grade or type Exit if you want to stop GPA Calculation : ");
 						string grd = pGUI->GetSrting();
 						if (grd == "Exit")  return;
 						course->setGrade(grd);
 					}
-					tPoints += getLetterGPA(grade) * course->getCredits();
+					tPoints += getLetterGPA(course->getGrade()) * course->getCredits();
 					tCrds += course->getCredits();
 				}
 			}
 		}
 	}
 	GPA = tPoints / tCrds;
+}
+
+void StudyPlan::viewFilter(bool all, int year, int sem_, bool major, bool univ, bool track) {
+	int yearN = 1; int semN = 1;
+	for (auto yearVec : plan) {
+		for (int sem = 0; sem < 3; sem++) {
+			for (auto course : yearVec->getCourses(sem)) {
+				if (all)
+				{
+					course->setVisible(true);
+				}
+				else if (year > 0)
+				{
+					if (year == yearN) {
+						course->setVisible(true);
+					}
+					else {
+						course->setVisible(false);
+					}
+				}
+				else if (sem_ > 0) {
+					if (sem_ == semN) {
+						course->setVisible(true);
+					}
+					else {
+						course->setVisible(false);
+					}
+				}
+				else if (major) {
+					if (course->getType() == "MAJOR")
+					{
+						course->setVisible(true);
+					}
+					else {
+						course->setVisible(false);
+					}
+				}
+				else if (univ) {
+					if (course->getType() == "UNIV")
+					{
+						course->setVisible(true);
+					}
+					else {
+						course->setVisible(false);
+					}
+				}
+				else if (track) {
+					if (course->getType() == "TRACK")
+					{
+						course->setVisible(true);
+					}
+					else {
+						course->setVisible(false);
+					}
+				}
+				
+			}
+			semN++;
+		}
+		yearN++;
+	}
+
+
 }

@@ -45,6 +45,9 @@ vector<Course_Code> Course::getCoReq() const {
 string Course::getType() const {
 	return type;
 }
+bool Course::getVisible() const {
+	return visible;
+}
 
 string Course::getIssue() const {
 	return issue;
@@ -108,4 +111,7 @@ bool Course::setGrade(string letter) {
 }
 void Course::saveCourse(ofstream& outdata) const {
 	outdata << "," << getCode();
+}
+void Course::setVisible(bool visible)  {
+	this->visible = visible;
 }

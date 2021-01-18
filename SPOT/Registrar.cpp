@@ -13,6 +13,7 @@
 #include "Actions/ActionCheck.h"
 #include "Actions/ActionSelectCourseStatus.h"
 #include  <algorithm>
+#include <iostream>
 
 
 
@@ -228,6 +229,43 @@ Action* Registrar::CreateRequiredAction()
 		break;
 	case SGPA:
 		pSPlan->calculateGPA(this);
+		break;
+	case TOGGLEVIEW:
+		pGUI->PrintMsg("Select View Filter: [1]All [2]Year [3]Semster [4]Major [5]University [6]Track");
+		str = pGUI->GetSrting();
+		transform(str.begin(), str.end(), str.begin(), ::toupper);
+		str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+		if (stoi(str) == 1) {
+			pSPlan->viewFilter(true, 0, 0, false, false, false);
+		}
+		else if(stoi(str) == 2)
+		{
+			pGUI->PrintMsg("Select Year Number: 1-2-3-4-5 ");
+			str = pGUI->GetSrting();
+			transform(str.begin(), str.end(), str.begin(), ::toupper);
+			str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+			pSPlan->viewFilter(false, stoi(str) , 0, false, false, false);
+			
+		}else if (stoi(str) == 3)
+		{
+			pGUI->PrintMsg("Select Semester Number: a number from 1-2-3- .... -15 ");
+			str = pGUI->GetSrting();
+			transform(str.begin(), str.end(), str.begin(), ::toupper);
+			str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+			pSPlan->viewFilter(false, 0,stoi(str), false, false, false);
+		}
+		else if (stoi(str) == 4)
+		{
+			pSPlan->viewFilter(false, 0, 0, true, false, false);
+		}
+		else if (stoi(str) == 5)
+		{
+			pSPlan->viewFilter(false, 0, 0, false, true, false);
+		}
+		else if (stoi(str) == 6)
+		{
+			pSPlan->viewFilter(false, 0, 0, false, false, true);
+		}
 		break;
 	case EXIT:
 		exit(1);

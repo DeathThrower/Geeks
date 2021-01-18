@@ -131,12 +131,12 @@ void GUI::CreateMenu() const
 	MenuItemImages[REORDER] = str + "SPOT/GUI/Images/Menu/reorder.jpg";
 	MenuItemImages[NOTES] = str + "SPOT/GUI/Images/Menu/notes.jpg";
 	MenuItemImages[CHECK] = str + "SPOT/GUI/Images/Menu/check.jpg";
-	MenuItemImages[ARROWS] = str + "SPOT/GUI/Images/Menu/arrows.jpg";
+	MenuItemImages[TOGGLEVIEW] = str + "SPOT/GUI/Images/Menu/viewFilter.jpg";
 	MenuItemImages[ITM_EXIT] = str + "SPOT/GUI/Images/Menu/exit.jpg";
 
 
 	//TODO: Prepare image for each menu item and add it to the list
-
+	
 	//Draw menu items one image at a time
 	for (int i = 0; i<ITM_CNT-1; i++)
 		pWind->DrawImage(MenuItemImages[i], (i*65)+5, 5, MenuItemWidth, 50);
@@ -179,70 +179,73 @@ void GUI::UpdateInterface() const
 ////////////////////////    Drawing functions    ///////////////////
 void GUI::DrawCourse(const Course* pCrs)
 {
-	string crsType = pCrs->getType();
-	string issType = pCrs->getIssue();
-	int roundWidth = 0; int roundHeight = 0;
-	color fontColor = WHITE;
-	color borderColor = color(40, 40, 40);
-	color fillingColor = color(54, 74, 94);
-	if (crsType == "UNIV")
+	if (pCrs->getVisible())
 	{
-		// fillingColor =RGB(29, 161, 242)
-		fillingColor.ucRed = 29;
-		fillingColor.ucGreen = 161;
-		fillingColor.ucBlue = 242;
+		string crsType = pCrs->getType();
+		string issType = pCrs->getIssue();
+		int roundWidth = 0; int roundHeight = 0;
+		color fontColor = WHITE;
+		color borderColor = color(40, 40, 40);
+		color fillingColor = color(54, 74, 94);
+		if (crsType == "UNIV")
+		{
+			// fillingColor =RGB(29, 161, 242)
+			fillingColor.ucRed = 29;
+			fillingColor.ucGreen = 161;
+			fillingColor.ucBlue = 242;
 
+		}
+		else if (crsType == "TRACK") {
+			// fillingColor =RGB(119, 123, 126) 
+			fillingColor.ucRed = 119;
+			fillingColor.ucGreen = 123;
+			fillingColor.ucBlue = 126;
+		}
+		else if (crsType == "MAJOR") {
+			// fillingColor =RGB(28, 32, 73) 17, 72, 128
+			fillingColor.ucRed = 17;
+			fillingColor.ucGreen = 72;
+			fillingColor.ucBlue = 128;
+		}
+		if (issType == "Critical")
+		{
+			// fillingColor =RGB(28, 32, 73) 17, 72, 128
+			fillingColor.ucRed = 255;
+			fillingColor.ucGreen = 50;
+			fillingColor.ucBlue = 50;
+		}
+		else if (issType == "Moderate")
+		{
+			// fillingColor =RGB(28, 32, 73) 17, 72, 128
+			fillingColor.ucRed = 255;
+			fillingColor.ucGreen = 255;
+			fillingColor.ucBlue = 20;
+		}
+		//
+		if (pCrs->isSelected()) {
+			pWind->SetPen(HiColor, 2);
+		}
+		else {
+			pWind->SetPen(DrawColor, 2);
+		}
+		pWind->SetPen(borderColor, 2);
+		//pWind->SetBrush(FillColor); 
+		pWind->SetBrush(fillingColor);
+		graphicsInfo gInfo = pCrs->getGfxInfo();
+		pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT, FILLED, roundWidth, roundHeight);
+		pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH - 1, gInfo.y + CRS_HEIGHT / 2);
+
+		//Write the course code and credit hours.
+		int Code_x = gInfo.x + CRS_WIDTH * 0.15;
+		int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
+		pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");
+		//pWind->SetPen(DARKBLUE);
+		pWind->SetPen(fontColor);
+		ostringstream crd;
+		crd << "crd:" << pCrs->getCredits();
+		pWind->DrawString(Code_x, Code_y, pCrs->getCode());
+		pWind->DrawString(Code_x, Code_y + CRS_HEIGHT / 2, crd.str());
 	}
-	else if (crsType == "TRACK") {
-		// fillingColor =RGB(119, 123, 126) 
-		fillingColor.ucRed = 119;
-		fillingColor.ucGreen = 123;
-		fillingColor.ucBlue = 126;
-	}
-	else if (crsType == "MAJOR") {
-		// fillingColor =RGB(28, 32, 73) 17, 72, 128
-		fillingColor.ucRed = 17;
-		fillingColor.ucGreen = 72;
-		fillingColor.ucBlue = 128;
-	}
-	if (issType == "Critical")
-	{
-		// fillingColor =RGB(28, 32, 73) 17, 72, 128
-		fillingColor.ucRed = 255;
-		fillingColor.ucGreen = 50;
-		fillingColor.ucBlue = 50;
-	}
-	else if (issType == "Moderate")
-	{
-		// fillingColor =RGB(28, 32, 73) 17, 72, 128
-		fillingColor.ucRed = 255;
-		fillingColor.ucGreen = 255;
-		fillingColor.ucBlue = 20;
-	}
-	//
-	if (pCrs->isSelected()) {
-		pWind->SetPen(HiColor, 2);
-	}
-	else {
-		pWind->SetPen(DrawColor, 2);
-	}
-	pWind->SetPen(borderColor , 2);
-	//pWind->SetBrush(FillColor); 
-	pWind->SetBrush(fillingColor);
-	graphicsInfo gInfo = pCrs->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT, FILLED, roundWidth,roundHeight);
-	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH-1, gInfo.y + CRS_HEIGHT / 2);
-	
-	//Write the course code and credit hours.
-	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
-	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
-	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD , BY_NAME, "Gramound");
-	//pWind->SetPen(DARKBLUE);
-	pWind->SetPen(fontColor);
-	ostringstream crd;
-	crd<< "crd:" << pCrs->getCredits();
-	pWind->DrawString(Code_x, Code_y, pCrs->getCode());
-	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
 }
 
 void GUI::DrawAcademicYear(const AcademicYear* pY) 
@@ -365,7 +368,7 @@ void GUI::DrawAcademicYear(const AcademicYear* pY)
 	pWind->DrawString(335, 57, "Reorder");
 	pWind->DrawString(390, 57, "Add Notes");
 	pWind->DrawString(465, 57, "Check");
-	pWind->DrawString(465 + 75, 57, "Arrows");
+	pWind->DrawString(465 + 57, 57, "View Filter");
 	pWind->DrawString(1500, 57, "Exit");
 
 }
@@ -442,6 +445,9 @@ ActionData GUI::GetUserAction(string msg) const
 				}
 				else if (460 <= x && x <= 510) {
 					return ActionData{ CHECK };
+				}
+				else if (525 <= x && x <= 575) {
+					return ActionData{ TOGGLEVIEW };
 				}
 				else if (1485 <= x && x <= 1900) {
 					return ActionData{ EXIT };
