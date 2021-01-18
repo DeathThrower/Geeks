@@ -132,6 +132,7 @@ string StudyPlan::getMinor() const{
 	return minor;
 }
 
+
 void StudyPlan::setMinor(string Minor)
 {
 	minor = Minor;
@@ -504,6 +505,30 @@ vector<string> StudyPlan::checkMinorReq(Rules* r)
 	return errorMsgs;
 }
 
+vector<string> StudyPlan::checkDmajor(Rules* r)
+{
+	vector<string> errorMsgs;
+	string errorMsg;
+	vector<Course_Code> doubleMajor = r->DMajorCompulsory;
+	if (getD_Major() != "")
+	{
+		for (Course_Code course : doubleMajor) {
+			int crd = 0;
+			if (getCoursePosition(course, crd) == -1) {
+				errorMsg = "Course  " + course + " is in " + getD_Major() + " Double Major Compulsory but not found in the plan.";
+				errorMsgs.push_back(errorMsg);
+				msg_errors.push_back(errorMsg);
+			}
+		}
+		if (errorMsgs.empty())
+			errorMsgs.push_back("Double Major Requirements are Fulfilled.");
+	}
+	else {
+		errorMsgs.push_back("You haven't choosen a Double Major yet.");
+	}
+	return errorMsgs;
+}
+
 vector<string> StudyPlan::checkD_Con(Rules* pRules) {
 	vector<string> msgs;
 	if (D_con != "") {
@@ -590,79 +615,16 @@ bool StudyPlan::loadDMajor(string DMajor, Rules* myRules)
 			pch = strtok_s(line, ",", &context);
 			switch (mline)
 			{
-			case 1:
-				//myRules->totalCredit = stoi(pch);
-				break;
-			case 2:
-				//myRules->ReqUnivCredits = stoi(pch);
-				break;
-			case 3:
-				//myRules->ReqTrackCredits = stoi(pch);
-				break;
 			case 4:
 				myRules->totalCredit += stoi(pch);
 				break;
-			case 5:
-				//myRules->NumConcentration = stoi(pch);
-				break;
-				/*case 6:
-					index++;
-					while (pch != NULL) {
-						if (index % 2 == 1) {
-							myRules->ReqConCredits.push_back(stoi(pch));
-						}
-						pch = strtok_s(NULL, ",", &context);
-						index++;
-					}
-					break;*/
-					/*case 7:
-						while (pch != NULL) {
-							myRules->UnivCompulsory.push_back(pch);
-							pch = strtok_s(NULL, ",", &context);
-						}
-						break;
-					case 8:
-						while (pch != NULL) {
-							myRules->UnivElective.push_back(pch);
-							pch = strtok_s(NULL, ",", &context);
-						}
-						break;
-					case 9:
-						while (pch != NULL) {
-							myRules->TrackCompulsory.push_back(pch);
-							pch = strtok_s(NULL, ",", &context);
-						}
-						break;*/
+			
 			case 10:
 				while (pch != NULL) {
 					myRules->DMajorCompulsory.push_back(pch);
 					pch = strtok_s(NULL, ",", &context);
 				}
 				break;
-				/*case 11:
-					while (pch != NULL) {
-						myRules->MajorElective.push_back(pch);
-						pch = strtok_s(NULL, ",", &context);
-					}
-					break;*/
-					/*default:
-						if (mline % 2 == 0) {
-							vector<Course_Code> Cvec;
-							while (pch != NULL) {
-								Cvec.push_back(pch);
-								pch = strtok_s(NULL, ",", &context);
-							}
-							myRules->ConCompulsory.push_back(Cvec);
-						}*
-						else {
-							vector<Course_Code> Evec;
-							while (pch != NULL) {
-								Evec.push_back(pch);
-								pch = strtok_s(NULL, ",", &context);
-							}
-							myRules->ConElective.push_back(Evec);
-						}
-						break;*/
 			}
 		}
 		return true;
