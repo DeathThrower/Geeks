@@ -237,7 +237,7 @@ void GUI::DrawCourse(const Course* pCrs)
 		pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH - 1, gInfo.y + CRS_HEIGHT / 2);
 
 		//Write the course code and credit hours.
-		int Code_x = gInfo.x + CRS_WIDTH * 0.15;
+		int Code_x = gInfo.x + CRS_WIDTH * 0.02;
 		int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
 		pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");
 		//pWind->SetPen(DARKBLUE);
