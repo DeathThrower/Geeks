@@ -10,3 +10,9 @@ In Year 4 Spring Semester has 0 credits which is out of bounds.
 In Year 5 Fall Semester has 0 credits which is out of bounds.
 In Year 5 Spring Semester has 0 credits which is out of bounds.
 This course CSCI 101 isn't offered in Fall semester 
+Number of Credits 156 is less than the required total number which is 168
+Number of Major Credits 75 is less than required Major number which is 81
+Error Course : CIE 417 is Major Compulsory but not found in the plan
+Error Course : CIE 425 is Major Compulsory but not found in the plan
+In Year 4 Fall Semester has 11 credits which is out of bounds.
+Error Course : CIE 417 isCIEMinor Compulsory but not found in the plan.

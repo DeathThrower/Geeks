@@ -19,13 +19,14 @@ void ActionCheck::generateReport() const {
 }
 
 bool ActionCheck::Execute() {
-	vector<string> checkPreCo, checkProg, checkCrSem, checkD_Con, conReq, offering;
+	vector<string> checkPreCo, checkProg, checkCrSem, checkD_Con, conReq, minorReq , offering;
 	checkPreCo = pReg->getStudyPlan()->checkpreReqCoreReq();
 	checkProg = pReg->getStudyPlan()->checkProgramReq(pReg->getRules());
 	checkCrSem = pReg->getStudyPlan()->checkCrSem(pReg->getRules());
 	checkD_Con = pReg->getStudyPlan()->checkD_Con(pReg->getRules());
 	conReq = pReg->getStudyPlan()->checkConcentrationReq(pReg->getRules());
 	offering = pReg->getStudyPlan()->checkOffering(pReg->getRules());
+	minorReq = pReg->getStudyPlan()->checkMinorReq(pReg->getRules());
 	window* win = new window(1320, 768, -10, 0);
 	win->SetPen(BLACK, 1);
 	win->SetBrush(RED);
@@ -76,7 +77,7 @@ bool ActionCheck::Execute() {
 	y += 25;
 	win->SetPen(RED, 2);
 	win->SetFont(25, BOLD, BY_NAME, "Arial");
-	win->DrawString(5, 5 + y, "concentration validity Check (Critical issue) :");
+	win->DrawString(5, 5 + y, "Concentration validity Check (Critical issue) :");
 	win->SetPen(BLACK, 2);
 	win->SetFont(20, BOLD, BY_NAME, "Arial");
 	for (string msg : conReq) {
@@ -90,6 +91,16 @@ bool ActionCheck::Execute() {
 	win->SetPen(BLACK, 2);
 	win->SetFont(20, BOLD, BY_NAME, "Arial");
 	for (string msg : checkD_Con) {
+		y += 25;
+		win->DrawString(5, 5 + y, msg);
+	}
+	y += 25;
+	win->SetPen(RED, 2);
+	win->SetFont(25, BOLD, BY_NAME, "Arial");
+	win->DrawString(5, 5 + y, "Minor Requirements Check (Moderate issue) :");
+	win->SetPen(BLACK, 2);
+	win->SetFont(20, BOLD, BY_NAME, "Arial");
+	for (string msg : minorReq) {
 		y += 25;
 		win->DrawString(5, 5 + y, msg);
 	}

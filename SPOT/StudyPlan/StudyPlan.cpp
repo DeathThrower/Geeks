@@ -465,6 +465,30 @@ vector<string> StudyPlan::checkConcentrationReq(Rules* r)
 	return errorMsgs;
 }
 
+vector<string> StudyPlan::checkMinorReq(Rules* r)
+{
+	vector<string> errorMsgs;
+	string errorMsg;
+	vector<Course_Code> minorCourses = r->MinorCompulsory;
+	if (getMinor() != "")
+	{
+		for (Course_Code course : minorCourses) {
+			int crd = 0;
+			if (getCoursePosition(course, crd) == -1) {
+				errorMsg = "Course  " + course + " is in " + getMinor() + " Minor Compulsory but not found in the plan.";
+				errorMsgs.push_back(errorMsg);
+				msg_errors.push_back(errorMsg);
+			}
+		}
+		if (errorMsgs.empty())
+			errorMsgs.push_back("Minor Requirements are Fulfilled.");
+	}
+	else {
+		errorMsgs.push_back("You haven't choosen a minor yet.");
+	}
+	return errorMsgs;
+}
+
 vector<string> StudyPlan::checkD_Con(Rules* pRules) {
 	vector<string> msgs;
 	if (D_con != "") {
