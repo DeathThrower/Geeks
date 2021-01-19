@@ -213,7 +213,6 @@ void GUI::DrawCourse(const Course* pCrs)
 			fillingColor.ucRed = 255;
 			fillingColor.ucGreen = 50;
 			fillingColor.ucBlue = 50;
-			issType = "None";
 		}
 		else if (issType == "Moderate")
 		{

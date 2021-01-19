@@ -418,7 +418,6 @@ vector<string> StudyPlan::checkOffering(Rules* r) {
 		for (int sem = FALL;  sem < SEM_CNT ; sem++) {
 			for (auto course : year->getCourses(sem)) {
 				found = 0;
-				course->setIssue("None");
 				for (auto year : offerings) {
 					for (auto course_code : year.Offerings[sem]) {
 						if (course_code == course->getCode()) {

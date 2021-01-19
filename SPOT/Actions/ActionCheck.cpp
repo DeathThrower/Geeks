@@ -10,7 +10,7 @@ void ActionCheck::generateReport() const {
 	vector<string> errorMsgs = pReg->getStudyPlan()->getErrorMsg();
 	string file_path = "report.txt";
 	ofstream file;
-	file.open(file_path);
+	file.open(file_path, ios::trunc);
 	for (auto msg : errorMsgs) {
 		file << msg << endl;
 	}
